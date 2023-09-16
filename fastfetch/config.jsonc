@@ -1,0 +1,38 @@
+// ~/.config/fastfetch/config.jsonc
+// See https://github.com/fastfetch-cli/fastfetch/wiki/Configuration for more details
+// See *.jsonc in https://github.com/fastfetch-cli/fastfetch/tree/dev/presets/examples for more examples
+{
+    "$schema": "https://github.com/fastfetch-cl`i/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "source": "Archcraft",
+        "padding": {
+            "top": 0,
+            "right": 1,
+            "left": 1,
+        }
+    },
+    "display": {
+        "percentType": 9 // colored percent number
+    },
+    "modules": [
+        "title",
+        "separator",
+        "os",
+        "kernel",
+        "packages",
+        "wm",
+        "terminal",
+        "cpu",
+        "gpu",
+        "memory",
+        "disk",
+        "battery",
+        "break",
+        "colors"
+    ],
+    "general": {
+        "multithreading": true,
+        
+
+    },
+}
