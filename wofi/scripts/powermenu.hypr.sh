@@ -1,8 +1,8 @@
 #!/bin/bash
 
-entries="⏻ shutdown \n⭮ reboot \n⇠ logout \n⍉ hibernate "
+entries="Shutdown Reboot Logout Hibernate"
 
-selected=$(echo -e $entries | wofi  --conf=$HOME/.config/wofi/config.powermenu --dmenu --cache-file /dev/null | awk '{print tolower($2)}')
+selected=$(printf '%s\n' $entries | wofi --conf=$HOME/.config/wofi/config.powermenu --style=$HOME/.config/wofi/style.widgets.css  | awk '{print tolower($1)}')
 
 case $selected in
   shutdown)

@@ -12,18 +12,18 @@ env:
   TERM: xterm-256color
 
 import:
-  - $HOME/.cache/wal/colors-alacritty.yml
+  - .config/alacritty/themes/tokyo-night.yaml
 
 key_bindings:
     - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
 window:
-  opacity: 0.90
+  opacity: 0.80
   padding:
     x: 0
     y: 0
 font:
   normal:
-    family: JetBrains Mono 
+    family: JetBrainsMono Nerd Font
     style: Regular
   size: 12
 live_config_reload: true

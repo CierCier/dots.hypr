@@ -4,7 +4,7 @@
 {
     "$schema": "https://github.com/fastfetch-cl`i/fastfetch/raw/dev/doc/json_schema.json",
     "logo": {
-        "source": "Archcraft",
+        "source": "OSX",
         "padding": {
             "top": 0,
             "right": 1,

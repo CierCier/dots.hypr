@@ -1,4 +1,6 @@
-width=250
-height=220
+hide_search=true
+hide_scroll=true
+width=1
+show=dmenu
+lines=5
 location=top
-hide_search=false

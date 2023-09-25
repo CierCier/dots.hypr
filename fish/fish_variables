@@ -8,7 +8,7 @@ SETUVAR _fisher_plugins:jorgebucaran/hydro
 SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR _hydro_git_1190:master\u2022\x20
 SETUVAR _hydro_git_140920:main\u2022\x20
-SETUVAR _hydro_git_143811:main\x20
+SETUVAR _hydro_git_3117:main\u2022\x20
 SETUVAR _hydro_git_62426:develop\u2022\x20
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
 SETUVAR fish_color_cancel:\x2dr

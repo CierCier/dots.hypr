@@ -88,7 +88,12 @@ alias cat='bat --style header --style snip --style changes --style header'
 #if status --is-interactive && type -q fastfetch
 #   fastfetch --load-config neofetch
 #end
-#
+
+function wall --argument filepath
+    wal -i $filepath -n
+    swww img $(/usr/bin/cat $HOME/.cache/wal/wal) --transition-angle 30 --transition-duration 2 --transition-type wave
+end
+
 
 
 ## cpu fetch

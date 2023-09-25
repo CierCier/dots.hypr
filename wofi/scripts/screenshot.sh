@@ -6,11 +6,11 @@ selected=$(printf '%s\n' $entries | wofi --style=$HOME/.config/wofi/style.widget
 
 case $selected in
   screen)
-      $HOME/.config/grimshot/auto-copy.sh screen;;
+      $HOME/.config/hypr/scripts/screenshot  screen;;
   area)
-     $HOME/.config/grimshot/auto-copy.sh area;;
+     $HOME/.config/hypr/scripts/screenshot area;;
   window)
-     $HOME/.config/grimshot/auto-copy.sh window;;
+     $HOME/.config/hypr/scripts/screenshot window;;
   colorpicker)
     /usr/bin/hyprpicker --no-fancy --autocopy --format=hex;;
 esac
