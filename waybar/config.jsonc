@@ -64,8 +64,8 @@
         "tooltip": false,
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "activated": "󰈈",
+            "deactivated": "󰈉"
         },
     },
     "tray": {
@@ -74,20 +74,20 @@
     },
     "clock": {
         "tooltip-format": "{:%A, %d %B %Y}\n<tt>{calendar}</tt>",
-        "format": "<span foreground='#7dcfff'></span> {:%d %B %Y - %H:%M}",
+        "format": "<span foreground='#7dcfff'>󰨲</span> {:%d %B %Y - %H:%M}",
         //"format": " {:%a %d %b  %H:%M}",	//24 hour format
-        "format-alt": "<span foreground='#7dcfff'></span> {:%d/%m/%Y  %H:%M:%S}",
+        "format-alt": "<span foreground='#7dcfff'>󰨲</span> {:%d/%m/%Y  %H:%M:%S}",
         //"timezones": [ "Kolkata" ],
         //"max-length": 200
         "interval": 1
     },
     "cpu": {
-        "format": "<span foreground='#e0af68'></span> {usage}%",
+        "format": "<span foreground='#e0af68'></span> {usage}%",
         "on-click": "alacritty --class=floating -e btop --utf-force",
         "interval": 5
     },
     "memory": {
-        "format": "<span foreground='#7aa2f7'>﬙</span> {percentage}%",
+        "format": "<span foreground='#7aa2f7'>󰘚</span> {percentage}%",
         "tooltip-format": "{used:0.2f}GiB used out of {total:0.2f}GiB",
         "on-click": "alacritty --class=floating -e btop --utf-force",
         "interval": 5
@@ -95,7 +95,7 @@
     "temperature": {
         // "thermal-zone": 2,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 80,
+        "critical-threshold": 75,
         "format-critical": " {temperatureC}°C",
         "format": " {temperatureC}°C",
         "tooltip": false,
@@ -105,10 +105,16 @@
         // "device": "acpi_video1",
         "format": "<span foreground='#b48ead'>{icon}</span> {percent}%",
         "format-icons": [
-            "",
-            "",
-            "",
-            ""
+            "󰹐",
+            "󱩎",
+            "󱩏",
+            "󱩐",
+            "󱩑",
+            "󱩒",
+            "󱩓",
+            "󱩔",
+            "󱩕",
+            "󱧡"
         ],
         "on-scroll-down": "brightnessctl -c backlight set 5%-",
         "on-scroll-up": "brightnessctl -c backlight set +5%",
@@ -124,18 +130,16 @@
         "format": "{icon} {capacity: >3}%",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-        "format-icons": [ "", "", "", "", "", "" ],
-        
-        //"format-icons": ["", "", "", "", ""],
-        //"format-icons": ["", "", "", "", "", "", "", "", "", ""],
+                
+        "format-icons": ["", "", "", "", ""]
     },
     "network": {
         // "interface": "wlp2s0", // (Optional) To force the use of this interface
         "interval": 1,
-        "format-wifi": "<span foreground='#61AF1F'>說</span> {essid} ({signalStrength}%)",
-        "format-ethernet": "<span foreground='#61AF1F'></span> {ifname} ({ipaddr})",
-        "format-linked": "<span foreground='#61AF1F'>說</span> {essid} (No IP)",
-        "format-disconnected": "<span foreground='#61AF1F'>說</span> Disconnected",
+        "format-wifi": "<span foreground='#61AF1F'></span> {essid} ({signalStrength}%)",
+        "format-ethernet": "<span foreground='#61AF1F'>󰌗</span> {ifname} ({ipaddr})",
+        "format-linked": "<span foreground='#61AF1F'>󰌙</span> {essid} (No IP)",
+        "format-disconnected": "<span foreground='#61AF1F'>󰌙</span> Disconnected",
         "tooltip-format": "↑ {bandwidthUpBits}\n↓ {bandwidthDownBits}",
         "tooltip-disabled": "Disconnected",
         "tooltip": true,
@@ -144,11 +148,12 @@
     "pulseaudio": {
         "scroll-step": 0.5,
         "format": "<span foreground='#d08770'>{icon}</span> {volume}%",
-        "format-muted": "婢 Muted",
+        "format-muted": "󰝟 Muted",
         "format-icons": {
             "default": [
                 "",
                 "",
+                "󰕾",
                 ""
             ]
         },
@@ -170,7 +175,7 @@
         ],
         "return-type": "json",
         "status-icons": {
-            "playing": "",
+            "playing": "",
             "paused": "",
         },
         "ellipsis": "..",
