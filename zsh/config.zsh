@@ -45,12 +45,21 @@ then
     export PATH=$PATH:$HOME/.local/bin
 fi
 
+# adding cargo bin to path if exists
 if [ -d $HOME/.cargo/bin ]
 then
     export PATH=$PATH:$HOME/.cargo/bin
 fi
 
+# adding flutter bin to path if exists
+if [ -d /opt/flutter ]
+then
+    export PATH=$PATH:/opt/flutter/bin
+fi
+
 export PATH=$PATH
+
+
 
 
 #terminal colors
