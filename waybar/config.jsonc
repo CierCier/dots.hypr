@@ -13,6 +13,8 @@
         "idle_inhibitor",
         "custom/separator",
         "mpris",
+        "custom/seperator",
+        "cava",
     ],
     "modules-center": [
         "clock"
