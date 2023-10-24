@@ -55,10 +55,7 @@
             "type": "battery",
             "key": " Battery"
         },
-        {
-            "type": "custom",
-            "format": "---------------------------"
-        },
+        "separator",
         {
             "type": "colors"
         }

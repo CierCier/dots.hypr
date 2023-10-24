@@ -1,109 +1,113 @@
 * {
-    font-family: JetBrainsMono Nerd Font Propo, Source Han Sans JP, monospace ;
-    font-size: 14px;
-    border: none;
-    border-radius: 0;
-    transition-property: background-color;
-    transition-duration: 0.5s;
-  }
-  window#waybar {
-    color: #c0caf5;
-    background-color: #24283b;
-    border-bottom: 1px solid #414868;
-    transition-duration: 0.5s;
-    transition-property: background-color;
-  }
-  #workspaces button {
-    background: #24283b;
-    color: #c0caf5;
-    border-bottom: 1px solid #414868;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    padding-left: 4px;
-    padding-right: 4px;
-  }
-  #workspaces button.active {
-    color: #c0caf5;
-    background: #414868;
-  }
-  #workspaces button.urgent {
-    color: #f7768e;
-  }
-  #workspaces button.persistent {
-    color: #414868;
-  }
-  #workspaces button:hover {
-    color: #c0caf5;
-    background: #414868;
-    box-shadow: inherit;
-  }
-  #clock,
-  #mpd,
-  #idle_inhibitor,
-  #custom-cava-internal,
-  #disk,
-  #backlight,
-  #temperature,
-  #bluetooth,
-  #network,
-  #pulseaudio,
-  #cpu,
-  #memory,
-  #battery,
-  #mode {
-    margin: 0px 2px;   /* gaps between modules */
-    padding: 1px 1px;
-    color: #c0caf5;
-    background: #24283b;
-    border-bottom: 1px solid #414868;
-  }
-  #mode,
-  #tray {
-    margin: 0 0 0 2px;
-  }
-  /* #mode { */
-  /*   color: #24283b; */
-  /*   background-color: #f7768e; */
-  /* } */
-  @keyframes blink {
-    to {
-      color: #c0caf5;
-      background-color: #24283b;
-    }
-  }
-  #battery.critical:not(.charging) {
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    color: #f7768e;
-    background-color: #24283b;
-  }
-  #battery.charging {
-    color: #9ece6a;
-    background-color: #24283b;
-  }
-  #mpd.paused {
-    color: #414868;
-    background-color: #24283b;
-  }
-  #mpd.stopped {
-    background: transparent;
-  }
-  #custom-separator {
-    color: #414868;
-    background: #24283b;
-    border-bottom: 1px solid #414868;
-  }
-  #idle_inhibitor {
-    color:#B5E8E0;
-  }
-  #custom-cava-internal{
-    font-family: "Hack Nerd Font" ;
-  }
+  transition: none;
+  box-shadow: none;
+  font-family: 'JetBrainsMono Nerd Font Propo', 'SourceHanSans JP', 'liberation' ;
+  font-size: 12.5px;
+  color: #89CFF0;
+}
 
-  tooltip {
-    border-radius: 10px;
-  }
+#waybar{
+  margin-top: 14px;;
+  background: rgba(52, 42, 113, 0.3);
+  border-radius: 5px;
+  border: 1px solid #89CFF0;
+}
+
+#workspaces{
+  margin: 0 3px;;
+  color: transparent;
+}
+
+#workspaces button{
+  margin: 3px 0;
+  padding: 0 4px;
+}
+
+#workspaces button:hover {
+  background: rgba(255,255,255,0.4);
+  box-shadow: inherit;
+  border-radius: 5px;
+}
+
+#workspaces button.persistent {
+  background: rgba(255,255,255,0.4);
+}
+
+#workspaces button.active{
+  color: #c0caf5;
+  border-radius: 5px;
+  background-color: rgba(14, 152, 156, 0.4);
+}
+
+#workspaces button.urgent{
+  border-radius: 5px;
+  background: rgba(255,255,255,0.4);
+}
+#workspaces button.urgent * {
+  color: rgba(246,71,71,0.8);
+}
+
+#tray {
+  margin: 3px 3px;
+  border: 5px;
+  border-radius: 10px;
+  background-color: rgba(0,0,0,0.4);
+}
+
+#tray *{
+  padding: 0px 6px;
+  border-left: 1px solid rgb(6, 106, 163);
+}
+
+#tray *:first-child{
+  border-left: none;
+}
+
+
+#mode, #battery, #cpu, #disk, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #mpris, #clock, #temperature {
+  margin: 2px 1px;
+  padding: 0 6px;
+  border-radius: 10px;
+  min-width: 10px;
+  background-color: transparent;
+}
+
+#clock {
+  margin: 4px 2px;
+}
+
+#temperature.clitical {
+  color: #800020;
+}
+
+#battery.charging{
+  color: rgb(26, 233, 95);
+}
+
+#battery.warning:not(.charging){
+  color: rgb(236, 19, 19);
+  animation-name: blink;
+  animation-duration: 250ms;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#battery.full{
+  color: rgb(0, 255, 170);
+}
+
+
+#tooltip {
+  background: rgba(0,0,0,0.4);
+  border: 1px solid #89CFF0;
+}
+
+#tooltip label{
+  color: white;
+}
+
+#idle_inhibitor.activated{
+  color: rgba(255, 255, 28, 0.541);
+}
 

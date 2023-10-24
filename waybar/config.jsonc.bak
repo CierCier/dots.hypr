@@ -8,27 +8,29 @@
     "modules-left": [
         "hyprland/workspaces",
         "custom/separator",
-        "idle_inhibitor",
-        "custom/separator",
         "temperature",
         "custom/separator",
+        "idle_inhibitor",
+        "custom/separator",
         "mpris",
+        "custom/seperator",
+        "cava",
     ],
     "modules-center": [
-        "clock",
+        "clock"
     ],
     "modules-right": [
         "network",
         "custom/separator",
-        "backlight",
-        "custom/separator",
-        "battery",
-        "custom/separator",
         "pulseaudio",
+        "custom/separator",
+        "backlight",
         "custom/separator",
         "cpu",
         "custom/separator",
         "memory",
+        "custom/separator",
+        "battery",
         "custom/separator",
         "tray"
     ],
@@ -73,31 +75,37 @@
         "spacing": 5
     },
     "clock": {
-        "tooltip-format": "<tt>{calendar}</tt>",
-        "format": "{: %A %d %B  %H:%M}",
-        //"format-alt": "󰨲 {:%d/%m/%Y  %H:%M:%S}",
+        "tooltip-format": "{:%A, %d %B %Y}\n<tt>{calendar}</tt>",
+        "format": "󰨲 {:%d %B - %H:%M}",
+        //"format": " {:%a %d %b  %H:%M}",	//24 hour format
+        "format-alt": "󰨲 {:%d/%m/%Y  %H:%M:%S}",
+        //"timezones": [ "Kolkata" ],
+        //"max-length": 200
         "interval": 1
     },
     "cpu": {
-        "format": " {usage}%",
+        "format": "<span></span> {load}%",
         "on-click": "alacritty --class=floating -e btop --utf-force",
-        "interval": 5
+        "interval": 1
     },
     "memory": {
-        "format": "󰘚 {used:0.2f}GB",
-        "tooltip": false,
+        "format": "<span foreground='#7aa2f7'>󰘚</span> {percentage}%",
+        "tooltip-format": "{used:0.2f}GiB used out of {total:0.2f}GiB",
         "on-click": "alacritty --class=floating -e btop --utf-force",
         "interval": 5
     },
     "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 75,
         "format-critical": " {temperatureC}°C",
         "format": " {temperatureC}°C",
-        "tooltip":false
+        "tooltip": false,
+        "interval": 2
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{icon} {percent}%",
+        "format": "<span foreground='#b48ead'>{icon}</span> {percent}%",
         "format-icons": [
             "󰹐",
             "󱩎",
@@ -128,26 +136,20 @@
         "format-icons": ["", "", "", "", ""]
     },
     "network": {
+        // "interface": "wlp2s0", // (Optional) To force the use of this interface
         "interval": 1,
-        "format-wifi": "{icon} {essid} ({signalStrength}%)",
-        "format-ethernet": "{icon} {ifname} ({ipaddr})",
-        "format-linked": "{icon} {essid} (No IP)",
-        "format-disconnected": "{icon} Disconnected",
-        "format-icons": {
-            //"wifi" : ["󱪼", "󱪽", "󱪾", "󱪿", "󱫀"],
-            "wifi": ["󰤯" ,"󰤟" ,"󰤢", "󰤥" ,"󰤨"],
-            "ethernet" : ["󱂇"],
-            "disconnected": [""],
-        },
+        "format-wifi": "<span foreground='#61AF1F'></span> {essid} ({signalStrength}%)",
+        "format-ethernet": "<span foreground='#61AF1F'>󰌗</span> {ifname} ({ipaddr})",
+        "format-linked": "<span foreground='#61AF1F'>󰌙</span> {essid} (No IP)",
+        "format-disconnected": "<span foreground='#61AF1F'>󰌙</span> Disconnected",
         "tooltip-format": "↑ {bandwidthUpBits}\n↓ {bandwidthDownBits}",
         "tooltip-disabled": "Disconnected",
         "tooltip": true,
-        
         "on-click": "alacritty --class=floating -e nmtui connect"
     },
     "pulseaudio": {
         "scroll-step": 0.5,
-        "format": "{icon} {volume}%",
+        "format": "<span foreground='#d08770'>{icon}</span> {volume}%",
         "format-muted": "󰝟 Muted",
         "format-icons": {
             "default": [
