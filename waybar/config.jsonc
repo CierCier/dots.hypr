@@ -69,8 +69,9 @@
         },
     },
     "tray": {
-        "icon-size": 15,
-        "spacing": 5
+        "icon-size": 16,
+        "spacing": 0,
+        "revese-direction": true
     },
     "clock": {
         "tooltip-format": "<tt>{calendar}</tt>",
@@ -84,8 +85,8 @@
         "interval": 5
     },
     "memory": {
-        "format": "󰘚 {used:0.2f}GB",
-        "tooltip": false,
+        "format": "󰘚 {percentage}%",
+        "tooltip": true,
         "on-click": "alacritty --class=floating -e btop --utf-force",
         "interval": 5
     },
@@ -184,6 +185,9 @@
         "title-len": 30,
         "escape": true,
         "tooltip": false,
-        "interval": 1
+        "interval": 1,
+
+        "on-click-middle": "",
+        "on-click-right": "",
     },
 }

@@ -1,0 +1,14 @@
+CompilerFlags:
+  Add: [ -Wall, -I=/usr/include ]
+
+
+Diagnostics:
+  ClangTidy:
+    Add: modernize*
+
+  UnusedIncludes: Strict
+
+  InlayHints:
+    Designators: Yes
+    Enabled: Yes
+
