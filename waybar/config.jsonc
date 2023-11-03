@@ -141,7 +141,8 @@
             "disconnected": [""],
         },
         "tooltip-format": "↑ {bandwidthUpBits}\n↓ {bandwidthDownBits}",
-        "tooltip-disabled": "Disconnected",
+        "tooltip-disconnected": "Disconnected",
+        "tooltip-disabled": "Unavailable",
         "tooltip": true,
         
         "on-click": "alacritty --class=floating -e nmtui connect"

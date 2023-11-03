@@ -84,7 +84,7 @@
 }
 
 #battery.charging{
-  color: rgb(7, 201, 72);
+  color: rgb(0, 255, 85);
 }
 
 #battery.warning:not(.charging){

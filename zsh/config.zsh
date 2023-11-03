@@ -13,7 +13,7 @@ wall() {
         echo "wall <file>\n<file> can be most image formats and gifs\nUses swww -> ensure that you run 'swww init' before this"
         return 1
     fi
-    swww img $1 --transition-angle=30 --transition-duration=2.1 --transition-fps=60 --transition-bezier=.63,.11,.41,.69 --transition-type=outer --transition-pos=1400,1080 --resize=crop
+    swww img $@ --transition-angle=30 --transition-duration=2.1 --transition-fps=60 --transition-bezier=.63,.11,.41,.69 --transition-type=outer --transition-pos=1400,1080 --resize=crop
 }
 
 
