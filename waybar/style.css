@@ -1,14 +1,14 @@
 * {
   transition: none;
   box-shadow: none;
-  font-family: 'JetBrainsMono Nerd Font Propo', 'SourceHanSans JP', 'liberation' ;
+  font-family: 'JetBrainsMono Nerd Font Propo', 'SourceHanSans JP', 'Twemoji', 'liberation' ;
   font-size: 13px;
   color: #89CFF0;
 }
 
 #waybar{
   margin-top: 14px;;
-  background: rgba(2, 2, 46, 0.555);
+  background: radial-gradient(circle at top ,rgba(214, 187, 187, 0.664), rgba(69, 70, 71, 0.314), rgba(69, 70, 71, 0.314) );
   border-radius: 5px;
   border: 1px solid #89CFF0;
 }
@@ -19,14 +19,16 @@
 }
 
 #workspaces button{
+  color: rgb(49, 31, 31);
   margin: 3px 0;
   padding: 0 4px;
+  transition: 750ms cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 #workspaces button:hover {
   background: rgba(255,255,255,0.4);
   box-shadow: inherit;
-  border-radius: 5px;
+  border-radius: 2px;
 }
 
 #workspaces button.persistent {
@@ -34,17 +36,15 @@
 }
 
 #workspaces button.active{
-  color: #303136;
+  color: #927a7a;
   border-radius: 2px;
-  background: rgba(22, 50, 51, 0.705);
+  background: rgba(10, 150, 155, 0.705);
 }
 
 #workspaces button.urgent{
   border-radius: 5px;
-  background: rgba(255,255,255,0.4);
-}
-#workspaces button.urgent * {
-  color: rgba(246,71,71,0.8);
+  background: rgba(255, 255, 255, 0.4);
+  
 }
 
 #tray {
@@ -53,12 +53,15 @@
 }
 
 #tray *{
-  padding: 0px 4px;
-  border-radius: inherit;
+  padding: 2px;
+  border-radius: 0px;
 }
 
 #tray *:first-child{
   border-left: none;
+}
+#tray *:last-child{
+  border-right: none;
 }
 
 
@@ -71,6 +74,7 @@
 }
 
 #clock {
+  color: black;
   margin: 4px 2px;
 }
 
@@ -92,12 +96,19 @@
   
 }
 
+#battery.critical:not(.charging){
+    animation-name: blink;
+    animation-duration: 500ms;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
 
 #battery.full:not(.discharging){
   color: rgb(255, 81, 0);
   animation-name: blink;
-  animation-duration: 1500ms;
-  animation-timing-function: ease-in-out;
+  animation-duration: 500ms;
+  animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }

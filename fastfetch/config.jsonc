@@ -4,7 +4,7 @@
 {
     "$schema": "https://raw.githubusercontent.com/fastfetch-cli/fastfetch/dev/doc/json_schema.json",
     "logo": {
-        "source": "OSX",
+        "source": "Arch",
         "padding": {
             "top": 0,
             "right": 1,
@@ -12,7 +12,10 @@
         }
     },
     "display": {
-        "percentType": 9 // colored percent number
+        "percent": {
+            "x" : 9,
+            "y" : 9
+        }
     },
     "modules": [
         {

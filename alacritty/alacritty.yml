@@ -8,30 +8,29 @@ window:
   padding:
     x: 0
     y: 0
+  decorations: None
+
+
 font:
   size: 12.0
   draw_bold_text_with_bright_colors: true
   normal:
-    family: JetBrainsMono Nerd Font
+    family: MesloLGS Nerd Font Propo
     style: Regular
-  bold:
-    family: JetBrainsMono Nerd Font
-    style: Bold
-  italic: 
-    family: JetBrainsMono Nerd Font
-    style: Italic
-  bold_italic:
-    family: JetBrainsMono Nerd Font
-    style: BoldItalic
-  
+ 
 live_config_reload: true
 dynamic_padding: true
+render_timer: false
+dynamic_title: true
+
+
 
 cursor:
   style:
-    shape: Beam
+    shape: Block
     blinking: On
     blink-interval: 250
+    hide_when_typing: false
 
 
 key_bindings:

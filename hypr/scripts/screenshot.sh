@@ -1,4 +1,18 @@
 #! /bin/bash
 #
 
-wl-copy < $(/usr/bin/grimblast --notify save $1);
+if [ $# -gt 0 ]
+then
+    selected=$1
+else
+    enteries="Area ColorPicker Screen"
+    selected=$(printf '%s\n' $enteries | fuzzel -d -l3 -w14 --anchor center  | awk '{print tolower($1)}')
+fi
+case $selected in
+    screen)
+        exec /usr/bin/grimblast --notify copysave screen;;
+    area)
+        exec /usr/bin/grimblast --notify copysave area;;
+    colorpicker)
+        exec /usr/bin/hyprpicker --no-fancy --autocopy --format=hex;;
+esac
