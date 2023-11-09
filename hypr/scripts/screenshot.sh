@@ -6,7 +6,7 @@ then
     selected=$1
 else
     enteries="Area ColorPicker Screen"
-    selected=$(printf '%s\n' $enteries | fuzzel -d -l3 -w14 --anchor center  | awk '{print tolower($1)}')
+    selected=$(printf '%s\n' $enteries | fuzzel -d -l3 -w14 --anchor center --prompt=""  | awk '{print tolower($1)}')
 fi
 case $selected in
     screen)

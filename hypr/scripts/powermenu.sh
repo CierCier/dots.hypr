@@ -1,7 +1,7 @@
 #! /bin/bash
 #
 entries="Shutdown Reboot Logout Hibernate"
-selected=$(printf '%s\n' $entries | fuzzel -d -l3 | awk '{print tolower($1)}')
+selected=$(printf '%s\n' $entries | fuzzel -d -l4 | awk '{print tolower($1)}')
 
 case $selected in 
     shutdown)
@@ -10,7 +10,7 @@ case $selected in
         exec hyprctl dispatch exit;;
     reboot)
         exec systemctl reboot;;
-    hybernate)
+    hibernate)
         exec systemctl hibernate;;
 esac
 

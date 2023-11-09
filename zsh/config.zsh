@@ -55,6 +55,8 @@ export PATH=$PATH
 
 if [ -f $(which mcfly) ] 
 then
+    export MCFLY_KEY_SCHEME=vim
+    export MCFLY_FUZZY=2
     eval "$(mcfly init zsh)"
 fi
 

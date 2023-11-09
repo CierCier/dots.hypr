@@ -1,14 +1,15 @@
 * {
   transition: none;
   box-shadow: none;
-  font-family: 'JetBrainsMono Nerd Font Propo', 'SourceHanSans JP', 'Twemoji', 'liberation' ;
+  font-family: 'JetBrainsMono Nerd Font Propo', 'Noto Sans CJK JP', 'Noto Sans', 'Twemoji', 'Unifont', 'liberation' ;
   font-size: 13px;
+  font-weight: 600;
   color: #89CFF0;
 }
 
 #waybar{
   margin-top: 14px;;
-  background: radial-gradient(circle at top ,rgba(214, 187, 187, 0.664), rgba(69, 70, 71, 0.314), rgba(69, 70, 71, 0.314) );
+  background-color: rgba(0, 0, 0, 0.733);
   border-radius: 5px;
   border: 1px solid #89CFF0;
 }
@@ -74,7 +75,6 @@
 }
 
 #clock {
-  color: black;
   margin: 4px 2px;
 }
 
