@@ -1,5 +1,5 @@
 CompilerFlags:
-  Add: [ -xc++, -Wall, -I=/usr/include ]
+  Add: [ -xc++, -Wall, -Wextra, -Werror, -I=/usr/include ]
 
 
 Diagnostics:

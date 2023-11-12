@@ -81,13 +81,13 @@
     },
     "cpu": {
         "format": " {usage}%",
-        "on-click": "alacritty --class=floating -e btop --utf-force",
+        "on-click": "foot --app-id=floating -w 740x550 -e btop",
         "interval": 5
     },
     "memory": {
         "format": "󰘚 {percentage}%",
         "tooltip": true,
-        "on-click": "alacritty --class=floating -e btop --utf-force",
+        "on-click": "foot --app-id=floating -w 740x550 -e btop",
         "interval": 5
     },
     "temperature": {
@@ -145,7 +145,7 @@
         "tooltip-disabled": "Unavailable",
         "tooltip": true,
         
-        "on-click": "alacritty --class=floating -e nmtui connect"
+        "on-click": "foot --app-id=floating -w 740x550 -e nmtui connect"
     },
     "pulseaudio": {
         "scroll-step": 0.5,
