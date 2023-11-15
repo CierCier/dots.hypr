@@ -1,4 +1,9 @@
-source /usr/share/doc/find-the-command/ftc.zsh
+
+if [ -d /ust/share/doc/find-the-command ]
+then
+    source /usr/share/doc/find-the-command/ftc.zsh
+fi
+
 
 # Aliases
 alias neofetch="/usr/bin/fastfetch"
@@ -20,25 +25,25 @@ wall() {
 # Path Manipulation
 if [ -d $HOME/.local/bin ]
 then
-    PATH=$PATH:$HOME/.local/bin
+    PATH+=$HOME/.local/bin
 fi
 
 # adding cargo bin to path if exists
 if [ -d $HOME/.cargo/bin ]
 then
-    PATH=$PATH:$HOME/.cargo/bin
+    PATH+=$HOME/.cargo/bin
 fi
 
 # adding flutter bin to path if exists
 if [ -d /opt/flutter ]
 then
-    PATH=$PATH:/opt/flutter/bin
+    PATH+=/opt/flutter/bin
 fi
 
 
 if [ -d $HOME/.ghcup ]
 then
-    PATH=$PATH:$HOME/.ghcup/bin         
+    PATH+=$HOME/.ghcup/bin         
 fi
 
 export PATH=$PATH
