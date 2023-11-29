@@ -23,6 +23,8 @@
         "backlight",
         "battery",
         "custom/seperator",
+        "idle_inhibitor",
+        "custom/seperator",
         "clock",
     ],
 
@@ -31,7 +33,7 @@
         "disable-scroll": true,
         "all-outputs": true,
         "format": "{icon}",
-        "persistent_workspaces": {
+        "persistent-workspaces": {
 
         },
 
@@ -146,14 +148,24 @@
             "paused": "",
         },
         "ellipsis": "..",
-        "max-length": 85,
-        "artist-len": 14,
-        "title-len": 30,
+        "max-length": 90,
+        "artist-len": 20,
+        "title-len": 50,
         "escape": true,
         "tooltip": false,
         "interval": 1,
 
         "on-click-middle": "",
         "on-click-right": "",
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "󰈈", 
+            "deactivated": "󰈉"
+        },
+        "tooltip": false,
+        "interval": 1,
+        "start-activated": false,
     },
 }

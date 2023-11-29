@@ -1,7 +1,7 @@
 * {
     transition: none;
     box-shadow: none;
-    font-family: "JetBrainsMono Nerd Font Propo", "Noto Sans CJK JP",
+    font-family: "JetBrainsMono NFP", "Noto Sans CJK JP",
         "Noto Sans", "Twemoji", "Unifont", "liberation";
     font-size: 13px;
     font-weight: 600;
@@ -73,7 +73,6 @@ window#waybar {
 #memory,
 #network,
 #pulseaudio,
-#idle_inhibitor,
 #backlight,
 #mpris,
 #clock,
@@ -128,6 +127,11 @@ window#waybar {
     background: transparent;
 }
 
-#idle_inhibitor.activated {
-    color: #ff9e64;
+#idle_inhibitor{
+    padding: 0px 5px;
 }
+#idle_inhibitor.activated {
+    color: #F0B72F;
+}
+
+

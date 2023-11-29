@@ -1,5 +1,5 @@
-CompilerFlags:
-  Add: [ -xc++, -Wall, -Wextra, -Werror, -I=/usr/include ]
+CompileFlags:
+  Add: [ -Wall, -Wextra, -Werror, -I=/usr/include, -stdlib=libc++]
 
 
 Diagnostics:
@@ -8,7 +8,8 @@ Diagnostics:
 
   UnusedIncludes: Strict
 
-  InlayHints:
-    Designators: Yes
-    Enabled: Yes
+
+InlayHints:
+  Designators: Yes
+  Enabled: Yes
 
