@@ -15,16 +15,16 @@ alias grep="/usr/bin/rg"
 
 
 ## clang set
-C_OPTS="-O3 -march=native -mtune=native -pipe -std=c17"
-CXX_OPTS="$C_OPTS -std=c++2a"
-export CFLAGS="$C_OPTS"
-export CXXFLAGS="$CXX_OPTS"
-export LDFLAGS="-Wl,-O3,--sort-common,--as-needed,-z,relro,-z,now, -fuse-ld=lld"
-export CC=clang
-export CXX=clang++
+#C_OPTS="-O3 -march=native -mtune=native -pipe -std=c17"
+#CXX_OPTS="$C_OPTS -std=c++2a"
+#export CFLAGS="$C_OPTS"
+#export CXXFLAGS="$CXX_OPTS"
+#export LDFLAGS="-Wl,-O3,--sort-common,--as-needed,-z,relro,-z,now, -fuse-ld=lld"
+#export CC=clang
+#export CXX=clang++
 
-alias cc="clang $CFLAGS"
-alias cxx="clang++ $CXXFLAGS"
+#alias cc="clang $CFLAGS"
+#alias cxx="clang++ $CXXFLAGS"
 
 alias vim="nvim"
 alias vi="nvim"
