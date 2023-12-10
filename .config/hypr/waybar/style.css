@@ -1,140 +1,149 @@
-
-@define-color background_color rgba(0, 0, 0, 0.781);
-
 * {
-    transition: none;
-    box-shadow: none;
-    font-family: "JetBrainsMono NFP", "Noto Sans CJK JP",
-        "Noto Sans", "Twemoji", "Unifont", "liberation";
-    font-size: 13px;
-    font-weight: 600;
-    color: #89cff0;
+  border-radius: 0;
+  border: none;
+
+  font-family: "JetBrainsMono NFP", "Noto Sans CJK JP", "Noto Sans", "Twemoji",
+    "Unifont", "liberation";
+  font-size: 12px;
+  font-weight: bolder;
+  min-height: 0;
 }
 
 window#waybar {
-    background: transparent;
-    background-color: @background_color;
-    color: #b4f9f8;
+  background: transparent;
+  color: #f4d9e1;
 }
 
-#workspaces{
-    color: transparent;
+#workspaces {
+  margin: 5px 0px;
 }
-
 
 #workspaces button {
-    transition: 750ms cubic-bezier(0.075, 0.82, 0.165, 1);
-    color: #b4f9f8;
-    padding: 0px 5px;
-    border: 1px solid;
-    border-color: rgba(0, 0, 0, 0.0);
-    border-radius: 0px;
+  background: #282828;
+  padding: 0px 5px;
+  color: #928374;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms;
 }
 
 #workspaces button.active {
-    color: #a9b1d6;
-    border-color: #89cff0;
-}
-
-#workspaces button.focused {
-    border-color: #89cff0;
-}
-
-#workspaces button.urgent {
-    color: white;
+  color: #f4d9e1;
 }
 
 #workspaces button:hover {
-    border-color: #bb9af7;
-    background-color: #89cff0;
-    color: black;
+  background-color: #e6b9c6;
+  color: black;
 }
 
-
+#workspaces button:first-child {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+#workspaces button:last-child {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
 
 #tray {
-    margin: 1px 2px;
-    border-radius: 10px;
+  margin: 5px 5px;
 }
-
+/*
 #tray * {
-    padding: 2px;
-    border-radius: 0px;
+  background-color: #282828;
+  padding: 0px 5px;
 }
 
-#tray *:first-child {
-    border-left: none;
-}
-#tray *:last-child {
-    border-right: none;
+#tray button{
+    color: #928374;
 }
 
-#mode,
-#battery,
+
+#tray :first-child {
+  margin-left: 0px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+#tray :last-child {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+*/
+
+#mpris {
+  background: #282828;
+  padding-left: 15px;
+  padding-right: 14px;
+  border-radius: 12px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 0px;
+  font-weight: normal;
+  font-style: normal;
+}
+
+#window {
+  background: #282828;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 12px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-weight: normal;
+  font-style: normal;
+}
+
 #cpu,
-#disk,
 #memory,
-#network,
-#pulseaudio,
-#backlight,
-#mpris,
-#clock,
+#temperature,
+#disk {
+  background-color: #282828;
+  margin: 5px 0px;
+  padding: 0px 10px 0px 10px;
+  font-weight: bold;
+}
+
 #temperature {
-    margin: 2px 1px;
-    padding: 0 5px;
-    border-radius: 10px;
-    min-width: 10px;
-    background-color: transparent;
+  margin-left: 2px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+#cpu {
+  margin-right: 0;
+  border-right: none;
+}
+
+#memory {
+  margin-left: 0;
+  border-left: none;
+}
+
+#disk {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  margin-right: 5px;
+}
+
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#backlight,
+#idle_inhibitor,
+#custom-seperator {
+  background: #282828;
+  padding: 4px;
+  margin: 5px 0px;
+  border-radius: 0;
+}
+
+#network {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
 }
 
 #clock {
-    margin: 4px 2px;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  margin-right: 2px;
 }
-
-#temperature.clitical {
-    color: #ff0000;
-    animation-name: blink;
-    animation-duration: 750ms;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-#battery.charging {
-    color: #9ece6a;
-}
-
-#battery.warning:not(.charging) {
-    color: #f7768e;
-}
-
-#battery.critical:not(.charging) {
-    animation-name: blink;
-    animation-duration: 500ms;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-#battery.full:not(.discharging) {
-    color: #c0caf5;
-    animation-name: blink;
-    animation-duration: 500ms;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-#tooltip {
-    color: #b4f9f8;
-    background: transparent;
-}
-
-#idle_inhibitor{
-    padding: 0px 5px;
-}
-#idle_inhibitor.activated {
-    color: #F0B72F;
-}
-
-
