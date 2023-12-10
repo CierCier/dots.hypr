@@ -9,10 +9,12 @@ export EDITOR=nvim
 
 # Aliases
 alias neofetch="/usr/bin/fastfetch"
-alias ls="/usr/bin/exa --long --all --colour auto --git --group-directories-first"
+alias ls="/usr/bin/eza --all --long --git --icons=auto --group-directories-first"
+
 alias cat="/usr/bin/bat --style header --style snip --style changes --style header"
 alias grep="/usr/bin/rg"
 
+alias grub-update="sudo /usr/bin/grub-mkconfig -o /boot/grub/grub.cfg"
 
 ## clang set
 #C_OPTS="-O3 -march=native -mtune=native -pipe -std=c17"

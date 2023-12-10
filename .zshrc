@@ -1,1 +1,1 @@
-/home/opticxc/extras/dots.hypr/zsh/zshrc
+/home/opticxc/.config/zsh/zshrc
