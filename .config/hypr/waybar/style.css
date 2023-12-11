@@ -32,6 +32,12 @@ window#waybar {
 #workspaces button:hover {
   background-color: #e6b9c6;
   color: black;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms;
+  /*
+   * GTK css doesnt support transform
+   * transform: scale(1.1); 
+   */
+  min-width: 30px;
 }
 
 #workspaces button:first-child {
@@ -44,41 +50,33 @@ window#waybar {
 }
 
 #tray {
-  margin: 5px 5px;
-}
-/*
-#tray * {
+  margin: 5px 0px;
   background-color: #282828;
-  padding: 0px 5px;
+  border-radius: 12px;
+  margin-right: 4px;
 }
 
-#tray button{
-    color: #928374;
+#tray * {
+  margin: 1px 3px 1px 3px ;
 }
 
-
-#tray :first-child {
-  margin-left: 0px;
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
+#tray button {
+  background: #282828;
+  color: #928374;
 }
-
-#tray :last-child {
-  border-top-right-radius: 12px;
-  border-bottom-right-radius: 12px;
-}
-*/
 
 #mpris {
   background: #282828;
   padding-left: 15px;
   padding-right: 14px;
   border-radius: 12px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: 0px;
-  font-weight: normal;
-  font-style: normal;
+  margin: 5px 0px;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms;
+}
+
+#mpris.playing {
+  background: #e6b9c6;
+  color: black;
 }
 
 #window {
@@ -107,10 +105,18 @@ window#waybar {
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
 }
+#temperature.critical {
+  background: #f78f81;
+  color: black;
+}
 
 #cpu {
   margin-right: 0;
   border-right: none;
+}
+#cpu.load {
+  background: #f78f81;
+  color: black;
 }
 
 #memory {
@@ -141,9 +147,54 @@ window#waybar {
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
 }
+#network.disconnected {
+  background: #e6b9c6;
+  color: black;
+}
+
+#battery.charging {
+  background: #e6b9c6;
+  color: black;
+}
+#battery.full {
+  background: #e7f9cf;
+  color: black;
+}
+#battery.warning {
+  background: #f78f81;
+  color: black;
+}
+#battery.critical {
+  background: #f78f81;
+  color: black;
+}
+
+
 
 #clock {
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
   margin-right: 2px;
+}
+#idle_inhibitor {
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms;
+}
+#idle_inhibitor.activated {
+  background: #e6b9c6;
+  color: black;
+}
+
+#pulseaudio.muted {
+  background: #e6b9c6;
+  color: black;
+}
+
+#tooltip {
+  background: #282828;
+  color: #f4d9e1;
+  border-radius: 12px;
+  padding: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 5px 0px;
 }

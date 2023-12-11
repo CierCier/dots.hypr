@@ -84,8 +84,12 @@
             "warning": 30,
             "clitical": 15,
         },
-        "format": "{icon} {capacity}%",
-        "format-icons":["", "", "", "", ""]
+        "format-discharging": "{icon} {capacity}% ({time})",
+        "format-charging": "{icon} {capacity}% ({time})",
+        "format-full": "{icon} {capacity}%",
+        "format-icons":["", "", "", "", ""],
+        "tooltip": false,
+        "interval": 10,
     },
     "network": {
         "on-click": "foot --app-id=floating -w 740x550 -e nmtui connect",
