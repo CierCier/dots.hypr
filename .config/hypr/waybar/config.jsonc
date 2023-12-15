@@ -36,7 +36,10 @@
         "all-outputs": true,
         "format": "{icon}",
         "persistent-workspaces": {
-
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
         },
 
         "format-icons": {
@@ -62,10 +65,11 @@
     "cpu":{
         "on-click": "foot --app-id='process-monitor' -w 820x540  -e btop",
         "format": " {usage}%",
-        "interval": 5
+        "interval": 2,
     },
     "memory": {
         "on-click": "foot --app-id='process-monitor' -w 820x540 -e btop",
+        "interval": 2,
 
     },
     "temperature":{
@@ -153,14 +157,14 @@
             "playing": "",
             "paused": "",
         },
-        "ellipsis": "..",
+        "ellipsis": "...",
         "max-length": 90,
         "artist-len": 20,
         "title-len": 50,
         "escape": true,
         "tooltip": false,
         "interval": 1,
-
+        "on-click": "playerctl play-pause",
         "on-click-middle": "",
         "on-click-right": "",
     },
@@ -176,7 +180,7 @@
     },
     "disk": {
         "format": "󰋊 {percentage_used}%",
-        "interval": 180,
+        "interval": 60,
         "tooltip-format":"Total: {total} | Used: {used} | Free: {free}",
     }
 }

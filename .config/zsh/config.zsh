@@ -39,7 +39,12 @@ wall() {
         echo "wall <file>\n<file> can be most image formats and gifs\nUses swww -> ensure that you run 'swww init' before this"
         return 1
     fi
-    swww img $@ --transition-angle=30 --transition-duration=2.1 --transition-fps=60 --transition-bezier=.63,.11,.41,.69 --transition-type=outer --transition-pos=1400,1080 --resize=crop
+    if [ -z "$SWWW_CUBIC_BEZIER" ]
+    then
+        export SWWW_CUBIC_BEZIER="0.63,0.11,0.41,0.69"
+    fi
+
+    swww img $@ --transition-angle=30 --transition-duration=1.3 --transition-fps=120 --transition-bezier="$SWWW_CUBIC_BEZIER" --transition-type=outer --transition-pos=1400,1080 --resize=crop
 }
 
 
