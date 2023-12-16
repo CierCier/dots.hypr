@@ -1,3 +1,5 @@
+@import url("../../../.cache/wal/colors-waybar.css");
+
 * {
   border-radius: 0;
   border: none;
@@ -11,7 +13,7 @@
 
 window#waybar {
   background: transparent;
-  color: #f4d9e1;
+  color: @color13;
 }
 
 #workspaces {
@@ -19,18 +21,18 @@ window#waybar {
 }
 
 #workspaces button {
-  background: #282828;
+  background: @background;
   padding: 0px 5px;
-  color: #584f46;
+  color: @color1;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms;
 }
 
 #workspaces button.active {
-  color: #ffe3eb;
+  color: @color13;
 }
 
 #workspaces button:hover {
-  background-color: #e6b9c6;
+  background-color: @color13;
   color: black;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms;
   /*
@@ -51,7 +53,7 @@ window#waybar {
 
 #tray {
   margin: 5px 0px;
-  background-color: #282828;
+  background-color: @background;
   border-radius: 12px;
   margin-right: 4px;
 }
@@ -61,12 +63,12 @@ window#waybar {
 }
 
 #tray button {
-  background: #282828;
-  color: #928374;
+  background: @background;
+  color: @color15;
 }
 
 #mpris {
-  background: #282828;
+  background: @background;
   padding-left: 15px;
   padding-right: 14px;
   border-radius: 12px;
@@ -75,12 +77,12 @@ window#waybar {
 }
 
 #mpris.playing {
-  background: #e6b9c6;
-  color: black;
+  background: @color13;
+  color: @color0;
 }
 
 #window {
-  background: #282828;
+  background: @color15;
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 12px;
@@ -94,7 +96,7 @@ window#waybar {
 #memory,
 #temperature,
 #disk {
-  background-color: #282828;
+  background-color: @background;
   margin: 5px 0px;
   padding: 0px 10px 0px 10px;
   font-weight: bold;
@@ -106,8 +108,8 @@ window#waybar {
   border-bottom-left-radius: 12px;
 }
 #temperature.critical {
-  background: #f78f81;
-  color: black;
+  background: @color13;
+  color: @background;
 }
 
 #cpu {
@@ -115,8 +117,8 @@ window#waybar {
   border-right: none;
 }
 #cpu.load {
-  background: #f78f81;
-  color: black;
+  background: @color13;
+  color: @background;
 }
 
 #memory {
@@ -137,7 +139,7 @@ window#waybar {
 #backlight,
 #idle_inhibitor,
 #custom-seperator {
-  background: #282828;
+  background: @background;
   padding: 4px;
   margin: 5px 0px;
   border-radius: 0;
@@ -148,25 +150,25 @@ window#waybar {
   border-bottom-left-radius: 12px;
 }
 #network.disconnected {
-  background: #e6b9c6;
-  color: black;
+  background: @color13;
+  color: @background;
 }
 
 #battery.charging {
-  background: #e6b9c6;
-  color: black;
+  background: @color13;
+  color: @background;
 }
 #battery.full {
-  background: #e7f9cf;
-  color: black;
+  background: @color13;
+  color: @background;
 }
 #battery.warning {
-  background: #f78f81;
-  color: black;
+  background: @color13;
+  color: @background;
 }
 #battery.critical {
-  background: #f78f81;
-  color: black;
+  background: @color13;
+  color: @background;
 }
 
 #clock {
@@ -178,18 +180,18 @@ window#waybar {
   transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms;
 }
 #idle_inhibitor.activated {
-  background: #e6b9c6;
-  color: black;
+  background: @color13;
+  color: @background;
 }
 
 #pulseaudio.muted {
-  background: #e6b9c6;
-  color: black;
+  background: @color13;
+  color: @background;
 }
 
 #tooltip {
-  background: #282828;
-  color: #f4d9e1;
+  background: @background;
+  color: @color13;
   border-radius: 12px;
   padding: 5px;
   font-size: 12px;

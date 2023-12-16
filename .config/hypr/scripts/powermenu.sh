@@ -1,5 +1,10 @@
 #! /bin/bash
 #
+#
+## !!!Depricated!!!
+# use wlogout instead
+
+
 entries="Shutdown Reboot Logout Hibernate"
 selected=$(printf '%s\n' $entries | fuzzel -d -l4 | awk '{print tolower($1)}')
 

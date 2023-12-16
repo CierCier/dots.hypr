@@ -32,22 +32,6 @@ alias vim="nvim"
 alias vi="nvim"
 
 
-# wallpaper doohickery
-wall() {
-    if (( $# == 0 ))
-    then
-        echo "wall <file>\n<file> can be most image formats and gifs\nUses swww -> ensure that you run 'swww init' before this"
-        return 1
-    fi
-    if [ -z "$SWWW_CUBIC_BEZIER" ]
-    then
-        export SWWW_CUBIC_BEZIER="0.63,0.11,0.41,0.69"
-    fi
-
-    swww img $@ --transition-angle=30 --transition-duration=1.3 --transition-fps=120 --transition-bezier="$SWWW_CUBIC_BEZIER" --transition-type=outer --transition-pos=1400,1080 --resize=crop
-}
-
-
 # Path Manipulation
 if [ -d $HOME/.local/bin ]
 then
