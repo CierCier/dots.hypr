@@ -108,6 +108,7 @@
             "ethernet" : ["󱂇"],
             "disconnected": [""],
         },
+        "interval": 5,
     },
 
     "pulseaudio": {

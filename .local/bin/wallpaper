@@ -2,8 +2,8 @@
 
 # This script is used to set the wallpaper on my desktop.
 
-if [ -z "$XDG_WALLPAPER_DIR" ]; then
-    XDG_WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+if [ -z "$WALLPAPER_DIR" ]; then
+    WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
 fi
 
 if [ -z "$SWWW_CUBIC_BEZIER" ]; then
@@ -15,7 +15,7 @@ fi
 if [ -z "$1" ]; then
 
     # get all files in XDG_WALLPAPER_DIR including subfolders
-    files=("$XDG_WALLPAPER_DIR"/**/*)
+    files=("$WALLPAPER_DIR"/**/*)
     # filter out non-supported images
     files=("${files[@]##@(jpg|jpeg|png|gif|webp)}")
     file=$(printf "%s\n" "${files[RANDOM % ${#files[@]}]}")
@@ -31,7 +31,11 @@ cursorx=$(echo $cursorpos | awk '{print $1}')
 cursory=$(echo $cursorpos | awk '{print $2}')
 
 #get display resolution
-monitor_h=$(hyprctl monitors -j | jq '.[0].height'  )
+if [ ! -z "$(pidof sway)"]; then
+    monitor_h=$(swaymsg -t get_outputs -r | jq '.[0].rect.height')
+elif [ ! -z "$(pidof Hyprland)" ]; then
+    monitor_h=$(hyprctl monitors -j | jq '.[0].height')
+fi
 
 cursory=$(echo $cursory | awk -v monitor_h="$monitor_h" '{print monitor_h-$1-50}')
 
