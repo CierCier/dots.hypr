@@ -23,6 +23,12 @@ else
     file="$1"
 fi
 
+if [ -z "$2" ]; then
+    resize_mode="crop"
+else
+    resize_mode="$2"
+fi
+
 cursorpos=$(hyprctl cursorpos)
 ## fix cursor y offset from hyprctl
 # height - y???
@@ -39,7 +45,7 @@ fi
 
 cursory=$(echo $cursory | awk -v monitor_h="$monitor_h" '{print monitor_h-$1-50}')
 
-swww img $file --transition-angle=30 --transition-duration=1.5 --transition-fps=144 --transition-bezier="$SWWW_CUBIC_BEZIER" --transition-type=outer --transition-pos="$cursorx $cursory" --resize=crop
+swww img $file --transition-angle=30 --transition-duration=1.5 --transition-fps=144 --transition-bezier="$SWWW_CUBIC_BEZIER" --transition-type=outer --transition-pos="$cursorx $cursory" --resize="$resize_mode"
 
 # generate wal color output
 wal --backend haishoku  --cols16 -i $file -s -n -q
