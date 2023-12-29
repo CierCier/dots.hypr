@@ -1,7 +1,4 @@
-dynamic_padding = true
-dynamic_title = true
 live_config_reload = true
-render_timer = false
 
 [colors.bright]
 black = "0x9ea7b3"
@@ -31,17 +28,11 @@ yellow = "0xf0b72f"
 background = "0x0a0c10"
 foreground = "0xf0f3f6"
 
-[cursor.style]
-blink-interval = 250
-blinking = "On"
-hide_when_typing = false
-shape = "Block"
 
 [env]
 TERM = "xterm-256color"
 
 [font]
-draw_bold_text_with_bright_colors = true
 size = 12.0
 
 [font.normal]
@@ -73,81 +64,6 @@ action = "ScrollPageUp"
 key = "PageUp"
 mods = "Shift"
 
-[schemes.github-dark.bright]
-black = "0x9ea7b3"
-blue = "0x91cbff"
-cyan = "0x39c5cf"
-green = "0x4ae168"
-magenta = "0xcb9eff"
-red = "0xffb1af"
-white = "0xd9dee3"
-yellow = "0xf7c843"
-
-[schemes.github-dark.cursor]
-cursor = "0xf0f3f6"
-text = "0x0a0c10"
-
-[schemes.github-dark.normal]
-black = "0x7a828e"
-blue = "0x71b7ff"
-cyan = "0x39c5cf"
-green = "0x26cd4d"
-magenta = "0xcb9eff"
-red = "0xff9492"
-white = "0xd9dee3"
-yellow = "0xf0b72f"
-
-[schemes.github-dark.primary]
-background = "0x0a0c10"
-foreground = "0xf0f3f6"
-
-[schemes.tokyo-night.bright]
-black = "#444b6a"
-blue = "#7da6ff"
-cyan = "#0db9d7"
-green = "#b9f27c"
-magenta = "#bb9af7"
-red = "#ff7a93"
-white = "#acb0d0"
-yellow = "#ff9e64"
-
-[schemes.tokyo-night.normal]
-black = "#32344a"
-blue = "#7aa2f7"
-cyan = "#449dab"
-green = "#9ece6a"
-magenta = "#ad8ee6"
-red = "#f7768e"
-white = "#787c99"
-yellow = "#e0af68"
-
-[schemes.tokyo-night.primary]
-background = "#1a1b26"
-foreground = "#a9b1d6"
-
-[schemes.tokyo-night-storm.bright]
-black = "#444b6a"
-blue = "#7da6ff"
-cyan = "#0db9d7"
-green = "#b9f27c"
-magenta = "#bb9af7"
-red = "#ff7a93"
-white = "#acb0d0"
-yellow = "#ff9e64"
-
-[schemes.tokyo-night-storm.normal]
-black = "#32344a"
-blue = "#7aa2f7"
-cyan = "#449dab"
-green = "#9ece6a"
-magenta = "#ad8ee6"
-red = "#f7768e"
-white = "#9699a8"
-yellow = "#e0af68"
-
-[schemes.tokyo-night-storm.primary]
-background = "#24283b"
-foreground = "#a9b1d6"
 
 [window]
 decorations = "Full"
