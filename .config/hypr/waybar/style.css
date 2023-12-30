@@ -21,6 +21,7 @@ window#waybar {
 }
 
 #workspaces button {
+  border: none;
   background: @background;
   padding: 0px 5px;
   color: @color1;
@@ -40,6 +41,10 @@ window#waybar {
    * transform: scale(1.1); 
    */
   min-width: 30px;
+}
+
+#workspaces button.persistent{
+ border: none
 }
 
 #workspaces button:first-child {
