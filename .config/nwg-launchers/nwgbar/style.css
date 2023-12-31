@@ -1,0 +1,31 @@
+@import '../../../.cache/wal/colors-waybar.css';
+
+#bar {
+    margin: 0px /* affects top/bottom & left/right alignment */
+}
+
+image {
+    background: none;
+    border-style: none;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+button {
+    background-color: @color0;
+    color: @color13;
+}
+
+button:hover {
+    background-color: @color13;
+    color: @color0;
+}
+
+button:focus {
+    background-color: @color13;
+    color: @color0;
+}
+
+grid {
+    /* e.g. for common background to all buttons */
+}

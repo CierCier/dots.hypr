@@ -1,0 +1,10 @@
+{
+	"editor.useTabStops": false,
+	"editor.tabSize": 4,
+	"editor.renderWhitespace": "all",
+	"editor.insertSpaces": false,
+	"workbench.iconTheme": "material-icon-theme",
+	"workbench.colorTheme": "Tokyo Night Gogh",
+	"files.autoSave": "afterDelay",
+	"editor.formatOnSave": true
+}
