@@ -1,0 +1,84 @@
+#! /bin/bash
+
+
+
+echo "Making cache directory"
+CACHE_DIR=$HOME/.cache/bootstrap
+mkdir -p $CACHE_DIR
+
+
+install_package(){
+    echo "Installing $1"
+	sudo paru -S $1 --noconfirm
+}
+
+if [ ! -f /sbin/paru ]; then
+    echo "Installing Paru"
+    if [ ! -f /sbin/git ]; then
+	    install_package git
+    fi
+    git clone https://aur.archlinux.org/paru-bin.git $CACHE_DIR/paru-bin
+    cd $CACHE_DIR/paru-bin
+    makepkg -si --noconfirm
+fi
+echo "Using Paru as package manager"
+
+echo "Checking supported micro-architecture"
+microarch=$(/usr/lib/ld-linux-x86-64.so.2 --help | grep 'supported' | awk 'NR==1 {print $1}')
+echo "Detected micro-architecture: $microarch"
+
+enable_alhp="n"
+read -p "Do you want to enable ALHP repos? (y/n)" enable_alhp
+
+if [ "$enable_alhp" = "y" ]; then
+
+    echo "Installing ALHP keyring and mirrorlist from the AUR"
+    paru -S --noconfirm alhp-keyring alhp-mirrorlist
+
+    start_line=$(grep -n "^\[core\]" /etc/pacman.conf | cut -d: -f1)
+    echo "Adding ALHP core-$microarch repo to pacman.conf"
+    sudo sed -i "${start_line}i [core-$microarch]\nSigLevel = Optional \nInclude = /etc/pacman.d/alhp-mirrorlist" /etc/pacman.conf
+
+    start_line=$(grep -n "^\[extra\]" /etc/pacman.conf | cut -d: -f1)
+    echo "Adding ALHP extra-$microarch repo to pacman.conf"
+    sudo sed -i "${start_line}i [extra-$microarch]\nSigLevel = Optional \nInclude = /etc/pacman.d/alhp-mirrorlist" /etc/pacman.conf
+
+    if grep -q "^\[multilib\]" /etc/pacman.conf; then
+	echo "Adding ALHP multilib-$microarch repo to pacman.conf"
+	start_line=$(grep -n "^\[multilib\]" /etc/pacman.conf | cut -d: -f1)
+	sudo sed -i "${start_line}i [multilib-$microarch]\nSigLevel = Optional \nInclude = /etc/pacman.d/alhp-mirrorlist" /etc/pacman.conf
+    else
+	echo "Enabling multilib repo"
+	sudo sed -i 's/#\[multilib\]/\[multilib\]/g' /etc/pacman.conf
+	sudo sed -i 's/#Include = \/etc\/pacman.d\/mirrorlist/Include = \/etc\/pacman.d\/mirrorlist/g' /etc/pacman.conf
+    fi
+fi
+
+
+
+CFLAGS="-march=$microarch -mtune=native -O3 -pipe -fno-plt -fexceptions -Wp,-D_FORTIFY_SECURITY=2 -fstack-clash-protection -fcf-protection -mstackrealign"
+RUSTFLAGS="-C target-cpu=native -C opt-level=3 -C strip=symbols"
+MAKEFLAGS="-j$(nproc)"
+BUILDENV="(\!distcc color ccache check \!sign)"
+PKGDEST="~/.cache/makepkg/pkgs"
+SRCDEST="~/.cache/makepkg/src"
+SRCPKGDEST="~/.cache/makepkg/srcpkgs"
+
+echo "Overwriting options in makepkg.conf"
+sudo sed -i "s/^CFLAGS=.*/CFLAGS=\"$CFLAGS\"/g" /etc/makepkg.conf
+sudo sed -i "s/^RUSTFLAGS=.*/RUSTFLAGS=\"$RUSTFLAGS\"/g" /etc/makepkg.conf
+sudo sed -i "s/^MAKEFLAGS=.*/MAKEFLAGS=\"$MAKEFLAGS\"/g" /etc/makepkg.conf
+sudo sed -i "s/^BUILDENV=.*/BUILDENV=\"$BUILDENV\"/g" /etc/makepkg.conf
+sudo sed -i "s@^#PKGDEST=.*@PKGDEST=\"$PKGDEST\"@g" /etc/makepkg.conf
+sudo sed -i "s@^#SRCDEST=.*@SRCDEST=\"$SRCDEST\"@g" /etc/makepkg.conf
+sudo sed -i "s@^#SRCPKGDEST=.*@SRCPKGDEST=\"$SRCPKGDEST\"@g" /etc/makepkg.conf
+
+
+echo "Updating pacman database"
+sudo pacman -Sy
+echo "Updating pacman Filelist"
+sudo pacman -Fy
+
+echo "Installing packages"
+paru -S --noconfirm - < $HOME/.config/yadm/pkglist.txt
+paru -S --noconfirm - < $HOME/.config/yadm/pkglist_aur.txt
