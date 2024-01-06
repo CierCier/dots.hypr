@@ -14,7 +14,7 @@ fi
 # check for arg1
 if [ -z "$1" ]; then
 
-    # get all files in XDG_WALLPAPER_DIR including subfolders
+    # get all files in WALLPAPER_DIR including subfolders
     files=("$WALLPAPER_DIR"/**/*)
     # filter out non-supported images
     files=("${files[@]##@(jpg|jpeg|png|gif|webp)}")
@@ -29,23 +29,29 @@ else
     resize_mode="$2"
 fi
 
-cursorpos=$(hyprctl cursorpos)
-## fix cursor y offset from hyprctl
-# height - y???
-cursorpos=$(echo $cursorpos | awk '{print $1, $2-50}')
-cursorx=$(echo $cursorpos | awk '{print $1}')
-cursory=$(echo $cursorpos | awk '{print $2}')
+#get screen resolution
 
-#get display resolution
-if [ ! -z "$(pidof sway)"]; then
-    monitor_h=$(swaymsg -t get_outputs -r | jq '.[0].rect.height')
-elif [ ! -z "$(pidof Hyprland)" ]; then
-    monitor_h=$(hyprctl monitors -j | jq '.[0].height')
+if [ "$XDG_SESSION_TYPE" = "x11" ]; then
+    screen_x=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1)
+    screen_y=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2)
+
+elif [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    if [ ! -z "$(pidof Hyprland)" ]; then
+	screen_x=$(hyprctl -j monitors | jq '.[0].width')
+	screen_y=$(hyprctl -j monitors | jq '.[0].height')
+    elif [ ! -z "$(pidof sway)" ]; then
+	screen_x=$(swaymsg -t get_outputs | jq '.[0].rect.width')
+	screen_y=$(swaymsg -t get_outputs | jq '.[0].rect.height')
+    fi
 fi
 
-cursory=$(echo $cursory | awk -v monitor_h="$monitor_h" '{print monitor_h-$1-50}')
+transition_pos="$screen_x , $screen_y"
 
-swww img $file --transition-angle=30 --transition-duration=1.5 --transition-fps=144 --transition-bezier="$SWWW_CUBIC_BEZIER" --transition-type=outer --transition-pos="$cursorx $cursory" --resize="$resize_mode"
+if [ "$XDG_SESSION_TYPE" = "x11" ]; then
+    feh --bg-center $file
+else
+    swww img $file --transition-angle=30 --transition-duration=1.5 --transition-fps=144 --transition-bezier="$SWWW_CUBIC_BEZIER" --transition-type=outer --transition-pos="$transition_pos" --resize="$resize_mode"
+fi
 
 # generate wal color output
 wal --backend haishoku  --cols16 -i $file -s -n -q
