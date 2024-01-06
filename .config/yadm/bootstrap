@@ -59,7 +59,6 @@ fi
 CFLAGS="-march=$microarch -mtune=native -O3 -pipe -fno-plt -fexceptions -Wp,-D_FORTIFY_SECURITY=2 -fstack-clash-protection -fcf-protection -mstackrealign"
 RUSTFLAGS="-C target-cpu=native -C opt-level=3 -C strip=symbols"
 MAKEFLAGS="-j$(nproc)"
-BUILDENV="(\!distcc color ccache check \!sign)"
 PKGDEST="~/.cache/makepkg/pkgs"
 SRCDEST="~/.cache/makepkg/src"
 SRCPKGDEST="~/.cache/makepkg/srcpkgs"
@@ -68,7 +67,6 @@ echo "Overwriting options in makepkg.conf"
 sudo sed -i "s/^CFLAGS=.*/CFLAGS=\"$CFLAGS\"/g" /etc/makepkg.conf
 sudo sed -i "s/^RUSTFLAGS=.*/RUSTFLAGS=\"$RUSTFLAGS\"/g" /etc/makepkg.conf
 sudo sed -i "s/^MAKEFLAGS=.*/MAKEFLAGS=\"$MAKEFLAGS\"/g" /etc/makepkg.conf
-sudo sed -i "s/^BUILDENV=.*/BUILDENV=\"$BUILDENV\"/g" /etc/makepkg.conf
 sudo sed -i "s@^#PKGDEST=.*@PKGDEST=\"$PKGDEST\"@g" /etc/makepkg.conf
 sudo sed -i "s@^#SRCDEST=.*@SRCDEST=\"$SRCDEST\"@g" /etc/makepkg.conf
 sudo sed -i "s@^#SRCPKGDEST=.*@SRCPKGDEST=\"$SRCPKGDEST\"@g" /etc/makepkg.conf
