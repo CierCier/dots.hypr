@@ -61,3 +61,4 @@ xdg-utils
 xfce4-settings
 xwaylandvideobridge
 zsh
+zsh-theme-powerlevel10k

@@ -18,4 +18,7 @@ swww
 ttf-twemoji-color
 waterfox-bin
 waybar-git
+oh-my-zsh-git
+oh-my-zsh-plugin-autosuggestions
+oh-my-zsh-plugi-syntax-highlighting
 

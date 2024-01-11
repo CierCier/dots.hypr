@@ -4,7 +4,10 @@
 	"editor.renderWhitespace": "all",
 	"editor.insertSpaces": false,
 	"workbench.iconTheme": "material-icon-theme",
-	"workbench.colorTheme": "Tokyo Night Gogh",
+	"workbench.colorTheme": "Catppuccin Mocha",
 	"files.autoSave": "afterDelay",
-	"editor.formatOnSave": true
+	"editor.formatOnSave": true,
+	"C_Cpp.default.includePath": [
+		"C:/<PATH>/include"
+	]
 }
