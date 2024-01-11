@@ -63,12 +63,12 @@
     },
 
     "cpu":{
-        "on-click": "foot --app-id='process-monitor' -w 820x540  -e btop",
+        "on-click": "foot --app-id='process-monitor' -w 820x540  -e bpytop",
         "format": " {usage}%",
         "interval": 2,
     },
     "memory": {
-        "on-click": "foot --app-id='process-monitor' -w 820x540 -e btop",
+        "on-click": "foot --app-id='process-monitor' -w 820x540 -e bpytop",
         "interval": 2,
 
     },
