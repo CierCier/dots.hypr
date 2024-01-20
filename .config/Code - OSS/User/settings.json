@@ -9,5 +9,10 @@
 	"editor.formatOnSave": true,
 	"C_Cpp.default.includePath": [
 		"C:/<PATH>/include"
-	]
+	],
+	"cmake.options.statusBarVisibility": "visible",
+	"cmake.configureOnOpen": true,
+	"editor.fontSize": 16,
+	"editor.fontFamily": "'JetBrainsMono NFP', 'monospace'",
+	"git.autofetch": true
 }

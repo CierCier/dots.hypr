@@ -63,12 +63,12 @@
     },
 
     "cpu":{
-        "on-click": "foot --app-id='process-monitor' -w 820x540  -e bpytop",
+        "on-click": "foot --app-id='process-monitor' -w 820x540  -e btop",
         "format": " {usage}%",
         "interval": 2,
     },
     "memory": {
-        "on-click": "foot --app-id='process-monitor' -w 820x540 -e bpytop",
+        "on-click": "foot --app-id='process-monitor' -w 820x540 -e btop",
         "interval": 2,
 
     },
@@ -76,6 +76,8 @@
         "critical-threshold": 75,
         "format-critical": " {temperatureC}°C",
         "format": " {temperatureC}°C",
+		"tooltip": false,
+		"interval": 2,
     },
 
     "clock":{

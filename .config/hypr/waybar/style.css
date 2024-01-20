@@ -65,6 +65,7 @@ window#waybar {
 
 #tray * {
   margin: 1px 3px 1px 3px;
+  min-width: 20px;
 }
 
 #tray button {

@@ -1,6 +1,7 @@
 #! /bin/bash
 
 # This script is used to set the wallpaper on my desktop.
+# does not work on environments other than Hyprland
 
 if [ -z "$WALLPAPER_DIR" ]; then
     WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
@@ -16,8 +17,7 @@ if [ -z "$1" ]; then
 
     # get all files in WALLPAPER_DIR including subfolders
     files=("$WALLPAPER_DIR"/**/*)
-    # filter out non-supported images
-    files=("${files[@]##@(jpg|jpeg|png|gif|webp)}")
+    files=("${files[@]##@(jpg|jpeg|png|gif|webp|mp4|mkv|webm)}")
     file=$(printf "%s\n" "${files[RANDOM % ${#files[@]}]}")
 else
     file="$1"
@@ -29,37 +29,27 @@ else
     resize_mode="$2"
 fi
 
-#get screen resolution
-
-if [ "$XDG_SESSION_TYPE" = "x11" ]; then
-    screen_x=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1)
-    screen_y=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2)
-
-elif [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-    if [ ! -z "$(pidof Hyprland)" ]; then
-	screen_x=$(hyprctl -j monitors | jq '.[0].width')
-	screen_y=$(hyprctl -j monitors | jq '.[0].height')
-    elif [ ! -z "$(pidof sway)" ]; then
-	screen_x=$(swaymsg -t get_outputs | jq '.[0].rect.width')
-	screen_y=$(swaymsg -t get_outputs | jq '.[0].rect.height')
-    fi
-fi
+screen_x=$(hyprctl -j monitors | jq '.[0].width')
+screen_y=$(hyprctl -j monitors | jq '.[0].height')
 
 transition_pos="$screen_x , $screen_y"
 
-if [ "$XDG_SESSION_TYPE" = "x11" ]; then
-    feh --bg-center $file
+if [ ! -z "$(pidof mpvpaper)" ] ; then
+	killall mpvpaper
+fi
+
+# check extensions
+if [[ "$file" == *".mp4" ]] || [[ "$file" == *".mkv" ]] || [[ "$file" == *".webm" ]] || [ "$file" = *".gif" ] ; then
+	mpvpaper -o "--no-audio --loop --no-config" "*" "$file"  &
 else
-    swww img $file --transition-angle=30 --transition-duration=1.5 --transition-fps=144 --transition-bezier="$SWWW_CUBIC_BEZIER" --transition-type=outer --transition-pos="$transition_pos" --resize="$resize_mode"
+	swww img $file --transition-angle=30 --transition-duration=1.5 --transition-fps=144 --transition-bezier="$SWWW_CUBIC_BEZIER" --transition-type=outer --transition-pos="$transition_pos" --resize="$resize_mode"
 fi
 
 # generate wal color output
-wal --backend haishoku  --cols16 -i $file -s -n -q
+# The --cols16 flag will not work with the standard pywal package in most repos
+# you will need to build pywal yourself
+# or from the AUR pkg pywal-16-colors on ArchLinux
+wal --cols16 -i $file -s -n -q
 
 # reload window manager
-
-if [ ! -z "$(pidof sway)" ]; then
-    swaymsg reload
-elif [ ! -z "$(pidof Hyprland)" ]; then
-    hyprctl reload
-fi
+hyprctl reload
