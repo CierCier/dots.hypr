@@ -1,7 +1,8 @@
 #! /bin/bash
 
 # This script is used to set the wallpaper on my desktop.
-# does not work on environments other than Hyprland
+# currently it is setup to work on Hyprland but can be easily modified
+# to work on other WMs
 
 if [ -z "$WALLPAPER_DIR" ]; then
     WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
@@ -12,7 +13,6 @@ if [ -z "$SWWW_CUBIC_BEZIER" ]; then
 fi
 
 
-# check for arg1
 if [ -z "$1" ]; then
 
     # get all files in WALLPAPER_DIR including subfolders
@@ -20,7 +20,7 @@ if [ -z "$1" ]; then
     files=("${files[@]##@(jpg|jpeg|png|gif|webp|mp4|mkv|webm)}")
     file=$(printf "%s\n" "${files[RANDOM % ${#files[@]}]}")
 else
-    file="$1"
+	file="$(realpath $1)"
 fi
 
 if [ -z "$2" ]; then
@@ -34,20 +34,25 @@ screen_y=$(hyprctl -j monitors | jq '.[0].height')
 
 transition_pos="$screen_x , $screen_y"
 
-if [ ! -z "$(pidof mpvpaper)" ] ; then
+if [ ! -z "$(pidof mpvpaper)" ]; then
 	killall mpvpaper
 fi
 
-# check extensions
+
 if [[ "$file" == *".mp4" ]] || [[ "$file" == *".mkv" ]] || [[ "$file" == *".webm" ]] || [ "$file" = *".gif" ] ; then
-	mpvpaper -o "--no-audio --loop --no-config" "*" "$file"  &
+	mpvpaper -o "--no-audio --loop --no-config" "*" "$file"  & disown
 else
+	
+	if [ -z "$(pidof swww-daemon)" ]; then
+		swww init
+	fi
+
 	swww img $file --transition-angle=30 --transition-duration=1.5 --transition-fps=144 --transition-bezier="$SWWW_CUBIC_BEZIER" --transition-type=outer --transition-pos="$transition_pos" --resize="$resize_mode"
 fi
 
 # generate wal color output
 # The --cols16 flag will not work with the standard pywal package in most repos
-# you will need to build pywal yourself
+# you will need to build pywal with 16 color pallet support yourself
 # or from the AUR pkg pywal-16-colors on ArchLinux
 wal --cols16 -i $file -s -n -q
 

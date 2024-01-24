@@ -1,7 +1,5 @@
 #! /bin/bash
 
-
-
 echo "Making cache directory"
 CACHE_DIR=$HOME/.cache/bootstrap
 mkdir -p $CACHE_DIR
