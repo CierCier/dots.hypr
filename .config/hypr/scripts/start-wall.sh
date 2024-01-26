@@ -8,8 +8,9 @@ if [ -z "$WALLPAPER_DIR" ]; then
 fi
 
 if [ -z "$(pidof swww-daemon)" ]; then
-    swww init
+	swww init
 fi
+
 
 #check for image cache
 image=$(swww query | grep -oP '(?<=image: ).*')
@@ -22,6 +23,6 @@ image=$(swww query | grep -oP '(?<=image: ).*')
 # building pywal cache
 #
 # important step
-# waybar would killitself without it......
+# waybar would kill itself without it......
 
 wal --backend haishoku --cols16 -s -n -q -i "$image"
