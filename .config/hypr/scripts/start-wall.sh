@@ -13,16 +13,6 @@ fi
 
 
 #check for image cache
-image=$(swww query | grep -oP '(?<=image: ).*')
-if [ -z "$image" ]; then
-    #no image in cache, set random from defaults
-    ~/.local/bin/wallpaper
-fi
-image=$(swww query | grep -oP '(?<=image: ).*')
+image=$(swww query | /usr/bin/grep -oP '(?<=image: ).*')
 
-# building pywal cache
-#
-# important step
-# waybar would kill itself without it......
-
-wal --backend haishoku --cols16 -s -n -q -i "$image"
+~/.local/bin/wallpaper.sh $image
