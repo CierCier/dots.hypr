@@ -12,7 +12,5 @@ if [ -z "$(pidof swww-daemon)" ]; then
 fi
 
 
-#check for image cache
-image=$(swww query | /usr/bin/grep -oP '(?<=image: ).*')
 
-~/.local/bin/wallpaper.sh $image
+~/.local/bin/wallpaper.sh --restore

@@ -20,8 +20,16 @@ if [ -z "$1" ]; then
     files=("${files[@]##@(jpg|jpeg|png|gif|webp|mp4|mkv|webm)}")
     file=$(printf "%s\n" "${files[RANDOM % ${#files[@]}]}")
 else
-	file="$(realpath $1)"
+	if [ "$1" = "--restore" ]; then
+		file=$(/usr/bin/cat $HOME/.config/wallpaper)
+	else
+		file="$(realpath $1)"
+	fi
 fi
+
+touch $HOME/.config/wallpaper
+echo $file > $HOME/.config/wallpaper
+
 
 if [ -z "$2" ]; then
     resize_mode="crop"
@@ -57,4 +65,6 @@ fi
 wal --cols16 -i $file -s -n -q
 
 # reload window manager
-hyprctl reload
+if [ "$XDG_SESSION_DESKTOP" = "Hyprland" ]; then
+	hyprctl reload
+fi
