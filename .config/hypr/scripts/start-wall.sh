@@ -13,4 +13,4 @@ fi
 
 
 
-~/.local/bin/wallpaper.sh --restore
+~/.local/bin/wallpaper --restore
