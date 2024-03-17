@@ -14,5 +14,9 @@
 	"cmake.configureOnOpen": true,
 	"editor.fontSize": 16,
 	"editor.fontFamily": "'JetBrainsMono NFP', 'monospace'",
-	"git.autofetch": true
+	"git.autofetch": true,
+	"[c]": {
+		"editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+	},
+	"liveServer.settings.donotVerifyTags": true
 }
