@@ -1,11 +1,9 @@
 CompileFlags:
-  Add: [ -Wall, -Wextra, -Werror, -I=/usr/include, -stdlib=libc++]
+  Add: [ -Wall, -Wextra, -Werror, -I=/usr/include]
 
 
 Diagnostics:
   ClangTidy:
-    Add: modernize*
-
   UnusedIncludes: Strict
 
 
