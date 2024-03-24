@@ -1,7 +1,5 @@
 ani-cli-git
 bemoji-git
-btrfs-assistant
-btrfsmaintenance
 catppuccin-cursors-mocha
 catppuccin-gtk-theme-mocha
 ffmpeg-audio-thumbnailer
