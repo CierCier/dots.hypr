@@ -30,6 +30,9 @@ gtk4
 gvfs
 gvfs-mtp
 htop
+hypridle
+hyprlock
+hyprcursor
 jq
 libaio
 libappindicator-gtk3
@@ -69,7 +72,6 @@ sed
 slurp
 snapper
 spdlog
-swayidle
 thunar
 thunar-volman
 ttf-dejavu

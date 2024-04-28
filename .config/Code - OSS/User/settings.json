@@ -16,7 +16,11 @@
 	"editor.fontFamily": "'JetBrainsMono NFP', 'monospace'",
 	"git.autofetch": true,
 	"[c]": {
-		"editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+		"editor.defaultFormatter": "for"
 	},
-	"liveServer.settings.donotVerifyTags": true
+	"liveServer.settings.donotVerifyTags": true,
+	"redhat.telemetry.enabled": false,
+	"java.configuration.runtimes": [
+
+	]
 }
