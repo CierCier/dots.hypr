@@ -46,3 +46,17 @@ if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; th
   source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
+PLE () {
+  # Go to the saved directory
+  cd "/home/opticxc/projects/android/Pixel-Launcher-Extended"
+
+  # Check if builder.sh exists
+  if [ -f builder.sh ]; then
+    chmod +x builder.sh && ./builder.sh
+  else
+    echo "PLE Builder is not available in your system"
+  fi
+
+  # Go back to the home folder
+  cd ~
+}

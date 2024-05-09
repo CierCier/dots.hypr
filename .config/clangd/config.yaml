@@ -4,6 +4,7 @@ CompileFlags:
 
 Diagnostics:
   ClangTidy:
+    Add: []
   UnusedIncludes: Strict
 
 

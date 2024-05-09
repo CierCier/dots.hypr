@@ -4,7 +4,8 @@
 {
     "$schema": "https://raw.githubusercontent.com/fastfetch-cli/fastfetch/dev/doc/json_schema.json",
     "logo": {
-        "source": "Arch",
+		"type": "auto",
+        "source": "~/.config/fastfetch/logo.jpg",
         "padding": {
             "top": 0,
             "right": 1,

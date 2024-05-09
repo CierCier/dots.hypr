@@ -20,7 +20,5 @@
 	},
 	"liveServer.settings.donotVerifyTags": true,
 	"redhat.telemetry.enabled": false,
-	"java.configuration.runtimes": [
-
-	]
+	"java.configuration.runtimes": []
 }
