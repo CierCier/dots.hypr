@@ -2,7 +2,6 @@
     "position": "top",
     "layer": "top",
     "output": "eDP-1",
-    
     "modules-left": [
         "temperature",
         "custom/seperator",
@@ -12,7 +11,6 @@
         "disk",
         "mpris",
     ],
-
     "modules-center": [
         "hyprland/workspaces",
     ],
@@ -29,15 +27,11 @@
         "custom/seperator",
         "clock",
     ],
-
-
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "format": "{icon}",
-        "persistent-workspaces": {
-        },
-
+        "persistent-workspaces": {},
         "format-icons": {
             "1": "一",
             "2": "二",
@@ -50,15 +44,12 @@
             "9": "九",
             "10": "十"
         }
-
     },
-
-    "custom/seperator":{
+    "custom/seperator": {
         "format": "|",
-        "interval":"once"
+        "interval": "once"
     },
-
-    "cpu":{
+    "cpu": {
         "on-click": "foot --app-id='process-monitor' -w 820x540  -e btop",
         "format": " {usage}%",
         "interval": 2,
@@ -66,21 +57,18 @@
     "memory": {
         "on-click": "foot --app-id='process-monitor' -w 820x540 -e btop",
         "interval": 2,
-
     },
-    "temperature":{
+    "temperature": {
         "critical-threshold": 75,
         "format-critical": " {temperatureC}°C",
         "format": " {temperatureC}°C",
-		"tooltip": false,
-		"interval": 2,
+        "tooltip": false,
+        "interval": 2,
     },
-
-    "clock":{
+    "clock": {
         "format": "󰅐 {:%H:%M} ",
         "tooltip-format": "<big>{:%Y %B %d}</big>",
     },
-
     "battery": {
         "states": {
             "warning": 30,
@@ -89,7 +77,13 @@
         "format-discharging": "{icon} {capacity}% ({time})",
         "format-charging": "{icon} {capacity}% ({time})",
         "format-full": "{icon} {capacity}%",
-        "format-icons":["", "", "", "", ""],
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
         "tooltip": false,
         "interval": 10,
     },
@@ -102,22 +96,34 @@
         "tooltip-format-wifi": "Signal Strenght: {signalStrength}% | Down Speed: {bandwidthDownBits}, Up Speed: {bandwidthUpBits}",
         "format-icons": {
             //"wifi" : ["󱪼", "󱪽", "󱪾", "󱪿", "󱫀"],
-            "wifi": ["󰤯" ,"󰤟" ,"󰤢", "󰤥" ,"󰤨"],
-            "ethernet" : ["󱂇"],
-            "disconnected": [""],
+            "wifi": [
+                "󰤯",
+                "󰤟",
+                "󰤢",
+                "󰤥",
+                "󰤨"
+            ],
+            "ethernet": [
+                "󱂇"
+            ],
+            "disconnected": [
+                ""
+            ],
         },
         "interval": 5,
     },
-
     "pulseaudio": {
         "on-click": "pavucontrol",
         "format": "{icon}  {volume}%",
-        	"format-muted": "󰖁 Muted",
-        	"format-icons": {
-            	"default": ["", "", ""]
+        "format-muted": "󰖁 Muted",
+        "format-icons": {
+            "default": [
+                "",
+                "",
+                ""
+            ]
         },
     },
-    
     "backlight": {
         // "device": "acpi_video1",
         "format": "{icon} {percent}%",
@@ -170,7 +176,7 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "󰈈", 
+            "activated": "󰈈",
             "deactivated": "󰈉"
         },
         "tooltip": false,
@@ -180,6 +186,6 @@
     "disk": {
         "format": "󰋊 {percentage_used}%",
         "interval": 60,
-        "tooltip-format":"Total: {total} | Used: {used} | Free: {free}",
+        "tooltip-format": "Total: {total} | Used: {used} | Free: {free}",
     }
 }
