@@ -1,5 +1,8 @@
 @import url("../../../.cache/wal/colors-waybar.css");
 
+
+
+
 * {
   border-radius: 0;
   border: none;
@@ -48,18 +51,18 @@ window#waybar {
 }
 
 #workspaces button:first-child {
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 #workspaces button:last-child {
-  border-top-right-radius: 12px;
-  border-bottom-right-radius: 12px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 #tray {
   margin: 5px 0px;
   background-color: @background;
-  border-radius: 12px;
+  border-radius: 4px;
   margin-right: 4px;
 }
 
@@ -77,7 +80,7 @@ window#waybar {
   background: @background;
   padding-left: 15px;
   padding-right: 14px;
-  border-radius: 12px;
+  border-radius: 4px;
   margin: 5px 0px;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms;
 }
@@ -91,7 +94,7 @@ window#waybar {
   background: @color15;
   padding-left: 15px;
   padding-right: 15px;
-  border-radius: 12px;
+  border-radius: 4px;
   margin-top: 5px;
   margin-bottom: 5px;
   font-weight: normal;
@@ -110,9 +113,10 @@ window#waybar {
 
 #temperature {
   margin-left: 2px;
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
+
 #temperature.critical {
   background: @color13;
   color: @background;
@@ -133,8 +137,8 @@ window#waybar {
 }
 
 #disk {
-  border-top-right-radius: 12px;
-  border-bottom-right-radius: 12px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
   margin-right: 5px;
 }
 
@@ -152,8 +156,8 @@ window#waybar {
 }
 
 #network {
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 #network.disconnected {
   background: @color13;
@@ -178,8 +182,8 @@ window#waybar {
 }
 
 #clock {
-  border-top-right-radius: 12px;
-  border-bottom-right-radius: 12px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
   margin-right: 2px;
 }
 #idle_inhibitor {
@@ -198,9 +202,10 @@ window#waybar {
 #tooltip {
   background: @background;
   color: @color13;
-  border-radius: 12px;
+  border-radius: 4px;
   padding: 5px;
   font-size: 12px;
   font-weight: bold;
   margin: 5px 0px;
 }
+

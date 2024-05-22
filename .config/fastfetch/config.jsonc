@@ -5,7 +5,7 @@
     "$schema": "https://raw.githubusercontent.com/fastfetch-cli/fastfetch/dev/doc/json_schema.json",
     "logo": {
 		"type": "auto",
-        "source": "~/.config/fastfetch/logo.jpg",
+        "source": "OSX",
         "padding": {
             "top": 0,
             "right": 1,

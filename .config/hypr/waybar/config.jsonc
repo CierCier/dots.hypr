@@ -3,12 +3,7 @@
     "layer": "top",
     "output": "eDP-1",
     "modules-left": [
-        "temperature",
-        "custom/seperator",
-        "cpu",
-        "memory",
-        "custom/seperator",
-        "disk",
+        "group/system-monitor",
         "mpris",
     ],
     "modules-center": [
@@ -187,5 +182,16 @@
         "format": "󰋊 {percentage_used}%",
         "interval": 60,
         "tooltip-format": "Total: {total} | Used: {used} | Free: {free}",
+    },
+    "group/system-monitor": {
+        "orientation": "horizontal",
+        "modules": [
+            "temperature",
+            "custom/seperator",
+            "cpu",
+            "memory",
+            "custom/seperator",
+            "disk"
+        ]
     }
 }
