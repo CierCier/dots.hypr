@@ -1,3 +1,4 @@
+#! /usr/bin/zsh
 
 if [ -d /ust/share/doc/find-the-command ]
 then
@@ -79,12 +80,15 @@ export PATH=$PATH
 #fi
 
 
-# mcfly
-
-if [ -f $(which mcfly) ] 
+if [ -f "$(which mcfly)" ] 
 then
     export MCFLY_KEY_SCHEME=vim
     export MCFLY_FUZZY=2
     eval "$(mcfly init zsh)"
+fi
+
+if [ -f "$(which zoxide)" ]
+then
+	eval "$(zoxide init zsh)"
 fi
 

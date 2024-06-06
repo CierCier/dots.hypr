@@ -4,10 +4,8 @@ catppuccin-cursors-mocha
 catppuccin-gtk-theme-mocha
 ffmpeg-audio-thumbnailer
 grimblast-git
-gtklock
 hyprpicker-git
 mpvpaper
-nwg-launchers-git
 oh-my-zsh-git
 paru
 python-haishoku
