@@ -8,7 +8,7 @@ if [ -z "$WALLPAPER_DIR" ]; then
 fi
 
 if [ -z "$(pidof swww-daemon)" ]; then
-	swww init
+	swww-daemon -q & disown
 fi
 
 

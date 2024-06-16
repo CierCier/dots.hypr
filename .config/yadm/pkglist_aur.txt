@@ -1,12 +1,18 @@
-ani-cli-git
+auto-cpufreq
 bemoji-git
+btrfs-assistant
+btrfsmaintenance
 catppuccin-cursors-mocha
 catppuccin-gtk-theme-mocha
 ffmpeg-audio-thumbnailer
 grimblast-git
+hyprland-git
+hyprland-git-debug
 hyprpicker-git
+kvantum-theme-catppuccin-git
 mpvpaper
-oh-my-zsh-git
+nwg-launchers
+oh-my-posh-git
 paru
 python-haishoku
 python-pyclip
@@ -14,4 +20,6 @@ pywal-16-colors
 swww-git
 ttf-ms-fonts
 ttf-twemoji-color
+zramd
+zsh-autocomplete
 zsh-fast-syntax-highlighting

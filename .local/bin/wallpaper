@@ -47,7 +47,7 @@ if [ ! -z "$(pidof mpvpaper)" ]; then
 fi
 
 
-if [[ "$file" == *".mp4" ]] || [[ "$file" == *".mkv" ]] || [[ "$file" == *".webm" ]] || [[ "$file" = *".gif" ]] ; then
+if [[ "$file" == *".mp4" ]] || [[ "$file" == *".mkv" ]] || [[ "$file" == *".webm" ]] || [[ "$file" == *".gif" ]] ; then
 	mpvpaper -o "--no-audio --loop --no-config" "*" "$file" & disown
 else
 	

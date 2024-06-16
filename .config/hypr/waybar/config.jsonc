@@ -69,8 +69,8 @@
             "warning": 30,
             "clitical": 15,
         },
-        "format-discharging": "{icon} {capacity}% ({time})",
-        "format-charging": "{icon} {capacity}% ({time})",
+        "format-discharging": "{icon} {capacity}% [{time}] ",
+        "format-charging": "{icon} {capacity}% [{time}]",
         "format-full": "{icon} {capacity}%",
         "format-icons": [
             "",
