@@ -66,5 +66,5 @@ wal --cols16 -i $file -s -n -q
 
 # reload window manager
 if [ "$XDG_SESSION_DESKTOP" = "Hyprland" ]; then
-	hyprctl reload
+	hyprctl reload -q
 fi

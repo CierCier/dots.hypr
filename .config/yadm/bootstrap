@@ -32,7 +32,6 @@ if [ "$enable_alhp" = "y" ]; then
 	~/.config/yadm/scripts/enable_alhp.sh $microarch
 fi
 
-sh ~/.config/yadm/scripts/replace_makepkg.sh $microarch
 
 echo "Updating pacman database"
 sudo pacman -Sy
