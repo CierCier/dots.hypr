@@ -7,11 +7,9 @@ catppuccin-gtk-theme-mocha
 ffmpeg-audio-thumbnailer
 grimblast-git
 hyprland-git
-hyprland-git-debug
 hyprpicker-git
 kvantum-theme-catppuccin-git
 mpvpaper
-nwg-launchers
 oh-my-posh-git
 paru
 python-haishoku

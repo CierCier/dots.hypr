@@ -52,7 +52,7 @@ if [[ "$file" == *".mp4" ]] || [[ "$file" == *".mkv" ]] || [[ "$file" == *".webm
 else
 	
 	if [ -z "$(pidof swww-daemon)" ]; then
-		swww init
+		swww-daemon & disown
 	fi
 
 	swww img $file --transition-angle=30 --transition-duration=1.5 --transition-fps=144 --transition-bezier="$SWWW_CUBIC_BEZIER" --transition-type=outer --transition-pos="$transition_pos" --resize="$resize_mode"
