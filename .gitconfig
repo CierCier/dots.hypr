@@ -1,0 +1,8 @@
+[commit]
+	gpgsign = true
+[gpg "openpgp"]
+	program = gpg2
+[user]
+	name = Aabish Malik
+	email = aabishmalik3337@gmail.com
+	signingkey = aabishmalik3337@gmail.com

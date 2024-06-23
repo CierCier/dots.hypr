@@ -1,0 +1,42 @@
+import = ["/home/opticxc/.config/alacritty/colors-material.toml", "/home/opticxc/.config/alacritty/fonts.toml"]
+live_config_reload = true
+
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[cursor]
+blink_interval = 550
+unfocused_hollow = false
+
+[cursor.style]
+blinking = "On"
+shape = "Block"
+
+[env]
+TERM = "xterm-256color"
+
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+
+[shell]
+program = "/usr/bin/zsh"
+
+
+[window]
+opacity = 0.9
+
+[window.padding]
+x = 15
+y = 15
+
+[keyboard]
+bindings = [
+	{ mods = "Super|Shift", key = "Return", action = "SpawnNewInstance" }
+]

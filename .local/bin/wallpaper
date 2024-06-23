@@ -42,6 +42,10 @@ screen_y=$(hyprctl -j monitors | jq '.[0].height')
 
 transition_pos="$screen_x , $screen_y"
 
+session="$XDG_SESSION_TYPE"
+
+
+
 if [ ! -z "$(pidof mpvpaper)" ]; then
 	killall mpvpaper
 fi
@@ -50,12 +54,14 @@ fi
 if [[ "$file" == *".mp4" ]] || [[ "$file" == *".mkv" ]] || [[ "$file" == *".webm" ]] || [[ "$file" == *".gif" ]] ; then
 	mpvpaper -o "--no-audio --loop --no-config" "*" "$file" & disown
 else
-	
-	if [ -z "$(pidof swww-daemon)" ]; then
-		swww-daemon & disown
+	if [ $session = "wayland" ]; then
+		if [ -z "$(pidof swww-daemon)" ]; then
+			swww-daemon & disown
+		fi
+		swww img $file --transition-angle=30 --transition-duration=1.5 --transition-fps=144 --transition-bezier="$SWWW_CUBIC_BEZIER" --transition-type=outer --transition-pos="$transition_pos" --resize="$resize_mode"
+	else
+		feh --bg-fill $file
 	fi
-
-	swww img $file --transition-angle=30 --transition-duration=1.5 --transition-fps=144 --transition-bezier="$SWWW_CUBIC_BEZIER" --transition-type=outer --transition-pos="$transition_pos" --resize="$resize_mode"
 fi
 
 # generate wal color output
