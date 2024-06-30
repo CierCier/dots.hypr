@@ -27,8 +27,10 @@ fi
 
 
 
-HIST_STAMPS="yyyy/mm/dd"
-
+export HIST_STAMPS="yyyy/mm/dd"
+export HISTSIZE=10000
+export SAVEHIST=10000
+export HISTFILE=$HOME/.zsh_history
 
 if [ -f /usr/bin/oh-my-posh ]
 then

@@ -4,10 +4,10 @@
     "output": "eDP-1",
     "modules-left": [
         "group/system-monitor",
-        "mpris",
+        "mpris"
     ],
     "modules-center": [
-        "hyprland/workspaces",
+        "hyprland/workspaces"
     ],
     "modules-right": [
         "tray",
@@ -20,7 +20,7 @@
         "custom/seperator",
         "idle_inhibitor",
         "custom/seperator",
-        "clock",
+        "clock"
     ],
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -47,27 +47,29 @@
     "cpu": {
         "on-click": "foot --app-id='process-monitor' -w 820x540  -e btop",
         "format": " {usage}%",
-        "interval": 2,
+        "interval": 2
     },
     "memory": {
         "on-click": "foot --app-id='process-monitor' -w 820x540 -e btop",
-        "interval": 2,
+        "interval": 2
     },
     "temperature": {
         "critical-threshold": 75,
         "format-critical": " {temperatureC}°C",
         "format": " {temperatureC}°C",
         "tooltip": false,
-        "interval": 2,
+        "interval": 2
     },
     "clock": {
         "format": "󰅐 {:%H:%M} ",
         "tooltip-format": "<big>{:%Y %B %d}</big>",
+        "on-click": "foot --app-id=floating -w 400x300 -e calcurse",
+        "interval": 1
     },
     "battery": {
         "states": {
             "warning": 30,
-            "clitical": 15,
+            "clitical": 15
         },
         "format-discharging": "{icon} {capacity}% [{time}] ",
         "format-charging": "{icon} {capacity}% [{time}]",
@@ -80,7 +82,7 @@
             ""
         ],
         "tooltip": false,
-        "interval": 10,
+        "interval": 10
     },
     "network": {
         "on-click": "foot --app-id=floating -w 740x550 -e nmtui connect",
@@ -103,9 +105,9 @@
             ],
             "disconnected": [
                 ""
-            ],
+            ]
         },
-        "interval": 5,
+        "interval": 5
     },
     "pulseaudio": {
         "on-click": "pavucontrol",
@@ -117,7 +119,7 @@
                 "",
                 ""
             ]
-        },
+        }
     },
     "backlight": {
         // "device": "acpi_video1",
@@ -155,7 +157,7 @@
         "return-type": "json",
         "status-icons": {
             "playing": "",
-            "paused": "",
+            "paused": ""
         },
         "ellipsis": "...",
         "max-length": 90,
@@ -166,7 +168,7 @@
         "interval": 1,
         "on-click": "playerctl play-pause",
         "on-click-middle": "",
-        "on-click-right": "",
+        "on-click-right": ""
     },
     "idle_inhibitor": {
         "format": "{icon}",
@@ -176,12 +178,12 @@
         },
         "tooltip": false,
         "interval": 1,
-        "start-activated": false,
+        "start-activated": false
     },
     "disk": {
         "format": "󰋊 {percentage_used}%",
         "interval": 60,
-        "tooltip-format": "Total: {total} | Used: {used} | Free: {free}",
+        "tooltip-format": "Total: {total} | Used: {used} | Free: {free}"
     },
     "group/system-monitor": {
         "orientation": "horizontal",

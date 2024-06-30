@@ -6,3 +6,9 @@
 	name = Aabish Malik
 	email = aabishmalik3337@gmail.com
 	signingkey = aabishmalik3337@gmail.com
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential

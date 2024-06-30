@@ -67,6 +67,11 @@ then
     PATH+=:$HOME/.encore/bin/
 fi
 
+if [ -d $HOME/go ]
+then
+	PATH+=:$HOME/go/bin
+fi
+
 
 export PATH=$PATH
 
@@ -104,4 +109,20 @@ function chpwd-osc7-pwd() {
     (( ZSH_SUBSHELL )) || osc7-pwd
 }
 add-zsh-hook -Uz chpwd chpwd-osc7-pwd
+
+
+if [ -d $HOME/.opam ]
+then
+	eval $(opam env --switch=default --shell=zsh)
+fi
+
+
+
+OS_ID=$(/usr/bin/lsb_release -si)
+if [ $OS_ID = "Arch" ]
+then
+	update-mirrors(){
+		sudo /usr/bin/reflector --latest 15 --age 15 --sort rate --connection-timeout 15 --download-timeout 15  --save /etc/pacman.d/mirrorlist --verbose
+	}
+fi
 
