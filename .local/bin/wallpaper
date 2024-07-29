@@ -37,8 +37,15 @@ else
     resize_mode="$2"
 fi
 
-screen_x=$(hyprctl -j monitors | jq '.[0].width')
-screen_y=$(hyprctl -j monitors | jq '.[0].height')
+screen_x="1920"
+screen_y="1080"
+
+if ( "$XDG_SESSION_DESKTOP" = "Hyprland" ); then
+	screen_x=$(hyprctl -j monitors | jq '.[0].width')
+	screen_y=$(hyprctl -j monitors | jq '.[0].height')
+fi
+
+
 
 transition_pos="$screen_x , $screen_y"
 
@@ -73,4 +80,6 @@ wal --cols16 -i $file -s -n -q
 # reload window manager
 if [ "$XDG_SESSION_DESKTOP" = "Hyprland" ]; then
 	hyprctl reload -q
+elif [ "$XDG_SESSION_DESKTOP" = "river" ]; then
+	/usr/bin/env bash $HOME/.config/river/conf/theme
 fi
