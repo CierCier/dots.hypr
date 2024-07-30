@@ -16,7 +16,7 @@ let configOptions = {
         'proxyUrl': null, // Can be "socks5://127.0.0.1:9050" or "http://127.0.0.1:8080" for example. Leave it blank if you don't need it.
     },
     'animations': {
-        'choreographyDelay': 35,
+        'choreographyDelay': 30,
         'durationSmall': 110,
         'durationLarge': 180,
     },
@@ -33,10 +33,10 @@ let configOptions = {
     },
     'apps': {
         'bluetooth': "blueberry",
-        'imageViewer': "loupe",
+        'imageViewer': "imv",
         'network': "XDG_CURRENT_DESKTOP=\"gnome\" gnome-control-center wifi",
         'settings': "XDG_CURRENT_DESKTOP=\"gnome\" gnome-control-center",
-        'taskManager': "gnome-usage",
+        'taskManager': "alacritty --class=system-monitor -e btop",
         'terminal': "foot", // This is only for shell actions
     },
     'battery': {
