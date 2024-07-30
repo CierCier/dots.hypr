@@ -1,4 +1,4 @@
-import = ["/home/opticxc/.config/alacritty/colors-material.toml", "/home/opticxc/.config/alacritty/fonts.toml"]
+import = ["~/.config/alacritty/colors-material.toml", "~/.config/alacritty/fonts.toml"]
 live_config_reload = true
 
 
