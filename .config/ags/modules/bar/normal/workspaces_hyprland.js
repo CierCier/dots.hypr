@@ -2,6 +2,7 @@ const { GLib, Gdk, Gtk } = imports.gi;
 const Lang = imports.lang;
 const Cairo = imports.cairo;
 const Pango = imports.gi.Pango;
+// @ts-ignore
 const PangoCairo = imports.gi.PangoCairo;
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js'

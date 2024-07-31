@@ -73,12 +73,14 @@ let configOptions = {
     },
     'music': {
         'preferredPlayer': "plasma-browser-integration",
+        'preferedTurncateLenth': 30,
+        'TurncateString': "...",
     },
     'onScreenKeyboard': {
         'layout': "qwerty_full", // See modules/onscreenkeyboard/onscreenkeyboard.js for available layouts
     },
     'overview': {
-        'scale': 0.18, // Relative to screen size
+        'scale': 0.12, // Relative to screen size
         'numOfRows': 2,
         'numOfCols': 5,
         'wsNumScale': 0.09,
@@ -128,7 +130,7 @@ let configOptions = {
         // For seconds, add "%S" and set interval to 1000
         'format': "%H:%M",
         'interval': 5000,
-        'dateFormatLong': "%A, %d/%m", // On bar
+        'dateFormatLong': "%a, %d/%m", // On bar
         'dateInterval': 5000,
         'dateFormat': "%d/%m", // On notif time
     },
@@ -137,7 +139,7 @@ let configOptions = {
         'preferredUnit': "C", // Either C or F
     },
     'workspaces': {
-        'shown': 10,
+        'shown': 5,
     },
     'dock': {
         'enabled': false,

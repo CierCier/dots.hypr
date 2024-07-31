@@ -1,12 +1,15 @@
 // This is for the right pills of the bar.
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
+// @ts-ignore
 const { Box, Label, Button, Overlay, Revealer, Scrollable, Stack, EventBox } = Widget;
+// @ts-ignore
 const { exec, execAsync } = Utils;
 const { GLib } = imports.gi;
 import Battery from 'resource:///com/github/Aylur/ags/service/battery.js';
 import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
 import { AnimatedCircProg } from "../../.commonwidgets/cairo_circularprogress.js";
+// @ts-ignore
 import { WWO_CODE, WEATHER_SYMBOL, NIGHT_WEATHER_SYMBOL } from '../../.commondata/weather.js';
 
 const WEATHER_CACHE_FOLDER = `${GLib.get_user_cache_dir()}/ags/weather`;
@@ -36,6 +39,7 @@ const BarClock = () => Widget.Box({
             className: 'bar-time',
             label: GLib.DateTime.new_now_local().format(userOptions.time.format),
             setup: (self) => self.poll(userOptions.time.interval, label => {
+                // @ts-ignore
                 label.label = GLib.DateTime.new_now_local().format(userOptions.time.format);
             }),
         }),
@@ -47,6 +51,7 @@ const BarClock = () => Widget.Box({
             className: 'txt-smallie bar-date',
             label: GLib.DateTime.new_now_local().format(userOptions.time.dateFormatLong),
             setup: (self) => self.poll(userOptions.time.dateInterval, (label) => {
+                // @ts-ignore
                 label.label = GLib.DateTime.new_now_local().format(userOptions.time.dateFormatLong);
             }),
         }),
@@ -84,6 +89,14 @@ const Utilities = () => Box({
     ]
 })
 
+function getBatteryTime (){
+    if (Battery.charged == true) return "";  
+    const seconds = Number.parseFloat(Battery['time-remaining']);
+    const hours = Math.floor(seconds / 36) / 100;
+    return `[${Math.floor(hours).toString()}:${Math.floor((hours%1) * 60)}]`
+}
+
+
 const BarBattery = () => Box({
     className: 'spacing-h-4 bar-batt-txt',
     children: [
@@ -92,14 +105,16 @@ const BarBattery = () => Box({
             revealChild: false,
             transition: 'slide_right',
             child: MaterialIcon('bolt', 'norm', { tooltipText: "Charging" }),
+            // @ts-ignore
             setup: (self) => self.hook(Battery, revealer => {
+                // @ts-ignore
                 self.revealChild = Battery.charging;
             }),
         }),
         Label({
             className: 'txt-smallie',
             setup: (self) => self.hook(Battery, label => {
-                label.label = `${Number.parseFloat(Battery.percent.toFixed(1))}%`;
+                label.label = `${Number.parseFloat(Battery.percent.toFixed(1))}% ${getBatteryTime()} `;
             }),
         }),
         Overlay({
@@ -121,6 +136,7 @@ const BarBattery = () => Box({
         }),
     ]
 });
+
 
 const BarGroup = ({ child }) => Widget.Box({
     className: 'bar-group-margin bar-sides',
@@ -166,7 +182,9 @@ const BatteryModule = () => Stack({
                             const weatherSymbol = WEATHER_SYMBOL[WWO_CODE[weatherCode]];
                             self.children[0].label = weatherSymbol;
                             self.children[1].label = `${temperature}°${userOptions.weather.preferredUnit} • Feels like ${feelsLike}°${userOptions.weather.preferredUnit}`;
+                            // @ts-ignore
                             self.tooltipText = weatherDesc;
+                        // @ts-ignore
                         }).catch((err) => {
                             try { // Read from cache
                                 const weather = JSON.parse(
@@ -179,6 +197,7 @@ const BatteryModule = () => Stack({
                                 const weatherSymbol = WEATHER_SYMBOL[WWO_CODE[weatherCode]];
                                 self.children[0].label = weatherSymbol;
                                 self.children[1].label = `${temperature}°${userOptions.weather.preferredUnit} • Feels like ${feelsLike}°${userOptions.weather.preferredUnit}`;
+                                // @ts-ignore
                                 self.tooltipText = weatherDesc;
                             } catch (err) {
                                 print(err);
@@ -205,6 +224,7 @@ const BatteryModule = () => Stack({
     })
 })
 
+// @ts-ignore
 const switchToRelativeWorkspace = async (self, num) => {
     try {
         const Hyprland = (await import('resource:///com/github/Aylur/ags/service/hyprland.js')).default;

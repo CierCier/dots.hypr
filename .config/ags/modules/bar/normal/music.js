@@ -16,13 +16,40 @@ const CUSTOM_MODULE_MIDDLECLICK_SCRIPT = `${GLib.get_user_cache_dir()}/ags/user/
 const CUSTOM_MODULE_SCROLLUP_SCRIPT = `${GLib.get_user_cache_dir()}/ags/user/scripts/custom-module-scrollup.sh`;
 const CUSTOM_MODULE_SCROLLDOWN_SCRIPT = `${GLib.get_user_cache_dir()}/ags/user/scripts/custom-module-scrolldown.sh`;
 
+
+/**
+ * @param {string} title
+ */
 function trimTrackTitle(title) {
     if (!title) return '';
     const cleanPatterns = [
         /【[^】]*】/,        // Touhou n weeb stuff
         " [FREE DOWNLOAD]", // F-777
+        " NCS",          // NCS
+        " [Official Video]", // Official Video
+        " [Official Music Video]", // Official Music Video
     ];
+    const limiters = [
+        "[",
+        "(",
+        "{",
+        "|"
+    ]
+
+
     cleanPatterns.forEach((expr) => title = title.replace(expr, ''));
+    if (title.length > userOptions.music.preferedTurncateLenth) {
+        title = title.slice(0, userOptions.music.preferedTurncateLenth - userOptions.music.TurncateString.length);
+        const lastSpace = title.lastIndexOf(' ');
+        for (const limiter of limiters){
+            const lastLimiter = title.lastIndexOf(limiter);
+            if (lastLimiter > 0) title = title.slice(0, lastLimiter);
+        }
+
+        if (lastSpace > 0) title = title.slice(0, lastSpace);
+        
+        title += userOptions.music.TurncateString;
+    }
     return title;
 }
 
@@ -143,7 +170,7 @@ export default () => {
         setup: (self) => self.hook(Mpris, label => {
             const mpris = Mpris.getPlayer('');
             if (mpris)
-                label.label = `${trimTrackTitle(mpris.trackTitle)} • ${mpris.trackArtists.join(', ')}`;
+                label.label = `${trimTrackTitle(mpris.track_title)} • ${mpris.track_artists.join(', ')}`;
             else
                 label.label = 'No media';
         }),

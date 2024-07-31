@@ -80,6 +80,8 @@ export const HyprToggleIcon = async (icon, name, hyprlandConfigValue, props = {}
 }
 
 export const ModuleNightLight = async (props = {}) => {
+    return null; // uncomment to enable nightlight modewa
+
     if (!exec(`bash -c 'command -v gammastep'`)) return null;
     return Widget.Button({
         attribute: {

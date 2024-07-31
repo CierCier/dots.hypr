@@ -41,3 +41,8 @@ sudo pacman -Fy
 echo "Installing packages"
 paru -S --noconfirm - < $HOME/.config/yadm/pkglist.txt
 paru -S --noconfirm - < $HOME/.config/yadm/pkglist_aur.txt
+
+echo "Installing Illogical-Impulse patched pkgs"
+~/.config/yadm/scripts/install-illogical.sh
+
+echo "Done!"
