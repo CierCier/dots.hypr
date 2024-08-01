@@ -33,20 +33,25 @@ function trimTrackTitle(title) {
         "[",
         "(",
         "{",
-        "|"
+        "|",
+        "【"
     ]
-
+    const youtubeIndexRegex =  /(\([0-9]*\))/;
+    title = title.replace(youtubeIndexRegex, '');
 
     cleanPatterns.forEach((expr) => title = title.replace(expr, ''));
-    if (title.length > userOptions.music.preferedTurncateLenth) {
-        title = title.slice(0, userOptions.music.preferedTurncateLenth - userOptions.music.TurncateString.length);
-        const lastSpace = title.lastIndexOf(' ');
+
+
+    const lastSpace = title.lastIndexOf(' ');
         for (const limiter of limiters){
             const lastLimiter = title.lastIndexOf(limiter);
             if (lastLimiter > 0) title = title.slice(0, lastLimiter);
         }
 
         if (lastSpace > 0) title = title.slice(0, lastSpace);
+
+    if (title.length > userOptions.music.preferedTurncateLenth) {
+        title = title.slice(0, userOptions.music.preferedTurncateLenth - userOptions.music.TurncateString.length);
         
         title += userOptions.music.TurncateString;
     }
