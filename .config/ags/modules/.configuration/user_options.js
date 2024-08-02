@@ -72,9 +72,17 @@ let configOptions = {
         'scaleMethod': "division", // Either "division" [default] or "gdk"
     },
     'music': {
+        'mode': 'cava', // Either "title" or "cava"
         'preferredPlayer': "plasma-browser-integration",
         'preferedTurncateLenth': 30,
         'TurncateString': "...",
+        'cava': {
+            'bars': 30,
+            'spacing': 1,
+            'align': 'end',
+            'smooth': false,
+            'characters': ['▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'],
+        }
     },
     'onScreenKeyboard': {
         'layout': "qwerty_full", // See modules/onscreenkeyboard/onscreenkeyboard.js for available layouts

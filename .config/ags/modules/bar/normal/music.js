@@ -1,4 +1,4 @@
-const { GLib } = imports.gi;
+
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js';
@@ -7,6 +7,10 @@ const { execAsync, exec } = Utils;
 import { AnimatedCircProg } from "../../.commonwidgets/cairo_circularprogress.js";
 import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
 import { showMusicControls } from '../../../variables.js';
+import cava from './cava.js';
+
+
+const  {Gtk, GLib} = imports.gi;
 
 const CUSTOM_MODULE_CONTENT_INTERVAL_FILE = `${GLib.get_user_cache_dir()}/ags/user/scripts/custom-module-interval.txt`;
 const CUSTOM_MODULE_CONTENT_SCRIPT = `${GLib.get_user_cache_dir()}/ags/user/scripts/custom-module-poll.sh`;
@@ -17,46 +21,60 @@ const CUSTOM_MODULE_SCROLLUP_SCRIPT = `${GLib.get_user_cache_dir()}/ags/user/scr
 const CUSTOM_MODULE_SCROLLDOWN_SCRIPT = `${GLib.get_user_cache_dir()}/ags/user/scripts/custom-module-scrolldown.sh`;
 
 
-/**
- * @param {string} title
- */
-function trimTrackTitle(title) {
-    if (!title) return '';
+
+function genTitle() {
+    const mpris = Mpris.getPlayer('');
+    if (!mpris) return '';
+    let title = mpris.track_title;
+    if (!title) return 'No Media';
+
     const cleanPatterns = [
-        /【[^】]*】/,        // Touhou n weeb stuff
-        " [FREE DOWNLOAD]", // F-777
-        " NCS",          // NCS
-        " [Official Video]", // Official Video
-        " [Official Music Video]", // Official Music Video
+        /【[^】]*】/,                // Touhou n weeb stuff
+        " NCS",                     // NCS
+        /(\([0-9]*\))/,             // weird numbering on Youtube tabs
+        /\[[A-z 0-9]*\]/,           // titles with alts or versions
+        /(\([A-z 0-9]*\))/,         // titles with alts or versions
+
     ];
-    const limiters = [
-        "[",
-        "(",
-        "{",
-        "|",
-        "【"
-    ]
-    const youtubeIndexRegex =  /(\([0-9]*\))/;
-    title = title.replace(youtubeIndexRegex, '');
 
     cleanPatterns.forEach((expr) => title = title.replace(expr, ''));
-
-
-    const lastSpace = title.lastIndexOf(' ');
-        for (const limiter of limiters){
-            const lastLimiter = title.lastIndexOf(limiter);
-            if (lastLimiter > 0) title = title.slice(0, lastLimiter);
-        }
-
-        if (lastSpace > 0) title = title.slice(0, lastSpace);
 
     if (title.length > userOptions.music.preferedTurncateLenth) {
         title = title.slice(0, userOptions.music.preferedTurncateLenth - userOptions.music.TurncateString.length);
         
         title += userOptions.music.TurncateString;
     }
+
+    if (mpris.track_artists.length > 0){
+        title += ` - ${mpris.track_artists.join(', ')}`;
+    }
+
     return title;
 }
+
+function genTrackWidget(){
+    
+    if (userOptions.music.mode == 'title') {
+        const trackTitle = Label({
+            hexpand: true,
+            className: 'txt-smallie bar-music-txt',
+            truncate: 'end',
+            maxWidthChars: 1, // Doesn't matter, just needs to be non negative
+            setup: (self) => self.hook(Mpris, label => {
+                const mpris = Mpris.getPlayer('');
+                if (mpris)
+                    label.label = `${genTitle()}`;
+                else
+                    label.label = 'No media';
+            }),
+        });
+        return trackTitle;
+    }else if (userOptions.music.mode == 'cava') {
+        return cava();
+    }
+}
+
+
 
 const BarGroup = ({ child }) => Box({
     className: 'bar-group-margin bar-sides',
@@ -103,7 +121,7 @@ const BarResource = (name, icon, command, circprogClassName = 'bar-batt-circprog
                 .then((output) => {
                     resourceCircProg.css = `font-size: ${Number(output)}px;`;
                     resourceLabel.label = `${Math.round(Number(output))}%`;
-                    widget.tooltipText = `${name}: ${Math.round(Number(output))}%`;
+                    widget.tooltip_text = `${name}: ${Math.round(Number(output))}%`;
                 }).catch(print))
             ,
         })
@@ -152,14 +170,14 @@ export default () => {
                     justification: 'center',
                     setup: (self) => self.hook(Mpris, label => {
                         const mpris = Mpris.getPlayer('');
-                        label.label = `${mpris !== null && mpris.playBackStatus == 'Playing' ? 'pause' : 'play_arrow'}`;
+                        label.label = `${mpris !== null && mpris.play_back_status == 'Playing' ? 'pause' : 'play_arrow'}`;
                     }),
                 })],
                 setup: (self) => self.hook(Mpris, label => {
                     const mpris = Mpris.getPlayer('');
                     if (!mpris) return;
-                    label.toggleClassName('bar-music-playstate-playing', mpris !== null && mpris.playBackStatus == 'Playing');
-                    label.toggleClassName('bar-music-playstate', mpris !== null || mpris.playBackStatus == 'Paused');
+                    label.toggleClassName('bar-music-playstate-playing', mpris !== null && mpris.play_back_status == 'Playing');
+                    label.toggleClassName('bar-music-playstate', mpris !== null || mpris.play_back_status == 'Paused');
                 }),
             }),
             overlays: [
@@ -167,25 +185,16 @@ export default () => {
             ]
         })]
     });
-    const trackTitle = Label({
-        hexpand: true,
-        className: 'txt-smallie bar-music-txt',
-        truncate: 'end',
-        maxWidthChars: 1, // Doesn't matter, just needs to be non negative
-        setup: (self) => self.hook(Mpris, label => {
-            const mpris = Mpris.getPlayer('');
-            if (mpris)
-                label.label = `${trimTrackTitle(mpris.track_title)} • ${mpris.track_artists.join(', ')}`;
-            else
-                label.label = 'No media';
-        }),
-    })
+    
+    const trackWidget = genTrackWidget();
+
+
     const musicStuff = Box({
         className: 'spacing-h-10',
         hexpand: true,
         children: [
             playingState,
-            trackTitle,
+            trackWidget,
         ]
     })
     const SystemResourcesOrCustomModule = () => {
@@ -232,7 +241,7 @@ export default () => {
                         }),
                         setup: (self) => self.hook(Mpris, label => {
                             const mpris = Mpris.getPlayer('');
-                            self.revealChild = (!mpris);
+                            self.reveal_child = (!mpris);
                         }),
                     })
                 ],
