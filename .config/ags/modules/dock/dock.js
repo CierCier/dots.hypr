@@ -55,7 +55,7 @@ const PinButton = () => Widget.Button({
     }),
     onClicked: (self) => {
         isPinned = !isPinned
-        self.className = `${isPinned ? "pinned-dock-app-btn" : "dock-app-btn animate"} dock-app-btn-animate`
+        self.class_name = `${isPinned ? "pinned-dock-app-btn" : "dock-app-btn animate"} dock-app-btn-animate`
     },
     setup: setupCursorHover,
 })
@@ -137,7 +137,7 @@ const Taskbar = (monitor) => Widget.Box({
                     onClicked: () => focus(client),
                 });
                 newButton.attribute.workspace = client.workspace.id;
-                newButton.revealChild = true;
+                newButton.reveal_child = true;
                 box.attribute.map.set(client.address, newButton);
             }
             box.children = Array.from(box.attribute.map.values());
@@ -168,7 +168,7 @@ const Taskbar = (monitor) => Widget.Box({
             newButton.attribute.workspace = newClient.workspace.id;
             box.attribute.map.set(address, newButton);
             box.children = Array.from(box.attribute.map.values());
-            newButton.revealChild = true;
+            newButton.reveal_child = true;
         },
         'remove': (box, address) => {
             if (!address) return;
@@ -225,7 +225,7 @@ const PinnedApps = () => Widget.Box({
                     }, 'notify::clients')
                 },
             })
-            newButton.revealChild = true;
+            newButton.reveal_child = true;
             return newButton;
         }),
 });
@@ -284,7 +284,7 @@ export default (monitor = 0) => {
     })
     return EventBox({
         onHover: () => {
-            dockRevealer.revealChild = true;
+            dockRevealer.reveal_child = true;
             clearTimes()
         },
         child: Box({
@@ -293,7 +293,7 @@ export default (monitor = 0) => {
             children: [dockRevealer],
         }),
         setup: self => self.on("leave-notify-event", () => {
-            if (!isPinned) dockRevealer.revealChild = false;
+            if (!isPinned) dockRevealer.reveal_child = false;
             clearTimes()
         })
     })

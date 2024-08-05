@@ -72,16 +72,13 @@ let configOptions = {
         'scaleMethod': "division", // Either "division" [default] or "gdk"
     },
     'music': {
-        'mode': 'cava', // Either "title" or "cava"
+        'mode': 'title', // Either "title" or "cava"
         'preferredPlayer': "plasma-browser-integration",
         'preferedTurncateLenth': 30,
         'TurncateString': "...",
         'cava': {
             'bars': 30,
-            'spacing': 1,
-            'align': 'end',
-            'smooth': false,
-            'characters': ['▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'],
+            'characters': ['\u2581', '\u2582', '\u2583', '\u2584', '\u2585', '\u2586', '\u2587', '\u2588'],
         }
     },
     'onScreenKeyboard': {

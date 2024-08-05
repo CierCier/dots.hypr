@@ -26,11 +26,11 @@ export default () => Widget.Label({
                         ascii_max_range = ${options.characters.length-1}\n" | \
                         cava -p /dev/stdin`
             ],
-            (out) => out.split(';').slice(0, -1)
+            (out) => out.split(';').slice(0, -1).map((x) => parseInt(x))
           ]
     }),
   }
-  ,
+  ,//////
   setup: (self)=>{
     const varHandler =  self.attribute.cavaVar.connect('changed', ()=> {
         const mpris = Mpris.getPlayer('');

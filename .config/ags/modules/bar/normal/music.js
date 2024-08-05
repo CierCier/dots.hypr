@@ -7,7 +7,7 @@ const { execAsync, exec } = Utils;
 import { AnimatedCircProg } from "../../.commonwidgets/cairo_circularprogress.js";
 import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
 import { showMusicControls } from '../../../variables.js';
-import cava from './cava.js';
+import visualizer from './visualizer.js';
 
 
 const  {Gtk, GLib} = imports.gi;
@@ -24,31 +24,57 @@ const CUSTOM_MODULE_SCROLLDOWN_SCRIPT = `${GLib.get_user_cache_dir()}/ags/user/s
 
 function genTitle() {
     const mpris = Mpris.getPlayer('');
-    if (!mpris) return '';
+    if (!mpris) return 'No Media';
+
     let title = mpris.track_title;
     if (!title) return 'No Media';
 
     const cleanPatterns = [
-        /【[^】]*】/,                // Touhou n weeb stuff
+        /(【[^】]*】)/,              // Touhou n weeb stuff
         " NCS",                     // NCS
         /(\([0-9]*\))/,             // weird numbering on Youtube tabs
         /\[[A-z 0-9]*\]/,           // titles with alts or versions
         /(\([A-z 0-9]*\))/,         // titles with alts or versions
+        " - YouTube",               // Youtube title suffix
+        /(#[0-z]*)/
 
     ];
 
-    cleanPatterns.forEach((expr) => title = title.replace(expr, ''));
+    const artistCleanPatterns = [
+        "Ch.",
+    ]
 
-    if (title.length > userOptions.music.preferedTurncateLenth) {
-        title = title.slice(0, userOptions.music.preferedTurncateLenth - userOptions.music.TurncateString.length);
-        
-        title += userOptions.music.TurncateString;
+
+    cleanPatterns.forEach((expr) => {
+        while (title.match(expr)) {
+            title = title.replace(expr, '');
+        }
+    });
+
+    const artists = mpris.track_artists;
+    const cleanedArtist =  artists.flatMap((artist) => {
+        artistCleanPatterns.forEach((expr) => {
+            while (artist.match(expr)) {
+                artist = artist.slice(0, artist.indexOf(expr)-1);
+            }
+
+        });
+        return artist;
+    })
+    var artistStr = cleanedArtist.join(', ');
+
+    if (title.length + artistStr.length > userOptions.music.preferedTurncateLenth) {
+        if (title.length > artistStr.length) {
+            title = title.slice(0, userOptions.music.preferedTurncateLenth - artistStr.length) + userOptions.music.TurncateString;
+        }else{
+            artistStr = artistStr.slice(0, userOptions.music.preferedTurncateLenth - title.length) + userOptions.music.TurncateString;
+        }
     }
+    artistStr.trim();
 
-    if (mpris.track_artists.length > 0){
-        title += ` - ${mpris.track_artists.join(', ')}`;
+    if (artistStr.length > 0){
+        title = `${title} - ${artistStr}`;
     }
-
     return title;
 }
 
@@ -70,7 +96,7 @@ function genTrackWidget(){
         });
         return trackTitle;
     }else if (userOptions.music.mode == 'cava') {
-        return cava();
+        return visualizer();
     }
 }
 
@@ -131,7 +157,7 @@ const BarResource = (name, icon, command, circprogClassName = 'bar-batt-circprog
 
 const TrackProgress = () => {
     const _updateProgress = (circprog) => {
-        const mpris = Mpris.getPlayer('');
+        const mpris = Mpris.getPlayer('')
         if (!mpris) return;
         // Set circular progress value
         circprog.css = `font-size: ${Math.max(mpris.position / mpris.length * 100, 0)}px;`
@@ -169,12 +195,12 @@ export default () => {
                     className: 'bar-music-playstate-txt',
                     justification: 'center',
                     setup: (self) => self.hook(Mpris, label => {
-                        const mpris = Mpris.getPlayer('');
+                        const mpris =Mpris.getPlayer('')
                         label.label = `${mpris !== null && mpris.play_back_status == 'Playing' ? 'pause' : 'play_arrow'}`;
                     }),
                 })],
                 setup: (self) => self.hook(Mpris, label => {
-                    const mpris = Mpris.getPlayer('');
+                    const mpris = Mpris.getPlayer('')
                     if (!mpris) return;
                     label.toggleClassName('bar-music-playstate-playing', mpris !== null && mpris.play_back_status == 'Playing');
                     label.toggleClassName('bar-music-playstate', mpris !== null || mpris.play_back_status == 'Paused');
@@ -240,7 +266,7 @@ export default () => {
                             ]
                         }),
                         setup: (self) => self.hook(Mpris, label => {
-                            const mpris = Mpris.getPlayer('');
+                            const mpris = Mpris.getPlayer('')
                             self.reveal_child = (!mpris);
                         }),
                     })
