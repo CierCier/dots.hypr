@@ -19,11 +19,9 @@ colorstrings=''
 colorlist=()
 colorvalues=()
 
-# wallpath=$(swww query | head -1 | awk -F 'image: ' '{print $2}')
-# wallpath_png="$CACHE_DIR/user/generated/hypr/lockscreen.png"
-# convert "$wallpath" "$wallpath_png"
-# wallpath_png=$(echo "$wallpath_png" | sed 's/\//\\\//g')
-# wallpath_png=$(sed 's/\//\\\\\//g' <<< "$wallpath_png")
+wallpath=$(swww query | head -1 | awk -F 'image: ' '{print $2}')
+wallpath_png="$CACHE_DIR/user/generated/hypr/lockscreen.png"
+wallpath_lock=""
 
 transparentize() {
   local hex="$1"
@@ -114,7 +112,8 @@ apply_hyprlock() {
     mkdir -p "$CACHE_DIR"/user/generated/hypr/
     cp "scripts/templates/hypr/hyprlock.conf" "$CACHE_DIR"/user/generated/hypr/hyprlock.conf
     # Apply colors
-    # sed -i "s/{{ SWWW_WALL }}/${wallpath_png}/g" "$CACHE_DIR"/user/generated/hypr/hyprlock.conf
+	sed -i "s@{{ SWWW_WALL }}@$wallpath_png@g" "$CACHE_DIR"/user/generated/hypr/hyprlock.conf
+
     for i in "${!colorlist[@]}"; do
         sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$CACHE_DIR"/user/generated/hypr/hyprlock.conf
     done
@@ -180,3 +179,4 @@ apply_lightdark &
 apply_gtk &
 apply_fuzzel &
 apply_term &
+convert "$wallpath" "$wallpath_png" &

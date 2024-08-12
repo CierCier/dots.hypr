@@ -24,7 +24,7 @@ export const ToggleIconWifi = (props = {}) => Widget.Button({
         setupCursorHover(self);
         self.hook(Network, button => {
             button.toggleClassName('sidebar-button-active', [Network.wifi?.internet, Network.wired?.internet].includes('connected'))
-            button.tooltipText = (`${Network.wifi?.ssid} | Right-click to configure` || 'Unknown');
+            button.tooltip_text = (`${Network.wifi?.ssid} | Right-click to configure` || 'Unknown');
         });
     },
     ...props,
@@ -80,9 +80,11 @@ export const HyprToggleIcon = async (icon, name, hyprlandConfigValue, props = {}
 }
 
 export const ModuleNightLight = async (props = {}) => {
+    
     //return null; // uncomment to enable nightlight modewa
 
-    if (!exec(`bash -c 'command -v gammastep'`)) return null;
+    if (exec(`bash -c 'pidof gammastep'`).length == 0 ) return null;
+
     return Widget.Button({
         attribute: {
             enabled: false,

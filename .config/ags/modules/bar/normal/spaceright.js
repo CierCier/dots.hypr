@@ -43,7 +43,7 @@ export default () => {
         onHover: () => { barStatusIcons.toggleClassName('bar-statusicons-hover', true) },
         onHoverLost: () => { barStatusIcons.toggleClassName('bar-statusicons-hover', false) },
         onPrimaryClick: () => App.toggleWindow('sideright'),
-        onSecondaryClick: () => execAsync('playerctl play-pause').catch(print),
+        onSecondaryClick: () => execAsync('pavucontrol').catch(print) ,
         onMiddleClick: () => null,
         setup: (self) => self.on('button-press-event', (self, event) => {
             if (event.get_button()[1] === 8)
