@@ -49,6 +49,10 @@ $sidebar_chat_textboxareaColor: mix($onSurfaceVariant, $surfaceVariant, 40%);
     background-color: $layer1;
 }
 
+.sidebar-profilepic{
+    @include full-rounding;
+}
+
 .sidebar-iconbutton {
     @include full-rounding;
     @include element_decel;

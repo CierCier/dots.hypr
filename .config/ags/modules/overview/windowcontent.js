@@ -184,6 +184,7 @@ export const SearchAndWindows = () => {
                 if (name == 'overview' && !visible) {
                     resultsBox.children = [];
                     entry.set_text('');
+                    Applications.reload();
                 }
             })
             .on('key-press-event', (widget, event) => { // Typing

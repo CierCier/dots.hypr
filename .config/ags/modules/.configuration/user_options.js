@@ -73,7 +73,7 @@ let configOptions = {
     },
     'music': {
         'mode': 'title', // Either "title" or "cava"
-        'preferredPlayer': "plasma-browser-integration",
+        'preferredPlayer': "",
         'preferedTurncateLenth': 30,
         'TurncateString': "...",
         'cava': {
@@ -86,7 +86,7 @@ let configOptions = {
     },
     'overview': {
         'scale': 0.12, // Relative to screen size
-        'numOfRows': 2,
+        'numOfRows': 1,
         'numOfCols': 5,
         'wsNumScale': 0.09,
         'wsNumMarginScale': 0.07,

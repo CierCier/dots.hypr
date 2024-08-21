@@ -26,6 +26,7 @@ import { getDistroIcon } from '../.miscutils/system.js';
 import { MaterialIcon } from '../.commonwidgets/materialicon.js';
 import { ExpandingIconTabContainer } from '../.commonwidgets/tabcontainer.js';
 import { checkKeybind } from '../.widgetutils/keybind.js';
+import GLib from 'gi://GLib';
 
 const centerWidgets = [
     {
@@ -56,12 +57,26 @@ const centerWidgets = [
     },
 ];
 
+function getUserProfilePic(){
+    const facePath = `${GLib.get_home_dir()}/.face`;
+    
+    if (GLib.file_test(facePath, GLib.FileTest.EXISTS)) {
+        return facePath;
+    }else{
+        return 'user';
+    }
+}
+
 const timeRow = Box({
     className: 'spacing-h-10 sidebar-group-invisible-morehorizpad',
     children: [
         Widget.Icon({
             icon: getDistroIcon(),
             className: 'txt txt-larger',
+        }),
+        Widget.Icon({
+            icon: `${getUserProfilePic()}`,
+            className: 'txt-larger sidebar-profilepic',
         }),
         Widget.Label({
             hpack: 'center',

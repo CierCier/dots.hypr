@@ -6,31 +6,38 @@ then
 fi
 
 
-export EDITOR=nvim
+if [ -f /usr/bin/nvim ]
+then
+	export VISUAL=nvim
+	export EDITOR=nvim
+elif [ -f /usr/bin/vim ]
+then
+	export VISUAL=vim
+	export EDITOR=vim
+else
+	export VISUAL=vi
+	export EDITOR=vi
+fi
+
 
 # Aliases
 alias neofetch="/usr/bin/fastfetch"
-alias ls="/usr/bin/eza --all --long --git --icons=auto --group-directories-first"
 
-alias cat="/usr/bin/bat --style header --style snip --style changes --style header"
-alias grep="/usr/bin/rg"
+if [ -f /usr/bin/eza ]
+then
+	alias ls="/usr/bin/eza --all --long --git --icons=auto --group-directories-first"
+fi
 
-alias grub-update="sudo /usr/bin/grub-mkconfig -o /boot/grub/grub.cfg"
+if [ -f /usr/bin/bat ]
+then
+	alias cat="/usr/bin/bat --style header --style snip --style changes --style header"
+fi
 
-## clang set
-#C_OPTS="-O3 -march=native -mtune=native -pipe -std=c17"
-#CXX_OPTS="$C_OPTS -std=c++2a"
-#export CFLAGS="$C_OPTS"
-#export CXXFLAGS="$CXX_OPTS"
-#export LDFLAGS="-Wl,-O3,--sort-common,--as-needed,-z,relro,-z,now, -fuse-ld=lld"
-#export CC=clang
-#export CXX=clang++
+if [ -f /usr/bin/rg ]
+then
+	alias grep="/usr/bin/rg"
+fi
 
-#alias cc="clang $CFLAGS"
-#alias cxx="clang++ $CXXFLAGS"
-
-alias vim="nvim"
-alias vi="nvim"
 
 
 # Path Manipulation
