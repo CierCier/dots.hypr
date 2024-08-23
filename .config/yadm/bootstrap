@@ -26,11 +26,22 @@ microarch=$(/usr/lib/ld-linux-x86-64.so.2 --help | grep 'supported' | awk 'NR==1
 echo "Detected micro-architecture: $microarch"
 
 enable_alhp="n"
-read -p "Do you want to enable ALHP repos? (y/n)" enable_alhp
+read -p "Do you want to enable ALHP repos? (y/N)" enable_alhp
 
 if [ "$enable_alhp" = "y" ]; then
 	~/.config/yadm/scripts/enable_alhp.sh $microarch
 fi
+
+
+enable_chaotic="n"
+read -p "Do you want to enable Chaotic Aur  repos? (y/N)" enable_chaotic
+
+if [ "$enable_chaotic" = "y" ]; then
+	paru -S chaotic-keyring chaotic-mirrorlist --noconfim
+fi
+
+bash -c "$HOME/.config/yadm/scripts/setup_root.sh"
+
 
 
 echo "Updating pacman database"
@@ -42,7 +53,15 @@ echo "Installing packages"
 paru -S --noconfirm - < $HOME/.config/yadm/pkglist.txt
 paru -S --noconfirm - < $HOME/.config/yadm/pkglist_aur.txt
 
-echo "Installing Illogical-Impulse patched pkgs"
-~/.config/yadm/scripts/install-illogical.sh
 
-echo "Done!"
+enable_imp = n
+
+read -p "Install illogical impulse packages? (y/N) "
+
+
+
+if [ "$enable_imp" = "y" ]; then
+	echo "Installing Illogical-Impulse patched pkgs"
+	~/.config/yadm/scripts/install-illogical.sh
+	echo "Installed Illogical impulse packages"
+fi

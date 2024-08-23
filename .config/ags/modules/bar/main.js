@@ -10,6 +10,7 @@ import System from "./normal/system.js";
 import { enableClickthrough } from "../.widgetutils/clickthrough.js";
 import { RoundedCorner } from "../.commonwidgets/cairo_roundedcorner.js";
 import { currentShellMode } from '../../variables.js';
+import VolumePanel from './normal/volume.js';
 
 const NormalOptionalWorkspaces = async () => {
     try {
