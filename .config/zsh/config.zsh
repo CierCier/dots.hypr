@@ -133,3 +133,26 @@ then
 	}
 fi
 
+## Plugins
+
+if [ -f /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh ]
+then
+	source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+fi
+
+if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]
+then
+	ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bold,underline"
+	ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+	source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+if [ -f /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh  ] 
+then
+	source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+	
+	bindkey              '^I'         menu-complete
+	bindkey "$terminfo[kcbt]" reverse-menu-complete
+
+fi
+

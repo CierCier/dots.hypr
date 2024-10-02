@@ -145,6 +145,8 @@ let configOptions = {
     },
     'workspaces': {
         'shown': 5,
+        'labels': ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'],
+
     },
     'dock': {
         'enabled': false,

@@ -120,7 +120,7 @@ export const ModuleNightLight = async (props = {}) => {
 }
 
 export const ModuleCloudflareWarp = async (props = {}) => {
-    if (!exec(`bash -c 'command -v warp-cli'`)) return null;
+    if (!exec(`bash -c 'pidof warp-svc'`)) return null;
     return Widget.Button({
         attribute: {
             enabled: false,

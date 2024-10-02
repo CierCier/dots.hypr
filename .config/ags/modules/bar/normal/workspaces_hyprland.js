@@ -124,7 +124,14 @@ const WorkspaceContents = (count = 10) => {
                     else
                         cr.setSourceRGBA(wsfg.red, wsfg.green, wsfg.blue, wsfg.alpha);
 
-                    layout.set_text(`${i + offset}`, -1);
+                    if ((i + offset) <= userOptions.workspaces.labels.length   ){
+                        layout.set_text(`${userOptions.workspaces.labels[i + offset -1]}`, -1 );
+
+                    }else{
+                        layout.set_text(`${i + offset}`, -1);
+                    }
+
+
                     const [layoutWidth, layoutHeight] = layout.get_pixel_size();
                     const x = -workspaceRadius + (workspaceDiameter * i) - (layoutWidth / 2);
                     const y = (height - layoutHeight) / 2;
