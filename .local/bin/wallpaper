@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
 
-script="$HOME/.config/ags/scripts/color_generation/switchwall.sh"
 
 img_path=$(realpath "$1")
 
-if [ -z "$img_path" ]; then
+if [ -z "$1" ]; then
 	echo "No image path provided"
 	exit 1
 fi
@@ -15,9 +14,9 @@ if [ ! -f "$img_path" ]; then
 	exit 1
 fi
 
-if [ ! -x "$script" ]; then
-	echo "Script not found or not executable: $script"
-	exit 1
-fi
 
-$script "$img_path"
+wal --cols16 -s -t  --backend haishoku -i "$img_path"
+
+swww img --transition-duration 1    "$img_path"
+~/.config/waybar/scripts/start-waybar
+
