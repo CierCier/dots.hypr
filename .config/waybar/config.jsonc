@@ -11,7 +11,7 @@
     ],
     "modules-right": [
         "tray",
-        "network",
+        "group/networking",
         "custom/seperator",
         "pulseaudio",
         "custom/seperator",
@@ -20,7 +20,8 @@
         "custom/seperator",
         "idle_inhibitor",
         "custom/seperator",
-        "clock"
+        "clock",
+        "custom/notifier"
     ],
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -199,5 +200,30 @@
             "custom/seperator",
             "disk"
         ]
+    },
+    "group/networking": {
+        "orientation": "horizontal",
+        "modules": [
+            "network"
+        ]
+
+    },
+
+
+    "custom/notifier": {
+        "format" : "{}{icon}",
+        "format-icons" : {
+            "notification" : "*",
+            "notification-none": "",
+            "dnd-notification" : "`",
+            "dnd-notification-none": ""
+
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
     }
 }

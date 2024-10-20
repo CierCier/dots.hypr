@@ -1,13 +1,48 @@
 #!/usr/bin/env bash
 
 
+print_help(){
+	echo "Usage: wallpaper <image or video path> <options>"
+	echo "Options:"
+	echo "  -h, --help: Show this help message"
+	echo "  -c, --crop: Crop the image to fit the screen"
+	echo "  -f, --fit: Resize the image to fit the screen"
+	echo "  -s, --stretch: Stretch the image to fit the screen"
+	exit 0
+}
 
-img_path=$(realpath "$1")
-
-if [ -z "$1" ]; then
-	echo "No image path provided"
+if [ $# -lt 1 ]; then
+	echo "Usage: $0 <image or video path> <options>"
 	exit 1
 fi
+
+img_path=$1
+resize=none
+
+while [ $# -gt 1 ]; do
+    case $2 in
+	-h|--help)
+	    print_help
+	    exit 0
+	;;
+	-c|--crop)
+	    resize=crop
+	;;
+	-f|--fit)
+	    resize=fit
+    	;;
+	-s|--stretch)
+	    resize=stretch
+	;;
+	*)
+	    echo "Unknown option: $2"
+	    exit 1
+	;;
+    esac
+    shift
+done
+
+
 
 if [ ! -f "$img_path" ]; then
 	echo "File not found: $img_path"
@@ -15,8 +50,81 @@ if [ ! -f "$img_path" ]; then
 fi
 
 
-wal --cols16 -s -t  --backend haishoku -i "$img_path"
+generate_colors(){
+    wal --cols16 -s -t  --backend haishoku -i $1
+}
 
-swww img --transition-duration 1    "$img_path"
-~/.config/waybar/scripts/start-waybar
+generate_thumbnail(){
+    video=$1
+    if [ -f /tmp/$(whoami)-thumbnail.png ]; then
+		rm /tmp/$(whoami)-thumbnail.png
+    fi
+    ffmpeg -i $video -vf "thumbnail" -frames:v 1 /tmp/$(whoami)-thumbnail.png
+} 
 
+use_swww(){
+    pkill mpvpaper
+    swww img --filter Lanczos3 --resize $resize --transition-duration 1 --transition-type center "$img_path"
+}
+
+
+use_mpv(){
+    outputs=$(hyprctl monitors -j |  jq ".[].name")
+    for output in $outputs;
+    do
+        mpvpaper -s -o "no-audio loop" "$output" "$img_path" & disown
+    done
+}
+
+file_type=$(file -b --mime-type "$img_path")
+
+case $file_type in
+	image/*)
+		generate_colors "$img_path"
+		use_swww
+		;;
+	video/*)
+		generate_thumbnail "$img_path"
+		generate_colors "/tmp/$(whoami)-thumbnail.png"
+		use_mpv
+		;;
+	*)
+		echo "Unsupported file type: $file_type"
+		exit 1
+		;;
+esac
+
+
+# update hyprland templates
+
+hypr_colors_template="$HOME/.config/hypr/templates/hyprland/colors.conf"
+hyprlock_template="$HOME/.config/hypr/templates/hyprlock.conf"
+
+cp $hypr_colors_template /tmp/colors.conf
+cp $hyprlock_template /tmp/lock.conf
+
+source $HOME/.cache/wal/colors.sh
+
+for color in {1..16}; do
+	eval "currentColor=\$color$color"
+	currentColor=$(echo $currentColor | tr -d '#')
+	sed -i "s/{{ \$color$color }}/$currentColor/g" /tmp/colors.conf
+	sed -i "s/{{ \$color$color }}/$currentColor/g" /tmp/lock.conf
+done
+
+background=$(echo $background | tr -d '#')
+foreground=$(echo $foreground | tr -d '#')
+
+sed -i "s/{{ \$background }}/$background/g" /tmp/colors.conf
+sed -i "s/{{ \$background }}/$background/g" /tmp/lock.conf
+
+sed -i "s/{{ \$foreground }}/$foreground/g" /tmp/colors.conf
+sed -i "s/{{ \$foreground }}/$foreground/g" /tmp/lock.conf
+
+sed -i "s@{{ \$wallpaper }}@$wallpaper@g" /tmp/lock.conf
+
+
+cp /tmp/colors.conf $HOME/.config/hypr/hyprland/colors.conf
+cp /tmp/lock.conf $HOME/.config/hypr/hyprlock.conf
+
+hyprctl reload

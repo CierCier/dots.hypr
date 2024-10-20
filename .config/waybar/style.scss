@@ -1,147 +1,133 @@
-@import "../../.cache/wal/colors.scss";
+@import "colors.scss";
 
-
-
+$border-radius: 0.45rem;
+$bar-padding: 0.25rem;
 
 * {
-    border-radius: 0;
-    border: none;
+  border-radius: 0;
+  border: none;
 
-    font-family: "JetBrainsMono NFP", "Noto Sans CJK JP", "Noto Sans", "Twemoji",
-        "liberation", "Unifont";
-    font-size: 12px;
-    font-weight: bolder;
-    min-height: 0;
+  font-family: "JetBrainsMono Nerd Font Propo", "Noto Sans CJK JP", "Noto Sans",
+    "Twemoji", "liberation", "Unifont", "monospace";
+  font-size: 0.85rem;
+  font-weight: bolder;
+  min-height: 0;
 }
 
 window#waybar {
-    background: transparent;
-    color: $color13;
+  background: transparent;
+  color: $color13;
 }
 
 #workspaces {
-    margin: 5px 0px;
+  margin: 0.25rem 0;
 }
 
 #workspaces button {
-    border: none;
-    background: $background;
-    padding: 0px 5px;
-    color: $color1;
-    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms;
+  border: none;
+  background: $background;
+  padding: 0 0.5rem;
+  color: $color1;
+  transition: cubic-bezier(0.175, 0.83, 0.235, 1) 500ms;
 }
 
 #workspaces button.active {
-    color: $color13;
+  color: $color13;
+  background: $color1;
 }
 
 #workspaces button:hover {
-    background-color: $color13;
-    color: black;
-    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms;
-    /*
+  background-color: $color13;
+  color: black;
+  /*
    * GTK css doesnt support transform
    * transform: scale(1.1); 
    */
-    min-width: 30px;
+  min-width: 2rem;
 }
 
 #workspaces button.persistent {
-    border: none
+  border: none;
 }
 
 #workspaces button:first-child {
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+  border-top-left-radius: 0.45rem;
+  border-bottom-left-radius: 0.45rem;
 }
 
 #workspaces button:last-child {
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
+  border-top-right-radius: 0.45rem;
+  border-bottom-right-radius: 0.45rem;
 }
 
 #tray {
-    margin: 5px 0px;
-    background-color: $background;
-    border-radius: 4px;
-    margin-right: 4px;
-}
-
-#tray * {
-    margin: 1px 3px 1px 3px;
-    min-width: 20px;
-}
-
-#tray button {
-    background: $background;
-    color: $color15;
+  margin: 0.25rem 0;
+  background-color: $background;
+  color: $color13;
+  border-radius: 0.45rem;
+  padding: 0 0.5rem;
 }
 
 #mpris {
-    background: $background;
-    padding-left: 15px;
-    padding-right: 14px;
-    border-radius: 4px;
-    margin: 5px 0px;
-    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms;
+  background: $background;
+  padding: 0 0.5rem;
+  border-radius: 0.45rem;
+  margin: 0.25rem 0;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms;
 }
 
 #mpris.playing {
-    background: $color13;
-    color: $color0;
+  background: $color13;
+  color: $color0;
 }
 
 #window {
-    background: $color15;
-    padding-left: 15px;
-    padding-right: 15px;
-    border-radius: 4px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-weight: normal;
-    font-style: normal;
+  background: $color15;
+  padding: 0 0.5rem;
+  border-radius: 0.45rem;
+  margin: 0.25rem 0;
+  font-weight: normal;
+  font-style: normal;
 }
 
 #cpu,
 #memory,
 #temperature,
 #disk {
-    background-color: $background;
-    margin: 5px 0px;
-    padding: 0px 10px 0px 10px;
-    font-weight: bold;
+  background-color: $background;
+  margin: 0.25rem 0;
+  padding: 0 0.5rem;
+  font-weight: bold;
 }
 
 #temperature {
-    margin-left: 2px;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+  margin: 0.25rem 0;
 }
 
 #temperature.critical {
-    background: $color13;
-    color: $background;
+  background: $color13;
+  color: $background;
 }
 
 #cpu {
-    margin-right: 0;
-    border-right: none;
+  margin-right: 0;
+  border-right: none;
 }
 
 #cpu.load {
-    background: $color13;
-    color: $background;
+  background: $color13;
+  color: $background;
 }
 
 #memory {
-    margin-left: 0;
-    border-left: none;
+  margin-left: 0;
+  border-left: none;
 }
 
 #disk {
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-    margin-right: 5px;
+  border-top-right-radius: 0.45rem;
+  border-bottom-right-radius: 0.45rem;
+  margin-right: 0.5rem;
 }
 
 #clock,
@@ -151,70 +137,102 @@ window#waybar {
 #backlight,
 #idle_inhibitor,
 #custom-seperator {
-    background: $background;
-    padding: 4px;
-    margin: 5px 0px;
-    border-radius: 0;
-}
-
-#network {
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+  background: $background;
+  padding: 0 0.5rem;
+  margin: 0.25rem 0;
+  border-radius: 0;
 }
 
 #network.disconnected {
-    background: $color13;
-    color: $background;
+  background: $color13;
+  color: $background;
 }
 
 #battery.charging {
-    background: $color13;
-    color: $background;
+  background: $color13;
+  color: $background;
 }
 
 #battery.full {
-    background: $color13;
-    color: $background;
+  background: $color13;
+  color: $background;
 }
 
 #battery.warning {
-    background: $color13;
-    color: $background;
+  background: $color13;
+  color: $background;
 }
 
 #battery.critical {
-    background: $color13;
-    color: $background;
+  background: $color13;
+  color: $background;
 }
 
 #clock {
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-    margin-right: 2px;
+  border-top-right-radius: 0.45rem;
+  border-bottom-right-radius: 0.45rem;
+  margin: 0.25rem 0;
+  margin-right: 0.25rem;
 }
 
 #idle_inhibitor {
-    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms;
 }
 
 #idle_inhibitor.activated {
-    background: $color13;
-    color: $background;
+  background: $color13;
+  color: $background;
 }
 
-
-
 #pulseaudio.muted {
-    background: $color13;
-    color: $background;
+  background: $color13;
+  color: $background;
 }
 
 #tooltip {
-    background: $background;
-    color: $color13;
-    border-radius: 4px;
-    padding: 5px;
-    font-size: 12px;
-    font-weight: bold;
-    margin: 5px 0px;
+  background: $background;
+  color: $color13;
+  border-radius: 0.45rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin: 0.25rem 0;
+}
+
+#custom-notifier {
+  background: $background;
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem 0;
+  border-radius: 0.45rem;
+  min-width: 2rem;
+}
+
+#custom-notifier.notification {
+  background: $color13;
+  color: $background;
+}
+
+#custom-notifier.dnd-notification {
+  background: $background;
+  color: $color13;
+}
+
+#system-monitor:first-child {
+  border-top-left-radius: 0.45rem;
+  border-bottom-left-radius: 0.45rem;
+}
+
+#system-monitor:last-child {
+  border-top-right-radius: 0.45rem;
+  border-bottom-right-radius: 0.45rem;
+}
+
+#networking:first-child {
+  border-top-left-radius: 0.45rem;
+  border-bottom-left-radius: 0.45rem;
+}
+
+#networking:last-child {
+  border-top-right-radius: 0.45rem;
+  border-bottom-right-radius: 0.45rem;
 }
