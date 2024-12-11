@@ -1,0 +1,217 @@
+@use "sass:color"
+@import "colors.scss"
+
+$border-radius: 0.45rem
+$bar-padding: 0.25rem
+
+$accent: $color14
+$background: $color0
+
+$critical: $color9
+$warning: $color1
+
+$text: $color14
+$text_active: color.invert($accent)
+$text_inactive: color.adjust($text, $lightness: -20%)
+
+$turn_on_transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms
+$turn_off_transition: cubic-bezier(0.075, 0.82, 0.165, 1) 1200ms
+
+*
+  border-radius: 0
+  border: none
+
+  font-family: "JetBrainsMono Nerd Font Propo", "Noto Sans CJK JP", "Noto Sans", "Twemoji", "monospace"
+  font-size: 0.85rem
+  font-weight: bolder
+  min-height: 0
+
+window#waybar
+  background: $background
+  color: $text
+
+#workspaces
+  margin: $bar-padding 0
+
+  & button
+    border: none
+    background: $background
+    padding: 0 0.5rem
+    color: $text
+    transition: $turn_off_transition
+
+  & button.empty
+    color: $color1
+
+  & button.active
+    color: $text
+    background: color.adjust($accent, $lightness: -20% )
+    transition: $turn_on_transition
+
+  & button:hover
+    background-color: $accent
+    color: $text_active
+    min-width: 2rem
+    transition: $turn_on_transition
+
+  & button.persistent
+    border: none
+
+  & button:first-child
+    border-top-left-radius: $border-radius
+    border-bottom-left-radius: $border-radius
+
+  & button:last-child
+    border-top-right-radius: $border-radius
+    border-bottom-right-radius: $border-radius
+
+#tray
+  margin: 0.25rem 0
+  background-color: $background
+  color: $text_inactive
+  border-radius: $border-radius
+  padding: 0 0.5rem
+
+#mpris
+  background: $background
+  padding: 0 0.5rem
+  border-radius: $border-radius
+  margin: 0.25rem 0
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms
+
+  &.playing
+    background: $accent
+    color: $text_active
+
+#window
+  background: $background
+  padding: 0 0.5rem
+  border-radius: $border-radius
+  margin: 0.25rem 0
+  font-weight: normal
+  font-style: normal
+
+#cpu,
+#memory,
+#temperature,
+#disk
+  background-color: $background
+  margin: 0.25rem 0
+  padding: 0 0.5rem
+  font-weight: bold
+
+#temperature
+  margin: 0.25rem 0
+  margin-left: 0.25rem
+  border-top-left-radius: $border-radius
+  border-bottom-left-radius: $border-radius
+
+  &.critical
+    background: $critical
+
+#cpu
+  margin-right: 0
+  border-right: none
+
+  &.load
+    background: $critical
+
+#memory
+  margin-left: 0
+  border-left: none
+
+#disk
+  border-top-right-radius: $border-radius
+  border-bottom-right-radius: $border-radius
+  margin-right: 0.5rem
+
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#backlight,
+#idle_inhibitor,
+#custom-seperator
+  background: $background
+  padding: 0 0.5rem
+  margin: 0.25rem 0
+  border-radius: 0
+
+#network
+  border-top-left-radius: $border-radius
+  border-bottom-left-radius: $border-radius
+
+  &.disconnected
+    background: $critical
+
+#battery.charging
+  background: $accent
+  color: $text_active
+
+#battery.full
+  background: rgb(100, 255, 160)
+  color: rgb(0, 0, 0)
+
+#battery.warning
+  background: $accent
+  color: $text_active
+
+#battery.critical
+  background: $critical
+
+#clock
+  border-top-right-radius: $border-radius
+  border-bottom-right-radius: $border-radius
+  margin: 0.25rem 0
+  margin-right: 0.25rem
+
+#idle_inhibitor
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms
+
+  &.activated
+    background: $accent
+    color: $text_active
+
+#pulseaudio.muted
+  background: $critical
+
+#tooltip
+  background: $background
+  color: $text
+  border-radius: $border-radius
+  padding: 0.25rem 0.5rem
+  font-size: 0.75rem
+  font-weight: bold
+  margin: 0.25rem 0
+
+#custom-notifier
+  background: $background
+  padding: 0.25rem 0.5rem
+  margin: 0.25rem 0
+  margin-right: 0.25rem
+  border-radius: $border-radius
+  min-width: 2rem
+
+  &.notification
+    background: $accent
+    color: $text_active
+
+  &.dnd-notification
+    background: $background
+    color: $text
+
+#system-monitor:first-child
+  border-top-left-radius: $border-radius
+  border-bottom-left-radius: $border-radius
+
+#system-monitor:last-child
+  border-top-right-radius: $border-radius
+  border-bottom-right-radius: $border-radius
+
+#networking:first-child
+  border-top-left-radius: $border-radius
+  border-bottom-left-radius: $border-radius
+
+#networking:last-child
+  border-top-right-radius: $border-radius
+  border-bottom-right-radius: $border-radius

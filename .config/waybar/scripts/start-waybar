@@ -13,7 +13,7 @@ conf_dir="$HOME/.config/waybar"
 config="$conf_dir/config.jsonc"
 
 
-style_sass="$conf_dir/style.scss"
+style_sass="$conf_dir/style.sass"
 style_css="$runtime_dir/style.css"
 
 

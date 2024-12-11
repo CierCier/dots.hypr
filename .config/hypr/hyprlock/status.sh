@@ -3,6 +3,7 @@
 ############ Variables ############
 enable_battery=true
 battery_charging=true
+enable_media=true
 
 ####### Check availability ########
 for battery in /sys/class/power_supply/*BAT*; do
@@ -10,7 +11,10 @@ for battery in /sys/class/power_supply/*BAT*; do
     enable_battery=true
     if [[ $(cat /sys/class/power_supply/*/status | head -1) == "Charging" ]]; then
       battery_charging=true
+    else
+      battery_charging=false
     fi
+
     break
   fi
 done
@@ -24,6 +28,17 @@ if [[ $enable_battery == true ]]; then
   if [[ $battery_charging == false ]]; then
     echo -n " remaining"
   fi
+fi
+
+if [[ $enable_media == true ]]; then
+    media=$(playerctl metadata title)
+    artist=$(playerctl metadata artist)
+    if [[ -n $media ]]; then
+	  echo -n " | $media"
+	  if [[ -n $artist ]]; then
+		echo -n " by $artist"
+	  fi
+    fi
 fi
 
 echo ''

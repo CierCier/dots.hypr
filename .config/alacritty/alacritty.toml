@@ -1,5 +1,3 @@
-import = ["~/.config/alacritty/colors-material.toml", "~/.config/alacritty/fonts.toml"]
-live_config_reload = true
 
 
 [colors]
@@ -25,18 +23,39 @@ multiplier = 3
 save_to_clipboard = true
 semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
 
-[shell]
+[terminal.shell]
 program = "/usr/bin/zsh"
 
 
 [window]
 opacity = 0.9
+padding = { x = 10, y = 10 }
+dynamic_padding = true
+decorations = "None"
+dynamic_title = true
 
-[window.padding]
-x = 15
-y = 15
 
 [keyboard]
 bindings = [
 	{ mods = "Super|Shift", key = "Return", action = "SpawnNewInstance" }
 ]
+
+[general]
+live_config_reload = true
+import = ["~/.config/alacritty/colors-material.toml", "~/.config/alacritty/fonts.toml"]
+
+[terminal]
+
+
+[[hints.enabled]]
+command = "xdg-open"
+hyperlinks = true
+post_processing = true
+persist = false
+mouse.enabled = true
+regex =  "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+
+[debug]
+render_timer = false
+persistent_logging = true
+log_level = "Warn"

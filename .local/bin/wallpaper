@@ -11,15 +11,26 @@ print_help(){
 	exit 0
 }
 
-if [ $# -lt 1 ]; then
-	echo "Usage: $0 <image or video path> <options>"
-	exit 1
-fi
+file_picker(){
+    path=$(xdg-user-dir PICTURES)
+    if [ -z $path ]; then
+	path=$HOME
+    fi
+    if [ -d $path/Wallpapers ]; then
+	path=$path/Wallpapers
+    elif [ -d $path/wallpapers ]; then
+	path=$path/wallpapers
+    fi
+    img_path=$(zenity --file-selection --filename=$path --file-filter='*.png *.jpg *.jpeg *.gif *.mp4 *.webm *.mkv')
 
+    echo $img_path
+}
+
+
+resize=crop
 img_path=$1
-resize=none
 
-while [ $# -gt 1 ]; do
+while [ $# -gt 0 ]; do
     case $2 in
 	-h|--help)
 	    print_help
@@ -35,13 +46,15 @@ while [ $# -gt 1 ]; do
 	    resize=stretch
 	;;
 	*)
-	    echo "Unknown option: $2"
-	    exit 1
+	    image_path=$2
 	;;
     esac
     shift
 done
 
+if [ -z $img_path ]; then
+	img_path=$(file_picker)
+fi
 
 
 if [ ! -f "$img_path" ]; then
@@ -49,9 +62,12 @@ if [ ! -f "$img_path" ]; then
 	exit 1
 fi
 
+if [ -z $WAL_BACKEND ]; then
+	WAL_BACKEND=haishoku
+fi
 
 generate_colors(){
-    wal --cols16 -s -t  --backend haishoku -i $1
+    wal --cols16 -s -t  --backend $WAL_BACKEND -i $1
 }
 
 generate_thumbnail(){
