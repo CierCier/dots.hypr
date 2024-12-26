@@ -2,12 +2,13 @@
 
 
 print_help(){
-	echo "Usage: wallpaper <image or video path> <options>"
+	echo "Usage: wallpaper <options> [image_path]"
 	echo "Options:"
-	echo "  -h, --help: Show this help message"
-	echo "  -c, --crop: Crop the image to fit the screen"
-	echo "  -f, --fit: Resize the image to fit the screen"
-	echo "  -s, --stretch: Stretch the image to fit the screen"
+	echo "  -h,	--help: Show this help message"
+	echo "  -c,	--crop: Crop the image to fit the screen"
+	echo "  -f,	--fit: Resize the image to fit the screen"
+	echo "  -s,	--stretch: Stretch the image to fit the screen"
+	echo "  -wa,	--wal-args: Pass additional arguments to wal"
 	exit 0
 }
 
@@ -28,29 +29,37 @@ file_picker(){
 
 
 resize=crop
-img_path=$1
+image_path=""
+other_args=()
+wal_args=()
 
-while [ $# -gt 0 ]; do
-    case $2 in
-	-h|--help)
+while [ "$1" != "" ]; do
+    case $1 in
+	-h | --help)
 	    print_help
-	    exit 0
-	;;
-	-c|--crop)
+	    ;;
+	-c | --crop)
 	    resize=crop
-	;;
-	-f|--fit)
+	    ;;
+	-f | --fit)
 	    resize=fit
-    	;;
-	-s|--stretch)
+	    ;;
+	-s | --stretch)
 	    resize=stretch
-	;;
+	    ;;
+	-wa | --wal-args)
+	    wal_args+=($2)
+	    shift
+	    ;;
 	*)
-	    image_path=$2
-	;;
+	    other_args+=($1)
+	    ;;
     esac
     shift
 done
+
+img_path=${other_args[0]}
+other_args=("${other_args[@]:1}")
 
 if [ -z $img_path ]; then
 	img_path=$(file_picker)
@@ -66,8 +75,12 @@ if [ -z $WAL_BACKEND ]; then
 	WAL_BACKEND=haishoku
 fi
 
+no_stdout () {
+	"$@" > /dev/null 2>&1
+}
+
 generate_colors(){
-    wal --cols16 -s -t  --backend $WAL_BACKEND -i $1
+    no_stdout wal $wal_args -s -t  --backend $WAL_BACKEND -i $1
 }
 
 generate_thumbnail(){
@@ -75,20 +88,34 @@ generate_thumbnail(){
     if [ -f /tmp/$(whoami)-thumbnail.png ]; then
 		rm /tmp/$(whoami)-thumbnail.png
     fi
-    ffmpeg -i $video -vf "thumbnail" -frames:v 1 /tmp/$(whoami)-thumbnail.png
+    no_stdout ffmpeg -i $video -vf "thumbnail" -frames:v 1 /tmp/$(whoami)-thumbnail.png
 } 
 
 use_swww(){
     pkill mpvpaper
-    swww img --filter Lanczos3 --resize $resize --transition-duration 1 --transition-type center "$img_path"
+    no_stdout swww img --filter Lanczos3 --resize $resize --transition-duration 1 --transition-type center "$img_path"
 }
 
 
 use_mpv(){
     outputs=$(hyprctl monitors -j |  jq ".[].name")
+    width=$(hyprctl monitors -j | jq ".[].width" | sort -n | head -n 1)
+    height=$(hyprctl monitors -j | jq ".[].height" | sort -n | head -n 1)
+
+    v_width=$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=s=x:p=0 "$img_path")
+    v_height=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of csv=s=x:p=0 "$img_path")
+    
+    if [ $v_width -gt $width ]; then
+	echo "Scaling video to $width:$height"
+	no_stdout ffmpeg -i "$img_path" -vf "scale=$width:$height:force_original_aspect_ratio=decrease,pad=$width:$height:(ow-iw)/2:(oh-ih)/2" /tmp/$(whoami)-scaled.mp4
+	video=/tmp/$(whoami)-scaled.mp4
+    else
+	video=$img_path
+    fi
+
     for output in $outputs;
     do
-        mpvpaper -s -o "no-audio loop" "$output" "$img_path" & disown
+	no_stdout mpvpaper -s -o "no-audio loop" "$output" $video & disown
     done
 }
 

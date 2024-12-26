@@ -4,18 +4,29 @@
 $border-radius: 0.45rem
 $bar-padding: 0.25rem
 
-$accent: $color14
-$background: $color0
+$black: $color0
+$red: $color1
+$green: $color2
+$yellow: $color3
+$blue: $color4
+$magenta: $color5
+$cyan: $color6
+$white: $color7
+$gray: $color8
 
-$critical: $color9
-$warning: $color1
+$background: $black
+$accent: $yellow
+$critical: $red
 
-$text: $color14
-$text_active: color.invert($accent)
-$text_inactive: color.adjust($text, $lightness: -20%)
 
-$turn_on_transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms
-$turn_off_transition: cubic-bezier(0.075, 0.82, 0.165, 1) 1200ms
+$text: $white
+$text_active: $black
+$text_inactive: $gray
+
+
+
+$turn_on_transition: cubic-bezier(0.5, 1, 0.5, 0) 200ms
+$turn_off_transition: cubic-bezier(0.5, 0, 1, 1) 200ms
 
 *
   border-radius: 0
@@ -41,7 +52,7 @@ window#waybar
     transition: $turn_off_transition
 
   & button.empty
-    color: $color1
+    color: $text_inactive
 
   & button.active
     color: $text
@@ -163,7 +174,7 @@ window#waybar
   border-top-right-radius: $border-radius
   border-bottom-right-radius: $border-radius
   margin: 0.25rem 0
-  margin-right: 0.25rem
+
 
 #idle_inhibitor
   transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms
@@ -186,11 +197,8 @@ window#waybar
 
 #custom-notifier
   background: $background
-  padding: 0.25rem 0.5rem
-  margin: 0.25rem 0
-  margin-right: 0.25rem
   border-radius: $border-radius
-  min-width: 2rem
+  min-width: 1rem
 
   &.notification
     background: $accent
@@ -215,3 +223,10 @@ window#waybar
 #networking:last-child
   border-top-right-radius: $border-radius
   border-bottom-right-radius: $border-radius
+
+#custom-powermenu
+  background: $background
+  padding-right: 0.5rem
+  margin: 0.25rem 0
+  border-radius: $border-radius
+  min-width: 2rem
