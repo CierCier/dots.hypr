@@ -20,26 +20,21 @@
     follow = mouse
 
     ### Geometry ###
+    width = 400
 
-    # dynamic width from 0 to 300
-    # width = (0, 300)
-    # constant width of 300
-    width = (200, 400)
-
-    # The maximum height of a single notification, excluding the frame.
-    height = (200,600)
+    height = (100, 200)
 
     # Position the notification in the top right corner
     origin = bottom-right
 
     # Offset from the origin
-    offset = 15x15
+    offset = (10, 10)
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
 
     # Maximum number of notification (0 means no limit)
-    notification_limit = 0
+    notification_limit = 6
 
     ### Progress bar ###
 
@@ -72,7 +67,7 @@
     # Draw a line of "separator_height" pixel height between two
     # notifications.
     # Set to 0 to disable.
-    separator_height = 5
+    separator_height = 2
 
     # Padding between text and separator.
     padding = 10
@@ -110,7 +105,7 @@
 
     ### Text ###
 
-    font = JetBrainsMono NFM 10
+    font = JetBrainsMono Nerd Font Mono 10
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -212,7 +207,7 @@
     dmenu = /usr/bin/fuzzel -p dunst:
 
     # Browser for opening urls in context menu.
-    browser =  /usr/bin/waterfox-g
+    browser =  xdg-open
 
     # Always run rule-defined scripts, even if the notification is suppressed
     always_run_script = true
