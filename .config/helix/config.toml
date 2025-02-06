@@ -1,0 +1,87 @@
+theme = "onedark"
+
+[editor]
+line-number = "relative"
+shell = [ "sh", "-c"  ]
+continue-comments = true
+gutters = ["diff", "diagnostics", "line-numbers", "spacer"]
+auto-completion = true
+path-completion = true
+auto-format = true
+idle-timeout = 750
+auto-info = true
+bufferline = "always"
+color-modes = true
+text-width = 100
+default-line-ending = "native"
+popup-border = "popup"
+end-of-line-diagnostics = "hint"
+
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+
+
+[editor.statusline]
+left = ["mode", "spinner", "file-modification-indicator"]
+center = [ "read-only-indicator", "file-name", "version-control"]
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+separator = "│"
+mode.normal = "NOR"
+mode.insert = "INS"
+mode.select = "SEL"
+
+
+[editor.lsp]
+enable = true
+display-inlay-hints = true
+snippets = true
+
+
+[editor.whitespace.render]
+space = "none"
+tab = "all"
+newline = "none"
+
+[editor.indent-guides]
+render = true
+character = "┊"
+skip-levels = 1
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
+
+
+[keys.normal]
+A-w = "goto_previous_buffer"
+A-e = "goto_next_buffer"
+
+C-d = "diagnostics_picker"
+C-s = "symbol_picker"
+C-p = "file_picker"
+"C-/" = "toggle_comments"
+
+e = "search_next"
+C-e = "extend_search_next"
+w = "search_prev"
+C-w = "extend_search_prev"
+"C-f" = "collapse_selection"
+
+[keys.normal.f]
+f = "search_selection"
+d = "delete_selection"
+c = "change_selection"
+
+
+
+
+
+[keys.normal."+"]
+m = ":run-shell-command make"
+c = ":run-shell-command cargo build"

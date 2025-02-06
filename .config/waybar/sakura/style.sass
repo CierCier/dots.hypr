@@ -1,0 +1,96 @@
+@use "sass:color"
+@import "colors.scss"
+
+$black: $color0
+$red: $color1
+$green: $color2
+$yellow: $color3
+$blue: $color4
+$magenta: $color5
+$cyan: $color6
+$white: $color7
+$gray: $color8
+
+$background: $black
+$accent: $yellow
+$critical: $red
+
+$text: $white
+$text_active: $black
+$text_inactive: $gray
+
+*
+    border: none
+    border-radius: 0
+    font-family: mononoki Nerd Font
+    font-size: 12px
+    min-height: 0
+
+window#waybar 
+    background: transparent
+    color: white
+
+tooltip
+    background: $background
+    border-radius: 15px
+    border-width: 2px
+    border-style: solid
+    border-color: #262626
+
+#workspaces
+
+    & button
+        padding: 5px 10px
+        color: $accent
+
+    & button.active
+        color: $background
+        background-color: $accent
+        border-radius: 15px
+
+    & button.urgent
+        color: $background
+        background-color: $red
+        border-radius: 15px
+
+    & button.empty
+        color: $text_inactive
+
+    & button:hover
+        background-color: $accent
+        color: $background
+        border-radius: 15px
+
+#custom-date, #clock, #battery, #pulseaudio, #network, #workspaces
+    background-color: $background
+    padding: 5px 10px
+    margin: 5px 0px
+
+#workspaces
+    background-color: #262626
+    border-radius: 15px 0px 0px 15px
+
+#custom-date
+    color: #9ec3c4
+
+#clock
+    color: #a39ec4
+    border-radius: 0px 15px 15px 0px
+    margin-right: 10px
+
+#battery
+    color: #9ec49f
+
+    &.charging
+        color: #9ec49f
+
+    &.warning:not(.charging)
+        background-color: #c49ea0
+        color: #0f0f0f
+
+#network
+    color: #c4c19e
+    border-radius: 0px 0px 0px 0px
+
+#pulseaudio
+    color: #a5b4cb

@@ -19,7 +19,8 @@ then
 	plugins=(
 		git git-extras 
 		archlinux 
-		adb 
+		adb
+		venv
 	)
 #	source $ZSH/oh-my-zsh.sh
 	export ARCHFLAGS="-arch x86_64"
@@ -36,10 +37,5 @@ if [ -f /usr/bin/oh-my-posh ]
 then
 	eval "$(oh-my-posh init zsh --config $HOME/.config/zsh/oh-my-posh/pure.omp.json)"
 fi
-
-
-
-
-
 
 source $HOME/.config/zsh/config.zsh

@@ -28,16 +28,16 @@ program = "/usr/bin/zsh"
 
 
 [window]
-opacity = 0.9
+opacity = 0.95
 padding = { x = 10, y = 10 }
 dynamic_padding = true
-decorations = "None"
 dynamic_title = true
 
 
 [keyboard]
 bindings = [
 	{ mods = "Super|Shift", key = "Return", action = "SpawnNewInstance" }
+
 ]
 
 [general]

@@ -1,8 +1,9 @@
 @use "sass:color"
 @import "colors.scss"
 
-$border-radius: 0.45rem
-$bar-padding: 0.25rem
+$border-radius: 0.0rem
+$bar-padding: 0.0rem
+$module-margins: 0.0rem 0
 
 $black: $color0
 $red: $color1
@@ -18,12 +19,9 @@ $background: $black
 $accent: $yellow
 $critical: $red
 
-
 $text: $white
 $text_active: $black
 $text_inactive: $gray
-
-
 
 $turn_on_transition: cubic-bezier(0.5, 1, 0.5, 0) 200ms
 $turn_off_transition: cubic-bezier(0.5, 0, 1, 1) 200ms
@@ -47,7 +45,8 @@ window#waybar
   & button
     border: none
     background: $background
-    padding: 0 0.5rem
+    padding: 0.0 0.5rem
+
     color: $text
     transition: $turn_off_transition
 
@@ -62,32 +61,26 @@ window#waybar
   & button:hover
     background-color: $accent
     color: $text_active
-    min-width: 2rem
     transition: $turn_on_transition
 
   & button.persistent
     border: none
 
-  & button:first-child
-    border-top-left-radius: $border-radius
-    border-bottom-left-radius: $border-radius
-
-  & button:last-child
-    border-top-right-radius: $border-radius
-    border-bottom-right-radius: $border-radius
-
 #tray
-  margin: 0.25rem 0
+  margin-right: $bar-padding
   background-color: $background
   color: $text_inactive
   border-radius: $border-radius
-  padding: 0 0.5rem
+  padding: $bar-padding 0.25rem
+  
+  & *
+    margin-right: 0.35rem
 
 #mpris
   background: $background
   padding: 0 0.5rem
   border-radius: $border-radius
-  margin: 0.25rem 0
+  margin: $module-margins
   transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms
 
   &.playing
@@ -98,7 +91,7 @@ window#waybar
   background: $background
   padding: 0 0.5rem
   border-radius: $border-radius
-  margin: 0.25rem 0
+  margin: 0 0
   font-weight: normal
   font-style: normal
 
@@ -107,12 +100,12 @@ window#waybar
 #temperature,
 #disk
   background-color: $background
-  margin: 0.25rem 0
+  margin: $module-margins
   padding: 0 0.5rem
   font-weight: bold
 
 #temperature
-  margin: 0.25rem 0
+  margin: $module-margins
   margin-left: 0.25rem
   border-top-left-radius: $border-radius
   border-bottom-left-radius: $border-radius
@@ -145,7 +138,7 @@ window#waybar
 #custom-seperator
   background: $background
   padding: 0 0.5rem
-  margin: 0.25rem 0
+  margin: $module-margins
   border-radius: 0
 
 #network
@@ -173,8 +166,7 @@ window#waybar
 #clock
   border-top-right-radius: $border-radius
   border-bottom-right-radius: $border-radius
-  margin: 0.25rem 0
-
+  margin: $module-margins
 
 #idle_inhibitor
   transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms
@@ -193,7 +185,7 @@ window#waybar
   padding: 0.25rem 0.5rem
   font-size: 0.75rem
   font-weight: bold
-  margin: 0.25rem 0
+  margin: $module-margins
 
 #custom-notifier
   background: $background
@@ -227,6 +219,6 @@ window#waybar
 #custom-powermenu
   background: $background
   padding-right: 0.5rem
-  margin: 0.25rem 0
+  margin: $module-margins
   border-radius: $border-radius
   min-width: 2rem
