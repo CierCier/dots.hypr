@@ -7,14 +7,11 @@
 user=$(whoami)
 runtime_dir="/tmp/waybar-$user"
 
-theme=$(cat "$HOME/.config/waybar/theme")
-if [ -z $theme ] ;
-then
-	theme=compact
-fi
+config_home="$HOME/.config/waybar"
 
+theme=aes
 
-conf_dir="$HOME/.config/waybar/$theme"
+conf_dir="$config_home/theme/$theme"
 config="$conf_dir/config.jsonc"
 
 

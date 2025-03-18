@@ -1,27 +1,9 @@
 @use "sass:color"
-@import "colors.scss"
+@import "../../colors"
 
 $border-radius: 0.0rem
 $bar-padding: 0.0rem
 $module-margins: 0.0rem 0
-
-$black: $color0
-$red: $color1
-$green: $color2
-$yellow: $color3
-$blue: $color4
-$magenta: $color5
-$cyan: $color6
-$white: $color7
-$gray: $color8
-
-$background: $black
-$accent: $yellow
-$critical: $red
-
-$text: $white
-$text_active: $black
-$text_inactive: $gray
 
 $turn_on_transition: cubic-bezier(0.5, 1, 0.5, 0) 200ms
 $turn_off_transition: cubic-bezier(0.5, 0, 1, 1) 200ms
@@ -72,7 +54,7 @@ window#waybar
   color: $text_inactive
   border-radius: $border-radius
   padding: $bar-padding 0.25rem
-  
+
   & *
     margin-right: 0.35rem
 

@@ -38,6 +38,10 @@ then
 	alias grep="/usr/bin/rg"
 fi
 
+if [ -f /usr/bin/trash  ]
+then
+	alias rm="/usr/bin/trash"
+fi
 
 
 # Path Manipulation

@@ -24,11 +24,11 @@ save_to_clipboard = true
 semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
 
 [terminal.shell]
-program = "/usr/bin/zsh"
+program = "/usr/bin/fish"
 
 
 [window]
-opacity = 0.95
+opacity = 0.90
 padding = { x = 10, y = 10 }
 dynamic_padding = true
 dynamic_title = true

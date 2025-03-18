@@ -8,7 +8,7 @@ print_help(){
 	echo "  -c,	--crop: Crop the image to fit the screen"
 	echo "  -f,	--fit: Resize the image to fit the screen"
 	echo "  -s,	--stretch: Stretch the image to fit the screen"
-	echo "  -wa,	--wal-args: Pass additional arguments to wal"
+	echo "  -wa,	--wal-args: Pass additional arguments to wallust"
 	exit 0
 }
 
@@ -80,7 +80,7 @@ no_stdout () {
 }
 
 generate_colors(){
-    no_stdout wal $wal_args -s -t  --backend $WAL_BACKEND -i $1
+    no_stdout wallust run $img_path  
 }
 
 generate_thumbnail(){
@@ -137,37 +137,5 @@ case $file_type in
 		;;
 esac
 
-
-# update hyprland templates
-
-hypr_colors_template="$HOME/.config/hypr/templates/hyprland/colors.conf"
-hyprlock_template="$HOME/.config/hypr/templates/hyprlock.conf"
-
-cp $hypr_colors_template /tmp/colors.conf
-cp $hyprlock_template /tmp/lock.conf
-
-source $HOME/.cache/wal/colors.sh
-
-for color in {1..16}; do
-	eval "currentColor=\$color$color"
-	currentColor=$(echo $currentColor | tr -d '#')
-	sed -i "s/{{ \$color$color }}/$currentColor/g" /tmp/colors.conf
-	sed -i "s/{{ \$color$color }}/$currentColor/g" /tmp/lock.conf
-done
-
-background=$(echo $background | tr -d '#')
-foreground=$(echo $foreground | tr -d '#')
-
-sed -i "s/{{ \$background }}/$background/g" /tmp/colors.conf
-sed -i "s/{{ \$background }}/$background/g" /tmp/lock.conf
-
-sed -i "s/{{ \$foreground }}/$foreground/g" /tmp/colors.conf
-sed -i "s/{{ \$foreground }}/$foreground/g" /tmp/lock.conf
-
-sed -i "s@{{ \$wallpaper }}@$wallpaper@g" /tmp/lock.conf
-
-
-cp /tmp/colors.conf $HOME/.config/hypr/hyprland/colors.conf
-cp /tmp/lock.conf $HOME/.config/hypr/hyprlock.conf
 
 hyprctl reload
