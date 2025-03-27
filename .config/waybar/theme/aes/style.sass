@@ -1,9 +1,9 @@
-
 @use "sass:color"
 @import "../../colors"
 
 $border-radius: 0.7em
 $bar-pad: 0.5em
+$transition-duration: 0.5s
 
 *
     all: unset
@@ -12,95 +12,116 @@ window#waybar
     font-family: "JetBrainsMono Nerd Font Propo", "Noto Sans CJK JP", "Noto Sans", "Twemoji", "monospace"
     font-size: 0.8em
     background-color: transparent
-    color: $white
+    color: $text
+    transition: background-color $transition-duration, color $transition-duration
 
 button
     min-width: 30px
     min-height: 20px
+    transition: background-color $transition-duration, color $transition-duration
 
 tooltip
-    background-color: $background
-    color: $white
+    background-color: $base
+    color: $text
     padding: 1em
+    transition: background-color $transition-duration, color $transition-duration
 
 menu
-    background-color: $background
+    background-color: $base
     padding: 0.5em
+    transition: background-color $transition-duration
 
 .modules-left
-    background-color: $background
+    background-color: $base
     border-radius: $border-radius
+    transition: background-color $transition-duration
 
 .modules-center .module
-    background-color: $background
+    background-color: $base
     border-radius: $border-radius
     padding-left: $bar-pad
     padding-right: $bar-pad
+    transition: background-color $transition-duration, color $transition-duration
 
     &:hover
-        background-color: $white
-        color: $background
+        background-color: $text
+        color: $base
 
 .modules-right
-    background-color: $background
+    background-color: $base
     border-radius: $border-radius
     padding-left: $bar-pad
+    transition: background-color $transition-duration
 
     & .module
         padding-left: 10px
         padding-right: 11px
-        background-image: linear-gradient($white)
+        background-image: linear-gradient($text)
         background-size: 1px 60%
         background-position: 100% 50%
         background-repeat: no-repeat
+        transition: background-size $transition-duration
+
+        &:hover
+            background-size: 2px 100%
 
 #workspaces button
-    color: $white
+    color: $text
     border-radius: $border-radius
+    transition: background-color $transition-duration, color $transition-duration
 
     &.urgent
         background-color: $red
 
     &.empty
-        color: rgba(248, 248, 242, 0.2)
+        color: color.scale($text, $alpha: -80%)
 
     &.active
-        color: $background
-        background-color: $white
+        color: $base
+        background-color: $text
 
     &:hover
-        background-color: $white
-        color: $background
+        background-color: $text
+        color: $base
 
 #privacy
     padding-right: 8px
-    background-image: linear-gradient($white)
+    background-image: linear-gradient($text)
     background-size: 1px 60%
     background-position: 100% 50%
     background-repeat: no-repeat
+    transition: background-size $transition-duration
+
+    &:hover
+        background-size: 2px 100%
 
 #cpu:hover,
 #memory:hover,
 #bluetooth:hover,
 #pulseaudio:hover
-    background-color: $white
-    color: $background
+    background-color: $text
+    color: $base
+    transition: background-color $transition-duration, color $transition-duration
 
 #clock
     background-size: 0px
+    transition: background-size $transition-duration
 
 #tray
     & button
         padding: $bar-pad
+        transition: padding $transition-duration
 
     & label
         padding: $bar-pad
+        transition: padding $transition-duration
 
 #mpris
     &.playing
-        background: $white
-        color: $background
+        background: $text
+        color: $base
+        transition: background-color $transition-duration, color $transition-duration
 
     &:hover .playing
-        background: $accent
-        color: $white
+        background: $flamingo
+        color: $text

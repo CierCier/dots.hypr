@@ -1,0 +1,112 @@
+@use "colors"
+
+$border-radius: 8px
+$bar-pad: 4px
+
+*
+  font-family: "JetBrainsMono Nerd Font"
+  font-weight: bold
+  min-height: 0
+  padding: 0
+  border: none
+  margin: 0
+  font-size: 10px
+
+/* <<--< Main Background >-->> */
+
+window#waybar > box {
+  background-color: colors.$main-bg
+  margin: 2px
+
+/* <<--< Drop Shadow >-->> */
+
+window#waybar {
+  background: colors.$shadow
+
+/* <<--< Tooltip >-->> */
+
+tooltip {
+  background: colors.$main-bg
+  border: solid 1.5px colors.$main-br
+  border-radius: $border-radius
+
+tooltip label {
+  color: colors.$main-fg
+  font-weight: normal
+  margin: -1.5px 3px
+
+/* <<--< Workspace Buttons >-->> */
+
+#workspaces button
+  color: colors.$module-fg
+  border-radius: $border-radius
+  box-shadow: none
+  margin: 2px 0
+  padding: 0 2px
+  transition: none
+
+  &:hover
+    color: colors.$hover-fg
+    background: colors.$hover-bg
+    text-shadow: none
+
+  &.active
+    color: colors.$active-fg
+    background: colors.$active-bg
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.6)
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4)
+    margin: 2px
+    padding: 0 6px
+
+/* <<--< General >-->> */
+
+#custom-ws,
+#workspaces,
+#window,
+#custom-cpuinfo,
+#memory,
+#cpu,
+#idle_inhibitor,
+#clock,
+#custom-wifi,
+#bluetooth,
+#custom-update,
+#mpris,
+#pulseaudio,
+#backlight,
+#battery,
+#custom-power
+  opacity: 1
+  color: colors.$module-fg
+  padding: 0 $bar-pad
+
+#custom-left1,
+#custom-left2,
+#custom-left3,
+#custom-left4,
+#custom-left5,
+#custom-left6,
+#custom-left7,
+#custom-left8,
+#custom-right1,
+#custom-right2,
+#custom-right3,
+#custom-right4,
+#custom-right5
+  font-size: 14.68px
+
+#custom-leftin1,
+#custom-leftin2,
+#custom-rightin1
+  font-size: 15.5px
+
+#custom-distro
+  font-size: 14.6px
+
+#custom-left5,
+#custom-right2
+  font-size: 15.68px
+
+#custom-power
+  border-radius: 10px
+  padding: 0 6px 0 9px

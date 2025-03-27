@@ -24,6 +24,6 @@ killall waybar
 
 mkdir -p "$runtime_dir"
 
-sass -I $HOME/.cache/wal  "$style_sass" "$style_css"
+sass -I $config_home  "$style_sass" "$style_css"
 
 waybar -c "$config" -s "$style_css" & disown
