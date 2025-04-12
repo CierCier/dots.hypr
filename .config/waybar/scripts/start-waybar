@@ -9,7 +9,13 @@ runtime_dir="/tmp/waybar-$user"
 
 config_home="$HOME/.config/waybar"
 
-theme=aes
+theme="$1"
+if [ -z "$theme" ]; then
+    theme="stellar"
+fi
+
+
+
 
 conf_dir="$config_home/theme/$theme"
 config="$conf_dir/config.jsonc"

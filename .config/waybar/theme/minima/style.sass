@@ -1,5 +1,5 @@
 @use "sass:color"
-@import "../../colors"
+@use "colors"
 
 $border-radius: 0.0rem
 $bar-padding: 0.0rem
@@ -18,31 +18,32 @@ $turn_off_transition: cubic-bezier(0.5, 0, 1, 1) 200ms
   min-height: 0
 
 window#waybar
-  background: $background
-  color: $text
+  background: colors.$base
+  color: colors.$text
 
 #workspaces
   margin: $bar-padding 0
 
   & button
     border: none
-    background: $background
+    background: colors.$base
     padding: 0.0 0.5rem
 
-    color: $text
+    color: colors.$text
     transition: $turn_off_transition
 
   & button.empty
-    color: $text_inactive
+    color: color.scale(colors.$text, $alpha: -80%)
+
 
   & button.active
-    color: $text
-    background: color.adjust($accent, $lightness: -20% )
+    color: colors.$text
+    background: color.adjust(colors.$text, $lightness: -20% )
     transition: $turn_on_transition
 
   & button:hover
-    background-color: $accent
-    color: $text_active
+    background-color: colors.$text
+    color: colors.$base
     transition: $turn_on_transition
 
   & button.persistent
@@ -50,8 +51,8 @@ window#waybar
 
 #tray
   margin-right: $bar-padding
-  background-color: $background
-  color: $text_inactive
+  background-color: colors.$base
+  color: color.scale(colors.$text, $alpha: -80%)
   border-radius: $border-radius
   padding: $bar-padding 0.25rem
 
@@ -59,18 +60,18 @@ window#waybar
     margin-right: 0.35rem
 
 #mpris
-  background: $background
+  background: colors.$base
   padding: 0 0.5rem
   border-radius: $border-radius
   margin: $module-margins
   transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms
 
   &.playing
-    background: $accent
-    color: $text_active
+        background: colors.$text
+        color: colors.$base
 
 #window
-  background: $background
+  background: colors.$base
   padding: 0 0.5rem
   border-radius: $border-radius
   margin: 0 0
@@ -81,7 +82,7 @@ window#waybar
 #memory,
 #temperature,
 #disk
-  background-color: $background
+  background-color: colors.$base
   margin: $module-margins
   padding: 0 0.5rem
   font-weight: bold
@@ -93,14 +94,14 @@ window#waybar
   border-bottom-left-radius: $border-radius
 
   &.critical
-    background: $critical
+    background: colors.$red
 
 #cpu
   margin-right: 0
   border-right: none
 
   &.load
-    background: $critical
+    background: colors.$red
 
 #memory
   margin-left: 0
@@ -118,7 +119,7 @@ window#waybar
 #backlight,
 #idle_inhibitor,
 #custom-seperator
-  background: $background
+  background: colors.$base
   padding: 0 0.5rem
   margin: $module-margins
   border-radius: 0
@@ -128,22 +129,23 @@ window#waybar
   border-bottom-left-radius: $border-radius
 
   &.disconnected
-    background: $critical
+    background: colors.$red
 
 #battery.charging
-  background: $accent
-  color: $text_active
+  background: colors.$text
+  color: colors.$base
 
 #battery.full
   background: rgb(100, 255, 160)
   color: rgb(0, 0, 0)
 
 #battery.warning
-  background: $accent
-  color: $text_active
+  background: colors.$yellow
+  color: colors.$white
 
 #battery.critical
-  background: $critical
+  background: colors.$red
+  color: colors.$white
 
 #clock
   border-top-right-radius: $border-radius
@@ -154,15 +156,16 @@ window#waybar
   transition: cubic-bezier(0.075, 0.82, 0.165, 1) 200ms
 
   &.activated
-    background: $accent
-    color: $text_active
+    background: colors.$text
+    color: colors.$base
 
 #pulseaudio.muted
-  background: $critical
+  background: colors.$text
+  color: colors.$base
 
 #tooltip
-  background: $background
-  color: $text
+  background: colors.$base
+  color: colors.$text
   border-radius: $border-radius
   padding: 0.25rem 0.5rem
   font-size: 0.75rem
@@ -170,17 +173,17 @@ window#waybar
   margin: $module-margins
 
 #custom-notifier
-  background: $background
+  background: colors.$base
   border-radius: $border-radius
   min-width: 1rem
 
   &.notification
-    background: $accent
-    color: $text_active
+    background: colors.$text
+    color: colors.$base
 
   &.dnd-notification
-    background: $background
-    color: $text
+    background: colors.$base
+    color: colors.$text
 
 #system-monitor:first-child
   border-top-left-radius: $border-radius
@@ -199,7 +202,7 @@ window#waybar
   border-bottom-right-radius: $border-radius
 
 #custom-powermenu
-  background: $background
+  background: colors.$base
   padding-right: 0.5rem
   margin: $module-margins
   border-radius: $border-radius
