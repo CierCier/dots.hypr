@@ -1,10 +1,10 @@
 {
 	"layer": "top",
 	"position": "top",
-	"margin": "5 10 0",
+	"margin": "10 0 0 0",
     "fixed center": true,
     "reload_style_on_change": true,
-	"height": 34,
+	"height": 30,
 	"width": 500,
 	"modules-left": ["clock"],
 	"modules-center": ["hyprland/workspaces"],
@@ -15,8 +15,9 @@
         "on-click": "activate",
         "all-outputs": true,
         "format-icons": {
-        "default": "󰫣 ",
-        "active": "󰫢 "
+        "default": "󰫢",
+        "empty": "󰫣",
+        "active": "󰫢",
 		},
 		"persistent-workspaces" : {
 			"*": 5,
@@ -41,12 +42,12 @@
 			"warning": 30,
 			"critical": 20
 		},
-		"format": "{icon}   {capacity}",
-		//"format-charging": "   {capacity}",
-        //"format-plugged": "    {capacity}",
-        "format-charging": "󰋠   {capacity}",
-		"format-plugged": "󰋠    {capacity}",
-		"format-alt": "{time}   {icon}",
+		"format": "{icon} {capacity}",
+		//"format-charging": " {capacity}",
+        //"format-plugged": " {capacity}",
+        "format-charging": "󰋠 {capacity}",
+		"format-plugged": "󰋠 {capacity}",
+		"format-alt": "{time} {icon}",
         //"format-icons": ["󱢠 󱢠 󱢠 ", "󱢠 󱢠 󰛞 ", "󱢠 󱢠 󰛞 ", "󱢠 󱢠 󰋑 ", "󱢠 󰛞 󰋑 ", "󱢠 󰛞 󰋑 ", "󱢠 󰋑 󰋑 ", "󰛞 󰋑 󰋑 ", "󰛞 󰋑 󰋑 ", "󰋑 󰋑 󰋑 "]
 		//"format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
 		"format-icons": [" ", " ", " ", " ", " "]
@@ -54,7 +55,7 @@
 
 	"network": {
 		"interface": "wlan0",
-		"format-wifi": " \t{signalStrength}%" ,
+		"format-wifi": " {signalStrength}%" ,
 		"format-ethernet": "{ipaddr}/{cidr}",
 		"format-linked": "{ifname} (No IP)",
 		"format-disconnected": "󰖪 ",
@@ -63,7 +64,7 @@
     },
 
 	"bluetooth": {
-		"format": "󰂯    {status}",
+		"format": "󰂯 {status}",
 		"format-disabled": " off",
 		"format-connected": " {num_connections}",
 		"tooltip-format": "{device_alias}",
