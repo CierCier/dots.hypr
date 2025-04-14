@@ -5,26 +5,26 @@ $main-color: colors.$color11
 
 *
     border: none
-    border-radius: 0px
+    border-radius: 15px
     font-family: "Iosevka NFP", "Noto Sans CJK JP", "Noto Sans", "Twemoji", "monospace"
     font-weight: bold
     font-size: 15px
-    min-height: 0
 
 window#waybar
-    border-radius: 20px
-    background: color.adjust(colors.$base, $alpha: 0.1 )
+  border-radius: 15px
+  background: color.adjust(colors.$base, $alpha: 0.6, $space: rgb)
 
 tooltip
-    background: color.adjust(colors.$base, $alpha: 0.3)
-    border-radius: 10px
-    border: 2px solid color.adjust(colors.$text, $lightness: 0.3)
+    background: transparent
+    background-color: colors.$base
+    border-radius: 20px
+    border: 2px solid color.adjust(colors.$text, $lightness: 5%)
 
 tooltip label
     color: colors.$text
 
 #workspaces
-    background: color.adjust(colors.$base, $alpha: 0.2)
+    background: color.adjust(colors.$base, $alpha: 0.8)
     border-radius: 20px
     margin-top: 4px
     margin-bottom: 4px
@@ -42,16 +42,16 @@ tooltip label
     transition: all 0.2s cubic-bezier(.17,.67,.83,.67)
 
 #workspaces button.active
-    background: color.adjust(colors.$base, $alpha: 0.2)
-    color: color.adjust($main-color, $lightness: 0.4)
-    border-radius: 20px
-    transition: color 0.5s
-    margin-left: 3px
-    padding-left: 15px
-    padding-right: 15px
-    margin-right: 3px
-    animation: gradient_f 20s ease-in infinite
-    transition: all 0.2s cubic-bezier(.17,.67,.83,.67)
+  background: color.adjust(colors.$base, $alpha: 0.2)
+  color: color.adjust($main-color, $lightness: 5%)
+  border-radius: 20px
+  transition: color 0.5s
+  margin-left: 3px
+  padding-left: 15px
+  padding-right: 15px
+  margin-right: 3px
+  animation: gradient_f 20s ease-in infinite
+  transition: all 0.2s cubic-bezier(.17,.67,.83,.67)
 
 #workspaces button.focused
     color: colors.$color5
@@ -71,35 +71,63 @@ tooltip label
 #network,
 #memory,
 #bluetooth,
-#workspaces
-    padding: 0px 14px 0px 14px
+#workspaces,
+#wireplumber,
+#backlight,
+#tray
+  padding: 0px 14px 0px 14px
+  border-radius: 20px
 
 #window
     margin-left: 60px
     margin-right: 60px
-    background: color.adjust(colors.$base, $alpha: 30%)
-    border-radius: 10px
-    color: color.adjust($main-color, $lightness: 0.4)
+    background: color.adjust(colors.$base, $alpha: 0.3)
+    border-radius: 20px
+    color: color.adjust($main-color, $lightness: 10%)
 
 #clock
-    color: color.adjust($main-color, $lightness: 0.4)
+    color: color.adjust($main-color, $lightness: 10%)
     background: transparent
 
 #network
-    color: color.adjust($main-color, $lightness: 0.4)
+    color: color.adjust($main-color, $lightness: 10%)
     background: transparent
 
 #bluetooth
-    color: color.adjust($main-color, $lightness: 0.4)
+    color: color.adjust($main-color, $lightness: 10%)
     background: transparent
 
 #battery
-    color: color.adjust($main-color, $lightness: 0.4)
+    color: color.adjust($main-color, $lightness: 10%)
     background: transparent
 
 #memory
-    color: color.adjust($main-color, $lightness: 0.4)
+    color: color.adjust($main-color, $lightness: 10%)
+    background: transparent
+
+#tray
+    color: color.adjust($main-color, $lightness: 10%)
+    background: transparent
+    
+    & *
+      margin: 0 10 0 0
+ 
+#backlight
+    color: color.adjust($main-color, $lightness: 10%)
+    background: transparent
+
+#wireplumber
+    color: color.adjust($main-color, $lightness: 10%)
     background: transparent
 
 #calendar
-    font-family: "DepartureMono Nerd Font"
+  font-family: "Iosevka NFP"
+  
+#mpris
+  border-radius: 20px
+  color: color.adjust($main-color, $lightness: 5%)
+  &.playing
+    color: colors.$white 
+    background: color.adjust($main-color, $lightness: 5%)
+
+
