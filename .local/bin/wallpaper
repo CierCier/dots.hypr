@@ -1,141 +1,123 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
+
+import os
+import sys
+import subprocess
+import argparse
+from pathlib import Path
 
 
-print_help(){
-	echo "Usage: wallpaper <options> [image_path]"
-	echo "Options:"
-	echo "  -h,	--help: Show this help message"
-	echo "  -c,	--crop: Crop the image to fit the screen"
-	echo "  -f,	--fit: Resize the image to fit the screen"
-	echo "  -s,	--stretch: Stretch the image to fit the screen"
-	echo "  -wa,	--wal-args: Pass additional arguments to wallust"
-	exit 0
-}
 
-file_picker(){
-    path=$(xdg-user-dir PICTURES)
-    if [ -z $path ]; then
-	path=$HOME
-    fi
-    if [ -d $path/Wallpapers ]; then
-	path=$path/Wallpapers
-    elif [ -d $path/wallpapers ]; then
-	path=$path/wallpapers
-    fi
-    img_path=$(zenity --file-selection --filename=$path --file-filter='*.png *.jpg *.jpeg *.gif *.mp4 *.webm *.mkv')
+def print_help():
+    print("""Usage: wallpaper <options> [image_path]
+Options:
+  -h,  --help: Show this help message
+  -c,  --crop: Crop the image to fit the screen
+  -f,  --fit: Resize the image to fit the screen
+  -s,  --stretch: Stretch the image to fit the screen
+  -wa, --wal-args: Pass additional arguments to wallust""")
+    sys.exit(0)
 
-    echo $img_path
-}
+def restore():
+    file_path = os.path.expanduser("~/.cache/wallpaper")
+    if os.path.exists(file_path):
+        with open(file_path, "r") as file:
+            wallpaper = file.read().strip()
+            return wallpaper
+    return ""
 
+def no_stdout(cmd):
+    return subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-resize=crop
-image_path=""
-other_args=()
-wal_args=()
+def generate_colors(img_path):
+    no_stdout(["wallust", "run", img_path])
 
-while [ "$1" != "" ]; do
-    case $1 in
-	-h | --help)
-	    print_help
-	    ;;
-	-c | --crop)
-	    resize=crop
-	    ;;
-	-f | --fit)
-	    resize=fit
-	    ;;
-	-s | --stretch)
-	    resize=stretch
-	    ;;
-	-wa | --wal-args)
-	    wal_args+=($2)
-	    shift
-	    ;;
-	*)
-	    other_args+=($1)
-	    ;;
-    esac
-    shift
-done
+def generate_thumbnail(video):
+    thumb_path = f"/tmp/{os.getlogin()}-thumbnail.png"
+    if Path(thumb_path).exists():
+        os.remove(thumb_path)
+    no_stdout(["ffmpeg", "-i", video, "-vf", "thumbnail", "-frames:v", "1", thumb_path])
+    return thumb_path
 
-img_path=${other_args[0]}
-other_args=("${other_args[@]:1}")
+def use_swww(img_path, resize):
+    subprocess.run(["pkill", "mpvpaper"])
+    no_stdout(["swww", "img", "--filter", "Lanczos3", "--resize", resize,
+               "--transition-duration", "1", "--transition-type", "center", img_path])
 
-if [ -z $img_path ]; then
-	img_path=$(file_picker)
-fi
+def use_mpv(img_path):
+    import json
+    outputs = json.loads(subprocess.check_output(["hyprctl", "monitors", "-j"]))
+    width = min(output["width"] for output in outputs)
+    height = min(output["height"] for output in outputs)
 
+    result = subprocess.check_output([
+        "ffprobe", "-v", "error", "-select_streams", "v:0",
+        "-show_entries", "stream=width,height",
+        "-of", "csv=s=x:p=0", img_path
+    ], text=True).strip()
 
-if [ ! -f "$img_path" ]; then
-	echo "File not found: $img_path"
-	exit 1
-fi
+    v_width, v_height = map(int, result.split("x"))
+    if v_width > width:
+        scaled = f"/tmp/{os.getlogin()}-scaled.mp4"
+        no_stdout([
+            "ffmpeg", "-i", img_path,
+            "-vf", f"scale={width}:{height}:force_original_aspect_ratio=decrease,"
+                   f"pad={width}:{height}:(ow-iw)/2:(oh-ih)/2",
+            scaled
+        ])
+        video = scaled
+    else:
+        video = img_path
 
-if [ -z $WAL_BACKEND ]; then
-	WAL_BACKEND=haishoku
-fi
+    for output in outputs:
+        no_stdout(["mpvpaper", "-s", "-o", "no-audio loop", output["name"], video])
 
-no_stdout () {
-	"$@" > /dev/null 2>&1
-}
+def main():
+    parser = argparse.ArgumentParser(add_help=False)
+    parser.add_argument("-h", "--help", action="store_true")
+    parser.add_argument("-c", "--crop", action="store_true")
+    parser.add_argument("-f", "--fit", action="store_true")
+    parser.add_argument("-s", "--stretch", action="store_true")
+    parser.add_argument("-wa", "--wal-args", nargs=1)
+    parser.add_argument("image_path", nargs="?")
+    args = parser.parse_args()
 
-generate_colors(){
-    no_stdout wallust run $img_path  
-}
+    if args.help:
+        print_help()
 
-generate_thumbnail(){
-    video=$1
-    if [ -f /tmp/$(whoami)-thumbnail.png ]; then
-		rm /tmp/$(whoami)-thumbnail.png
-    fi
-    no_stdout ffmpeg -i $video -vf "thumbnail" -frames:v 1 /tmp/$(whoami)-thumbnail.png
-} 
+    resize = "crop"
+    if args.fit:
+        resize = "fit"
+    elif args.stretch:
+        resize = "stretch"
 
-use_swww(){
-    pkill mpvpaper
-    no_stdout swww img --filter Lanczos3 --resize $resize --transition-duration 1 --transition-type center "$img_path"
-}
-
-
-use_mpv(){
-    outputs=$(hyprctl monitors -j |  jq ".[].name")
-    width=$(hyprctl monitors -j | jq ".[].width" | sort -n | head -n 1)
-    height=$(hyprctl monitors -j | jq ".[].height" | sort -n | head -n 1)
-
-    v_width=$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=s=x:p=0 "$img_path")
-    v_height=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of csv=s=x:p=0 "$img_path")
+    img_path = args.image_path or restore()
     
-    if [ $v_width -gt $width ]; then
-	echo "Scaling video to $width:$height"
-	no_stdout ffmpeg -i "$img_path" -vf "scale=$width:$height:force_original_aspect_ratio=decrease,pad=$width:$height:(ow-iw)/2:(oh-ih)/2" /tmp/$(whoami)-scaled.mp4
-	video=/tmp/$(whoami)-scaled.mp4
-    else
-	video=$img_path
-    fi
+    if not img_path or not Path(img_path).exists():
+        print(f"File not found: {img_path}")
+        sys.exit(1)
 
-    for output in $outputs;
-    do
-	no_stdout mpvpaper -s -o "no-audio loop" "$output" $video & disown
-    done
-}
+    file_type = subprocess.check_output(["file", "-b", "--mime-type", img_path], text=True).strip()
 
-file_type=$(file -b --mime-type "$img_path")
+    if not os.getenv("WAL_BACKEND"):
+        os.environ["WAL_BACKEND"] = "haishoku"
 
-case $file_type in
-	image/*)
-		generate_colors "$img_path"
-		use_swww
-		;;
-	video/*)
-		generate_thumbnail "$img_path"
-		generate_colors "/tmp/$(whoami)-thumbnail.png"
-		use_mpv
-		;;
-	*)
-		echo "Unsupported file type: $file_type"
-		exit 1
-		;;
-esac
+    if file_type.startswith("image/"):
+        generate_colors(img_path)
+        use_swww(img_path, resize)
+    elif file_type.startswith("video/"):
+        thumb = generate_thumbnail(img_path)
+        generate_colors(thumb)
+        use_mpv(img_path)
+    else:
+        print(f"Unsupported file type: {file_type}")
+        sys.exit(1)
 
+    no_stdout(["hyprctl", "reload"])
 
-hyprctl reload
+    with open(os.path.expanduser("~/.cache/wallpaper"), "w") as file:
+        file.write(img_path)
+
+if __name__ == "__main__":
+    main()
+

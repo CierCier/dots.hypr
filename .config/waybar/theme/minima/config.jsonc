@@ -49,12 +49,12 @@
 		"interval": "once"
 	},
 	"cpu": {
-		"on-click": "foot --app-id='process-monitor' -w 820x540  -e btop",
+		"on-click":"alacritty --class='process-monitor' -e btop",
 		"format": " {usage}%",
 		"interval": 2
 	},
 	"memory": {
-		"on-click": "foot --app-id='process-monitor' -w 820x540 -e btop",
+		"on-click": "alacritty --class='process-monitor' -e btop",
 		"interval": 2
 	},
 	"temperature": {
@@ -67,7 +67,7 @@
 	"clock": {
 		"format": "󰅐 {:%H:%M} ",
 		"tooltip-format": "<big>{:%Y %B %d}</big>",
-		"on-click": "foot --app-id=floating -w 400x300 -e calcurse",
+		"on-click": "alacritty --class='process-monitor' -e calcurse",
 		"interval": 1
 	},
 	"battery": {
@@ -89,7 +89,7 @@
 		"interval": 10
 	},
 	"network": {
-		"on-click": "foot --app-id=process-monitor -e nmtui connect",
+		"on-click": "alacritty --class=process-monitor -e nmtui connect",
 		"format-wifi": "{icon} {essid}",
 		"format-ethernet": " {icon} Disconnected",
 		"format-linked": "{icon} {ifname} (No IP)",

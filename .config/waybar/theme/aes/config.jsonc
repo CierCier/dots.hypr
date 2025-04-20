@@ -84,13 +84,13 @@
   "cpu": {
     "format": " {usage}%",
     "interval": 1,
-    "on-click": "foot --app-id='process-monitor' -w 820x540 -e btop"
+    "on-click": "alacritty --class='process-monitor' -e btop"
   },
   "memory": {
     "format": "  {used:0.1f}G",
     "tooltip-format": "Usage: {used} GiB / {total} GiB",
     "interval": 1,
-    "on-click": "foot --app-id='process-monitor' -w 820x540 -e btop"
+    "on-click": "alacritty --class='process-monitor' -e btop"
   },
   "bluetooth": {
     "format": "󰂲",

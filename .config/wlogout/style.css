@@ -1,6 +1,3 @@
-* {
-}
-
 @import "./colors.css";
 
 window {
@@ -9,11 +6,10 @@ window {
 }
 
 button {
-	border: none;
-	background-image: none;
+	border: solid 2px lighter(@color14);
 	color: @color0;
 
-	background-color: @color8;
+	background-color: @color6;
 	background-repeat: no-repeat;
 	background-size: 10%;
 	background-position: center;
@@ -23,13 +19,13 @@ button {
 }
 
 button:focus {
-	background-color: @color3;
+	background-color: alpha(@color13, 255);
 	color: @color7;
 	background-size: 20%;
 }
 
 button:hover {
-	background-color: @color3;
+	background-color: alpha(@color13, 0.5);
 	color: @color7;
 
 	animation: gradient_f 20s ease-in infinite;

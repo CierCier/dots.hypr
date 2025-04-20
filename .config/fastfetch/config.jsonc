@@ -4,14 +4,14 @@
 {
     "$schema": "https://raw.githubusercontent.com/fastfetch-cli/fastfetch/dev/doc/json_schema.json",
     "logo": {
-		"type": "auto",
+		"type": "raw",
         "padding": {
             "top": 0,
             "right": 1,
             "left": 1,
         },
-	"width": 100,
-	"height": 100,
+		"width": 100,
+		"height": 100,
     },
     "display": {
         "percent": {
