@@ -4,7 +4,7 @@
 	"margin": "5 10 0",
     "fixed center": true,
 	"width": 600,
-	"modules-left": ["clock", "group/left-group"],
+	"modules-left": ["clock", "group/left-group", "mpris"],
 	"modules-center": [ "hyprland/workspaces"],
 	"modules-right": [ "group/right-group", "tray" ],
 
@@ -86,6 +86,21 @@
 		"on-scroll-down": "",
 
 	},
+	"mpris": {
+		"interval": 1,
+		"format": "{status_icon}",
+		"tooltip-format": "{dynamic}",
+		"dynamic-order" : [
+			"title", "artist"
+		],
+		"status-icons": {
+			"playing": " Playing",
+			"paused": " Paused",
+		}
+
+	},
+
+	
 
     "group/right-group": {
         "orientation": "inherit",

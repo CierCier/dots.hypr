@@ -7,8 +7,10 @@ alias neofetch "/usr/bin/fastfetch"
 alias vi "/usr/bin/nvim"
 alias emacs "/usr/bin/emacs -nw"
 
-if test -f /usr/bin/eza
-    alias ls "/usr/bin/eza --all --long --git --icons=auto --group-directories-first"
+if test -f /usr/bin/lsd
+    alias ls "/usr/bin/lsd -l --group-directories-first -h "
+else
+	alias ls "/usr/bin/ls -l --group-directories-first --color=auto -h "
 end
 
 if test -f /usr/bin/bat
@@ -33,3 +35,5 @@ end
 if test -d $HOME/go/bin
 	set -U fish_user_paths $fish_user_paths $HOME/go/bin
 end
+
+

@@ -1,7 +1,7 @@
 @use "sass:color"
 @use "colors"
 
-$main-color: colors.$color11
+$main-color: colors.$blue
 
 *
     border: none
@@ -18,7 +18,7 @@ tooltip
     background: transparent
     background-color: colors.$base
     border-radius: 20px
-    border: 2px solid color.adjust(colors.$text, $lightness: 5%)
+    border: 2px solid $main-color
 
 tooltip label
     color: colors.$text
@@ -126,8 +126,3 @@ tooltip label
 #mpris
   border-radius: 20px
   color: color.adjust($main-color, $lightness: 5%)
-  &.playing
-    color: colors.$white 
-    background: color.adjust($main-color, $lightness: 5%)
-
-

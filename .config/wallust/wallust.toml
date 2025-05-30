@@ -12,7 +12,7 @@ color_space = "lchmixed"
 # harddark - harddark16 - harddarkcomp - harddarkcomp16
 # softdark - softdark16 - softdarkcomp - softdarkcomp16
 # softlight - softlight16 - softlightcomp - softlightcomp16
-palette = "dark16"
+palette = "softlight16"
 
 # Ensures a "readable contrast" (OPTIONAL, disabled by default)
 # Should only be enabled when you notice an unreadable contrast frequently happening
@@ -34,3 +34,4 @@ waybar = { template = "waybar-colors.sass" , target = "~/.config/waybar/colors.s
 rofi = { template = "rofi-colors.rasi", target = "~/.config/rofi/colors.rasi", pywal=true}
 neopywal = { template = "neopywal.vim", target = "~/.cache/wal/colors-wal.vim" }
 wlogout = { template = "wlogout.css", target = "~/.config/wlogout/colors.css" }
+quickshell = { template = "quickshell.js", target = "~/.config/quickshell/colors.js"}

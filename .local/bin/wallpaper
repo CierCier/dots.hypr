@@ -30,7 +30,7 @@ def no_stdout(cmd):
     return subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def generate_colors(img_path):
-    no_stdout(["wallust", "run", img_path])
+    no_stdout(["wallust", "-s",  "run", img_path])
 
 def generate_thumbnail(video):
     thumb_path = f"/tmp/{os.getlogin()}-thumbnail.png"
